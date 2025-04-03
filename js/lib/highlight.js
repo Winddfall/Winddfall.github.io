@@ -3,24 +3,33 @@ mixins.highlight = {
         return { copying: false };
     },
     created() {
-        hljs.configure({ ignoreUnescapedHTML: true });
+        hljs.configure({ 
+            ignoreUnescapedHTML: false,
+            languages: ['javascript', 'python', 'html', 'css', 'json','c','cpp'] 
+        });
         this.renderers.push(this.highlight);
     },
     methods: {
         sleep(ms) {
             return new Promise((resolve) => setTimeout(resolve, ms));
         },
-        highlight() {
+        async highlight() {
+            await this.$nextTick(); // Wait for DOM update if using Vue
             let codes = document.querySelectorAll("pre");
+            
             for (let i of codes) {
                 let code = i.textContent;
-                let language = [...i.classList, ...i.firstChild.classList][0] || "plaintext";
+                let language = [...i.classList, ...(i.firstChild?.classList || [])]
+                    .find(c => c.startsWith('language-'))?.replace('language-', '') || 'plaintext';
+                
                 let highlighted;
                 try {
                     highlighted = hljs.highlight(code, { language }).value;
-                } catch {
-                    highlighted = code;
+                } catch (e) {
+                    console.warn(`Failed to highlight as ${language}:`, e);
+                    highlighted = hljs.highlightAuto(code).value;
                 }
+                
                 i.innerHTML = `
                 <div class="code-content hljs">${highlighted}</div>
                 <div class="language">${language}</div>
@@ -29,8 +38,12 @@ mixins.highlight = {
                     <i class="fa-solid fa-check fa-fw"></i>
                 </div>
                 `;
+                
                 let content = i.querySelector(".code-content");
-                hljs.lineNumbersBlock(content, { singleLine: true });
+                if (hljs.lineNumbersBlock) {
+                    hljs.lineNumbersBlock(content, { singleLine: true });
+                }
+                
                 let copycode = i.querySelector(".copycode");
                 copycode.addEventListener("click", async () => {
                     if (this.copying) return;
