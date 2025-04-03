@@ -175,7 +175,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/OS/" style="color: #00a596">
+                <a href="/tags/OS/" style="color: #ff7d73">
                     OS
                 </a>
             </span>
@@ -186,29 +186,91 @@
     
     <div class="content" v-pre>
         <h1 id="Lab1实验报告"><a href="#Lab1实验报告" class="headerlink" title="Lab1实验报告"></a>Lab1实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-1-1"><a href="#Thinking-1-1" class="headerlink" title="Thinking 1.1"></a>Thinking 1.1</h3><p>编写程序hello.c</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main()
+&#123;
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+&#125;
+</code></pre>
 <p>只进行预处理+重定向输出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E hello.c &gt; output.txt</span><br></pre></td></tr></table></figure>
+<pre><code class="language-bash">gcc -E hello.c &gt; output.txt
+</code></pre>
+<pre><code class="language-c">/* 由于原输出太长，这里只能留下很少很少的一部分。 */
+typedef unsigned char __u_char;
+typedef unsigned short int __u_short;
+typedef unsigned int __u_int;
+typedef unsigned long int __u_long;
+typedef signed char __int8_t;
+typedef unsigned char __uint8_t;
+typedef signed short int __int16_t;
+typedef unsigned short int __uint16_t;
+typedef signed int __int32_t;
+typedef unsigned int __uint32_t;
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由于原输出太长，这里只能留下很少很少的一部分。 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> __u_char;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">int</span> __u_short;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> __u_int;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span> __u_long;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">signed</span> <span class="type">char</span> <span class="type">__int8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> <span class="type">__uint8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">signed</span> <span class="type">short</span> <span class="type">int</span> <span class="type">__int16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">int</span> <span class="type">__uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">signed</span> <span class="type">int</span> <span class="type">__int32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> <span class="type">__uint32_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">signed</span> <span class="type">long</span> <span class="type">int</span> <span class="type">__int64_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span> <span class="type">__uint64_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stdin</span>;</span></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stdout</span>;</span></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stderr</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">printf</span> <span class="params">(<span class="type">const</span> <span class="type">char</span> *__restrict __format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+typedef signed long int __int64_t;
+typedef unsigned long int __uint64_t;
 
+extern struct _IO_FILE *stdin;
+extern struct _IO_FILE *stdout;
+extern struct _IO_FILE *stderr;
+
+extern int printf (const char *__restrict __format, ...);
+int main()
+&#123;
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+&#125;
+</code></pre>
 <p>只编译不链接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello.c</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-bash">gcc -c hello.c
+</code></pre>
 <p>反汇编</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -DS hello.o &gt; output.txt</span><br></pre></td></tr></table></figure>
+<pre><code class="language-bash">objdump -DS hello.o &gt; output.txt
+</code></pre>
+<pre><code class="language-assembly">hello.o: file format elf64-x86-64
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hello.o: file format elf64-x86-64</span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000000000 &lt;main&gt;:</span><br><span class="line">0:  55                push %rbp</span><br><span class="line">1:  48 89 e5          mov %rsp,%rbp</span><br><span class="line">4:  bf 00 00 00 00    mov $0x0,%edi</span><br><span class="line">9:  e8 00 00 00 00    callq e &lt;main+0xe&gt;   </span><br><span class="line">                      #本该填写 printf 地址的位置上被填写了一串 0。</span><br><span class="line">e:  b8 00 00 00 00    mov $0x0,%eax</span><br><span class="line">13: 5d                pop %rbp</span><br><span class="line">14: c3                retq</span><br></pre></td></tr></table></figure>
+Disassembly of section .text:
 
+0000000000000000 &lt;main&gt;:
+0:  55                push %rbp
+1:  48 89 e5          mov %rsp,%rbp
+4:  bf 00 00 00 00    mov $0x0,%edi
+9:  e8 00 00 00 00    callq e &lt;main+0xe&gt;   
+                      #本该填写 printf 地址的位置上被填写了一串 0。
+e:  b8 00 00 00 00    mov $0x0,%eax
+13: 5d                pop %rbp
+14: c3                retq
+</code></pre>
 <p>编译并链接，生成可执行文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -o hello</span><br><span class="line">objdump -DS hello &gt; output.txt</span><br></pre></td></tr></table></figure>
+<pre><code class="language-bash">gcc hello.c -o hello
+objdump -DS hello &gt; output.txt
+</code></pre>
+<pre><code class="language-assembly">hello: file format elf64-x86-64
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">hello: file format elf64-x86-64</span><br><span class="line"></span><br><span class="line">Disassembly of section .init:</span><br><span class="line"></span><br><span class="line">00000000004003a8 &lt;_init&gt;:</span><br><span class="line">4003a8: 48 83 ec 08             sub $0x8,%rsp</span><br><span class="line">4003ac: 48 8b 05 0d 05 20 00    mov 0x20050d(%rip),%rax</span><br><span class="line">4003b3: 48 85 c0                test %rax,%rax</span><br><span class="line">4003b6: 74 05                   je 4003bd &lt;_init+0x15&gt;</span><br><span class="line">4003b8: e8 43 00 00 00          callq 400400 &lt;__gmon_start__@plt&gt;</span><br><span class="line">                                #填写printf地址处填写了puts@plt标记的位置</span><br><span class="line">4003bd: 48 83 c4 08             add $0x8,%rsp</span><br><span class="line">4003c1: c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">00000000004003d0 &lt;puts@plt-0x10&gt;:</span><br><span class="line">4003d0: ff 35 fa 04 20 00       pushq 0x2004fa(%rip)</span><br><span class="line">4003d6: ff 25 fc 04 20 00       jmpq *0x2004fc(%rip)</span><br><span class="line">4003dc: 0f 1f 40 00             nopl 0x0(%rax)</span><br><span class="line">#......</span><br></pre></td></tr></table></figure>
+Disassembly of section .init:
 
+00000000004003a8 &lt;_init&gt;:
+4003a8: 48 83 ec 08             sub $0x8,%rsp
+4003ac: 48 8b 05 0d 05 20 00    mov 0x20050d(%rip),%rax
+4003b3: 48 85 c0                test %rax,%rax
+4003b6: 74 05                   je 4003bd &lt;_init+0x15&gt;
+4003b8: e8 43 00 00 00          callq 400400 &lt;__gmon_start__@plt&gt;
+                                #填写printf地址处填写了puts@plt标记的位置
+4003bd: 48 83 c4 08             add $0x8,%rsp
+4003c1: c3                      retq
+
+Disassembly of section .plt:
+
+00000000004003d0 &lt;puts@plt-0x10&gt;:
+4003d0: ff 35 fa 04 20 00       pushq 0x2004fa(%rip)
+4003d6: ff 25 fc 04 20 00       jmpq *0x2004fc(%rip)
+4003dc: 0f 1f 40 00             nopl 0x0(%rax)
+#......
+</code></pre>
 <p>向<code>objdump</code>传入参数的含义：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -DS 要反汇编的目标文件名 &gt; 导出文本文件名</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-bash">objdump -DS 要反汇编的目标文件名 &gt; 导出文本文件名
+</code></pre>
 <ul>
 <li><code>-D</code>：反汇编所有的section</li>
 <li><code>-S</code>：尽可能反汇编出源代码，在编译时指定了<code>-g</code>等调试参数时效果明显，该选项隐含了<code>-d</code>参数</li>
@@ -221,38 +283,73 @@
 <p>使用系统自带的readelf工具解析我们的readelf文件：</p>
 <p><img src="/..%5Cimages%5Cimage-20250325113852785.png" alt="image-20250325113852785"></p>
 <p><code>Makefile</code>中是这样的：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">readelf: main.o readelf.o</span></span><br><span class="line">		  <span class="variable">$(CC)</span> <span class="variable">$^</span> -o <span class="variable">$@</span></span><br><span class="line"><span class="section">hello: hello.c</span></span><br><span class="line">          <span class="variable">$(CC)</span> <span class="variable">$^</span> -o <span class="variable">$@</span> -m32 -static -g</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-makefile">readelf: main.o readelf.o
+		  $(CC) $^ -o $@
+hello: hello.c
+          $(CC) $^ -o $@ -m32 -static -g
+</code></pre>
 <p>可以看到<code>hello</code>是静态链接的。静态链接会将程序运行时所依赖的所有库文件（如标准 C 库、数学库等）的代码都复制到最终生成的可执行文件中，这样生成的可执行文件不依赖系统中安装的动态库，具有更好的可移植性，但文件通常会比较大。</p>
 <h3 id="Thinking-1-3"><a href="#Thinking-1-3" class="headerlink" title="Thinking 1.3"></a>Thinking 1.3</h3><p>我们的实验采用QEMU模拟器，不需要再实现bootloader的功能</p>
 <p>QEMU 支持加载 ELF 格式内核，所以启动流程被简化为<strong>加载内核到内存</strong>，之后<strong>跳转到内核的入口</strong>，启动就完成了。</p>
 <ul>
 <li><p>加载内核到内存，我们的依据是链接脚本文件<code>kernel.lds</code>。我们已经在这个文件中填写好了各个<code>section</code>加载的位置，通过它，生成的程序各个<code>section</code>的位置就被调整到了我们所指定的地址上。同时我们在该文件中指定了程序的入口点<code>ENTRY(_start)</code>，即把内核入口定为 _start 这个函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ENTRY(_start)</span><br><span class="line">SECTIONS &#123;</span><br><span class="line">	. = 0x80020000;</span><br><span class="line">	.text : &#123; *(.text) &#125;</span><br><span class="line">	.data : &#123; *(.data) &#125;</span><br><span class="line">	.bss : &#123; *(.bss) &#125;</span><br><span class="line">	bss_end = .;</span><br><span class="line">	. = 0x80400000;</span><br><span class="line">	end = . ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>ENTRY(_start)
+SECTIONS &#123;
+    . = 0x80020000;
+    .text : &#123; *(.text) &#125;
+    .data : &#123; *(.data) &#125;
+    .bss : &#123; *(.bss) &#125;
+    bss_end = .;
+    . = 0x80400000;
+    end = . ;
+&#125;
+</code></pre>
 </li>
 <li><p>跳转到内核的入口，我们通过对<code>/init/start.S</code>中<code>_start</code>函数的设置，就可以正确的跳转至<code>mips_init</code>函数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EXPORT(_start)</span><br><span class="line">.set at</span><br><span class="line">.set reorder</span><br><span class="line">	mtc0    zero, CP0_STATUS</span><br><span class="line">	la	sp, 0x80400000</span><br><span class="line">	j	mips_init</span><br></pre></td></tr></table></figure></li>
+<pre><code class="language-assembly">EXPORT(_start)
+.set at
+.set reorder
+    mtc0    zero, CP0_STATUS
+    la    sp, 0x80400000
+    j    mips_init
+</code></pre>
+</li>
 </ul>
 <h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><h3 id="Makefile语法"><a href="#Makefile语法" class="headerlink" title="Makefile语法"></a>Makefile语法</h3><ul>
 <li><p>变量</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量名	:=	内容</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-makefile">变量名    :=    内容
+</code></pre>
 <p>内容一般是文件，可以有一个也可以有多个</p>
 <p>引用变量使用<code>$</code></p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">target_dir := target <span class="comment"># MOS 构建目标所在目录</span></span><br><span class="line">mos_elf := <span class="variable">$(target_dir)</span>/mos <span class="comment"># 最终需要生成的 ELF 可执行文件</span></span><br><span class="line">user_disk := <span class="variable">$(target_dir)</span>/fs.img <span class="comment"># MOS 文件系统使用的磁盘镜像文件</span></span><br><span class="line">link_script := kernel.lds</span><br><span class="line"></span><br><span class="line">modules := lib init kern <span class="comment"># 需要生成的子模块</span></span><br><span class="line">objects := <span class="variable">$(<span class="built_in">addsuffix</span> /*.o, <span class="variable">$(modules)</span>)</span> <span class="comment"># 遍历需要生成的目标文件</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-makefile">target_dir := target # MOS 构建目标所在目录
+mos_elf := $(target_dir)/mos # 最终需要生成的 ELF 可执行文件
+user_disk := $(target_dir)/fs.img # MOS 文件系统使用的磁盘镜像文件
+link_script := kernel.lds
+
+modules := lib init kern # 需要生成的子模块
+objects := $(addsuffix /*.o, $(modules)) # 遍历需要生成的目标文件
+</code></pre>
 </li>
 <li><p>PHONY</p>
 <p>在 Makefile 里，<code>PHONY</code> 是一个特殊的目标（target），其作用是告诉 <code>make</code> 工具，某个目标并非代表一个实际的文件，而是一种伪目标。经过<code>PHONY</code>声称的目标，在<code>make</code>时会直接执行，而不会去检查是否存在名为 <code>clean</code> 的文件，也不管依赖文件是否被修改</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>:	目标名</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-makefile">.PHONY:    目标名
+</code></pre>
 </li>
 <li><p>目标</p>
 <p>目标名可以是变量，依存文件也可以是变量，因为变量本身就可以是文件</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: <span class="variable">$(mos_elf)</span> # 我们的“最终目标”</span></span><br><span class="line"><span class="variable">$(mos_elf)</span>: <span class="variable">$(modules)</span> <span class="comment"># 调用链接器 $(LD) 链接所有目标文件</span></span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -o <span class="variable">$(mos_elf)</span> -N -T <span class="variable">$(link_script)</span> <span class="variable">$(objects)</span></span><br><span class="line"><span class="variable">$(modules)</span>: <span class="comment"># 进入各个子目录进行 make</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> --directory=<span class="variable">$@</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-makefile">all: $(mos_elf) # 我们的“最终目标”
+$(mos_elf): $(modules) # 调用链接器 $(LD) 链接所有目标文件
+    $(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)
+$(modules): # 进入各个子目录进行 make
+    $(MAKE) --directory=$@
+</code></pre>
 </li>
 <li><p>MAKE变量</p>
 <p><code>MAKE</code>是Makefile里的一个特殊变量，其值为当前正在使用的 <code>make</code> 程序，一般就是 <code>make</code> 命令本身。使用 <code>$(MAKE)</code> 而非直接写 <code>make</code>，能保证在不同系统或者环境下都能正确调用 <code>make</code> 程序。</p>
 <p><code>--directory=$@</code>是<code>make</code>命令的一个选项，<code>--directory</code>可以简写为<code>-C</code>，其作用是改变当前工作目录到指定目录。<code>$@</code>是<code>Makefile</code>中一个自动变量，代表当前目标的名称。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(modules)</span>: <span class="comment"># 进入各个子目录进行 make</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> --directory=<span class="variable">$@</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-makefile">$(modules): # 进入各个子目录进行 make
+    $(MAKE) --directory=$@
+</code></pre>
 </li>
 <li><p>all</p>
 <p>一般在写 Makefile 时，习惯将第一个规则命名为<code>all</code>，也就是构建整个项目的意思。如果调用 make 时没有指定目标，make 会自动执行第一个目标，所以把<code>all</code>放在 第一个目标的位置上，可以使得<code>make</code>命令默认构建整个项目，较为方便。</p>
@@ -260,8 +357,9 @@
 <li><p>$</p>
 <p>$在Makefile中有两种用法</p>
 <p>变量引用：使用单个 “$”符号加上用括号或花括号括起来的变量名来引用在Makefile中定义的变量。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VAR = value</span><br><span class="line">echo $&#123;VAR&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-makefile">VAR = value
+echo $&#123;VAR&#125;
+</code></pre>
 <p>函数调用：<code>$(函数名 参数)</code></p>
 </li>
 </ul>
@@ -275,15 +373,54 @@
 <p><img src="/..%5Cimages%5Cimage-20250322221013203.png" alt="image-20250322221013203"></p>
 <ul>
 <li><p>ELF文件头：包括程序的基本信息，比如体系结构和操作系统，同时也包含了节头表和段头表 相对文件的偏移量（offset）。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> e_ident[EI_NIDENT]; <span class="comment">// 存放魔数以及其他信息</span></span><br><span class="line">    Elf32_Half e_type; <span class="comment">// 文件类型</span></span><br><span class="line">    Elf32_Half e_machine; <span class="comment">// 机器架构</span></span><br><span class="line">    Elf32_Word e_version; <span class="comment">// 文件版本</span></span><br><span class="line">    Elf32_Addr e_entry; <span class="comment">// 入口点的虚拟地址</span></span><br><span class="line">    Elf32_Off e_phoff; <span class="comment">// 程序头表所在处与此文件头的偏移</span></span><br><span class="line">    Elf32_Off e_shoff; <span class="comment">// 节头表所在处与此文件头的偏移</span></span><br><span class="line">    Elf32_Word e_flags; <span class="comment">// 针对处理器的标记</span></span><br><span class="line">    Elf32_Half e_ehsize; <span class="comment">// ELF 文件头的大小（单位为字节）</span></span><br><span class="line">    Elf32_Half e_phentsize; <span class="comment">// 程序头表表项大小</span></span><br><span class="line">    Elf32_Half e_phnum; <span class="comment">// 程序头表表项数</span></span><br><span class="line">    Elf32_Half e_shentsize; <span class="comment">// 节头表表项大小</span></span><br><span class="line">    Elf32_Half e_shnum; <span class="comment">// 节头表表项数</span></span><br><span class="line">    Elf32_Half e_shstrndx; <span class="comment">// 节头字符串编号</span></span><br><span class="line">&#125; Elf32_Ehdr; <span class="comment">// ELF头类型</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">typedef struct &#123;
+    unsigned char e_ident[EI_NIDENT]; // 存放魔数以及其他信息
+    Elf32_Half e_type; // 文件类型
+    Elf32_Half e_machine; // 机器架构
+    Elf32_Word e_version; // 文件版本
+    Elf32_Addr e_entry; // 入口点的虚拟地址
+    Elf32_Off e_phoff; // 程序头表所在处与此文件头的偏移
+    Elf32_Off e_shoff; // 节头表所在处与此文件头的偏移
+    Elf32_Word e_flags; // 针对处理器的标记
+    Elf32_Half e_ehsize; // ELF 文件头的大小（单位为字节）
+    Elf32_Half e_phentsize; // 程序头表表项大小
+    Elf32_Half e_phnum; // 程序头表表项数
+    Elf32_Half e_shentsize; // 节头表表项大小
+    Elf32_Half e_shnum; // 节头表表项数
+    Elf32_Half e_shstrndx; // 节头字符串编号
+&#125; Elf32_Ehdr; // ELF头类型
+</code></pre>
 </li>
 <li><p>段头表（或程序头表，program header table）：主要<strong>包含程序中各个段（segment）的信息</strong>， 段的信息需要在运行时刻使用。</p>
 <p><strong>段头表项</strong>和段一一对应</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Word p_type; <span class="comment">// 段的类型</span></span><br><span class="line">    Elf32_Off p_offset; <span class="comment">// 该段在ELF文件中的偏移量</span></span><br><span class="line">    Elf32_Addr p_vaddr; <span class="comment">// 在内存中的虚拟地址</span></span><br><span class="line">    Elf32_Addr p_paddr; <span class="comment">// 在物理内存中的地址</span></span><br><span class="line">    Elf32_Word p_filesz; <span class="comment">// 在文件中占用的字节数</span></span><br><span class="line">    Elf32_Word p_memsz; <span class="comment">// 在内存中占用的字节数（&gt;=p_filesz）</span></span><br><span class="line">    Elf32_Word p_flags; <span class="comment">// 该程序段的标志位</span></span><br><span class="line">    Elf32_Word p_align; <span class="comment">// 该程序段的对齐要求</span></span><br><span class="line">&#125; Elf32_Phdr; <span class="comment">// 段头表项类型</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">typedef struct &#123;
+    Elf32_Word p_type; // 段的类型
+    Elf32_Off p_offset; // 该段在ELF文件中的偏移量
+    Elf32_Addr p_vaddr; // 在内存中的虚拟地址
+    Elf32_Addr p_paddr; // 在物理内存中的地址
+    Elf32_Word p_filesz; // 在文件中占用的字节数
+    Elf32_Word p_memsz; // 在内存中占用的字节数（&gt;=p_filesz）
+    Elf32_Word p_flags; // 该程序段的标志位
+    Elf32_Word p_align; // 该程序段的对齐要求
+&#125; Elf32_Phdr; // 段头表项类型
+</code></pre>
 </li>
 <li><p>节头表（section header table）：主要<strong>包含程序中各个节（section）的信息</strong>，节的信息需要在程序编译和链接的时候使用。</p>
 <p><strong>节头表项</strong>和节一一对应</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Word sh_name; <span class="comment">// 节的名称</span></span><br><span class="line">    Elf32_Word sh_type; <span class="comment">// 节的类型</span></span><br><span class="line">    Elf32_Word sh_flags; <span class="comment">// 节的属性和标志</span></span><br><span class="line">    Elf32_Addr sh_addr; <span class="comment">// 该节在内存中的加载地址</span></span><br><span class="line">    Elf32_Off sh_offset; <span class="comment">// 该节在ELF文件中的偏移量</span></span><br><span class="line">    Elf32_Word sh_size; <span class="comment">// 节的大小</span></span><br><span class="line">    Elf32_Word sh_link; <span class="comment">// 链接其他节的索引</span></span><br><span class="line">    Elf32_Word sh_info; <span class="comment">// 额外信息</span></span><br><span class="line">    Elf32_Word sh_addralign; <span class="comment">// 该节的对齐要求</span></span><br><span class="line">    Elf32_Word sh_entsize; <span class="comment">// 节中条目的大小。如果没有固定大小的条目则为0</span></span><br><span class="line">&#125; Elf32_Shdr; <span class="comment">// 节头表项类型</span></span><br></pre></td></tr></table></figure></li>
+<pre><code class="language-c">typedef struct &#123;
+    Elf32_Word sh_name; // 节的名称
+    Elf32_Word sh_type; // 节的类型
+    Elf32_Word sh_flags; // 节的属性和标志
+    Elf32_Addr sh_addr; // 该节在内存中的加载地址
+    Elf32_Off sh_offset; // 该节在ELF文件中的偏移量
+    Elf32_Word sh_size; // 节的大小
+    Elf32_Word sh_link; // 链接其他节的索引
+    Elf32_Word sh_info; // 额外信息
+    Elf32_Word sh_addralign; // 该节的对齐要求
+    Elf32_Word sh_entsize; // 节中条目的大小。如果没有固定大小的条目则为0
+&#125; Elf32_Shdr; // 节头表项类型
+</code></pre>
+</li>
 </ul>
 <h3 id="C语言拾遗"><a href="#C语言拾遗" class="headerlink" title="C语言拾遗"></a>C语言拾遗</h3><ul>
 <li><p><code>void *</code>：泛型指针，可以指向任意类型的数据，不过 <code>void *</code> 类型的指针本身不包含所指向数据的类型信息，因此不能对它做解引用操作。</p>
@@ -292,7 +429,13 @@
 <li><p><code>const void *</code>： <code>void *</code> 的常量版本。<code>const</code> 关键字表示该指针<strong>所指向的内容是只读的</strong>，不能通过这个指针来修改所指向的数据。</p>
 </li>
 <li><p>指针运算：泛型指针不包含指向数据的类型信息，在加上偏移值时按照<strong>1字节</strong>处理。其它指针按照本类型的大小处理。如</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> *p = &amp;a; <span class="comment">// p是int*类型的指针</span></span><br><span class="line">p = p + <span class="number">3</span>; <span class="comment">// p向后移动3个int大小（3*4字节）</span></span><br><span class="line"><span class="type">int</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="type">void</span> *q = &amp;b;</span><br><span class="line">q = q + <span class="number">3</span>; <span class="comment">// q向后移动3个字节</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">int a = 1;
+int *p = &amp;a; // p是int*类型的指针
+p = p + 3; // p向后移动3个int大小（3*4字节）
+int b = 1;
+void *q = &amp;b;
+q = q + 3; // q向后移动3个字节
+</code></pre>
 </li>
 <li><p>指向常量的指针&amp;常量指针：</p>
 <p><code>const &lt;类型&gt; *&lt;指针名&gt;</code>是指向常量的指针，指针指向的对象无法改变，但是指针可以移动</p>
@@ -307,29 +450,92 @@
 <li><code>va_end</code>：在使用完变长参数列表之后，释放<code>va_list</code>类型的变量。</li>
 </ul>
 <p>一个简单例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算多个整数的和</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> count, ...)</span> &#123;</span><br><span class="line">    va_list args;</span><br><span class="line">    <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化变长参数列表</span></span><br><span class="line">    va_start(args, count); <span class="comment">// count是最后一个形参</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历参数列表并求和</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        result += va_arg(args, <span class="type">int</span>); <span class="comment">// int代表要获得的参数类型</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 结束变长参数列表的使用</span></span><br><span class="line">    va_end(args);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> result = sum(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sum: %d\n&quot;</span>, result);</span><br><span class="line"></span><br><span class="line">    result = sum(<span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sum: %d\n&quot;</span>, result);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
 
+// 计算多个整数的和
+int sum(int count, ...) &#123;
+    va_list args;
+    int result = 0;
+    int i;
+
+    // 初始化变长参数列表
+    va_start(args, count); // count是最后一个形参
+
+    // 遍历参数列表并求和
+    for (i = 0; i &lt; count; i++) &#123;
+        result += va_arg(args, int); // int代表要获得的参数类型
+    &#125;
+
+    // 结束变长参数列表的使用
+    va_end(args);
+
+    return result;
+&#125;
+
+int main() &#123;
+    int result = sum(3, 1, 2, 3);
+    printf(&quot;Sum: %d\n&quot;, result);
+
+    result = sum(5, 1, 2, 3, 4, 5);
+    printf(&quot;Sum: %d\n&quot;, result);
+
+    return 0;
+&#125;
+</code></pre>
 <p>我们熟知的<code>printf()</code>函数就使用了变长参数列表，它的函数标签是这样<code>void printk(const char *fmt, ...)</code></p>
-<h3 id="获得文件类型"><a href="#获得文件类型" class="headerlink" title="获得文件类型"></a>获得文件类型</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file 要查看的文件名</span><br></pre></td></tr></table></figure>
-
-<h3 id="readelf基本用法"><a href="#readelf基本用法" class="headerlink" title="readelf基本用法"></a>readelf基本用法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">readelf [option(s)] &lt;elf-file(s)&gt;</span><br><span class="line">readelf -h &lt;elf_file&gt; //查看ELF文件头</span><br><span class="line">readelf -S &lt;elf_file&gt; //查看各节</span><br><span class="line">readelf -l &lt;elf_file&gt; //查看各段</span><br></pre></td></tr></table></figure>
-
+<h3 id="获得文件类型"><a href="#获得文件类型" class="headerlink" title="获得文件类型"></a>获得文件类型</h3><pre><code class="language-bash">file 要查看的文件名
+</code></pre>
+<h3 id="readelf基本用法"><a href="#readelf基本用法" class="headerlink" title="readelf基本用法"></a>readelf基本用法</h3><pre><code class="language-bash">readelf [option(s)] &lt;elf-file(s)&gt;
+readelf -h &lt;elf_file&gt; //查看ELF文件头
+readelf -S &lt;elf_file&gt; //查看各节
+readelf -l &lt;elf_file&gt; //查看各段
+</code></pre>
 <h3 id="使用-Linker-Script"><a href="#使用-Linker-Script" class="headerlink" title="使用 Linker Script"></a>使用 Linker Script</h3><p>要使用Linker Script来调整各节的位置，将脚本写入链接脚本文件<code>.lds</code>中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">	. = 0x10000; // 定位计数器,可设置接下来的节的起始地址</span><br><span class="line">	.text : &#123; *(.text) &#125; // *是通配符，匹配所有的相应的节。意思是将所有输入文件中的.bss节都放到输出的.bss节中</span><br><span class="line">	. = 0x8000000;</span><br><span class="line">	.data : &#123; *(.data) &#125;</span><br><span class="line">	.bss : &#123; *(.bss) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>SECTIONS
+&#123;
+	. = 0x10000; // 定位计数器,可设置接下来的节的起始地址
+	.text : &#123; *(.text) &#125; // *是通配符，匹配所有的相应的节。意思是将所有输入文件中的.bss节都放到输出的.bss节中
+	. = 0x8000000;
+	.data : &#123; *(.data) &#125;
+	.bss : &#123; *(.bss) &#125;
+&#125;
+</code></pre>
 <h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>回调函数指将A函数作为参数传递给B函数，在B函数内调用A函数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">printk</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *fmt, ...)</span> &#123;</span><br><span class="line">	va_list ap;</span><br><span class="line">	va_start(ap, fmt);</span><br><span class="line">	vprintfmt(outputk, <span class="literal">NULL</span>, fmt, ap); <span class="comment">// outputk就是一个回调函数</span></span><br><span class="line">	va_end(ap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-c">void printk(const char *fmt, ...) &#123;
+	va_list ap;
+	va_start(ap, fmt);
+	vprintfmt(outputk, NULL, fmt, ap); // outputk就是一个回调函数
+	va_end(ap);
+&#125;
+</code></pre>
 <p><code>printk()</code>函数内：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vprintfmt</span><span class="params">(<span class="type">fmt_callback_t</span> out, <span class="type">void</span> *data, <span class="type">const</span> <span class="type">char</span> *fmt, va_list ap)</span> &#123; <span class="comment">// out是回调函数的参数名</span></span><br><span class="line">	<span class="type">char</span> c;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> *s;</span><br><span class="line">	<span class="type">long</span> num;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> width;</span><br><span class="line">	<span class="type">int</span> long_flag; <span class="comment">// output is long (rather than int)</span></span><br><span class="line">	<span class="type">int</span> neg_flag;  <span class="comment">// output is negative</span></span><br><span class="line">	<span class="type">int</span> ladjust;   <span class="comment">// output is left-aligned</span></span><br><span class="line">	<span class="type">char</span> padc;     <span class="comment">// padding char</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        <span class="comment">/*...*/</span></span><br><span class="line">        out(data, fmt, p - fmt); <span class="comment">// 调用回调函数</span></span><br><span class="line">        <span class="comment">/*...*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*...*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">void vprintfmt(fmt_callback_t out, void *data, const char *fmt, va_list ap) &#123; // out是回调函数的参数名
+	char c;
+	const char *s;
+	long num;
 
+	int width;
+	int long_flag; // output is long (rather than int)
+	int neg_flag;  // output is negative
+	int ladjust;   // output is left-aligned
+	char padc;     // padding char
+    
+    for(;;) &#123;
+        /*...*/
+        out(data, fmt, p - fmt); // 调用回调函数
+        /*...*/
+    &#125;
+    /*...*/
+&#125;
+</code></pre>
 <p>与直接在B函数内部调用A函数相比，回调函数有以下好处：</p>
 <ul>
 <li>函数的调用关系更加灵活，B函数可以通过传入的参数不同来调用不同的函数，而不是在编程时已经写死的某个函数</li>
 <li>降低不同函数之间的耦合度，如果在B函数内直接调用A函数，B函数的执行依赖A函数，耦合度太高。如果使用回调函数，则B函数的执行不完全依赖A函数，模块的独立性增强。</li>
 </ul>
 <h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h2><h3 id="Exercise-1-1"><a href="#Exercise-1-1" class="headerlink" title="Exercise 1.1"></a>Exercise 1.1</h3><ul>
-<li><p>我们想要遍历节头表，输出所有节的地址信息，那么我们必须了解3个量：节头表与文件头的偏移、节头表项数、节头表每一项有多大。这3个量都包含在ELF文件头的结构体中</p>
+<li><p>我们想要遍历节头表，输出所有节的地址信息，那么我们必须了解3个量：<strong>节头表与文件头的偏移</strong>、<strong>节头表项数</strong>、<strong>节头表每一项有多大</strong>。这3个量都包含在ELF文件头的结构体中</p>
 </li>
 <li><p>ELF文件头、节头表表项、段头表表项都是结构体，其中包含了相应的ELF文件、节、段的信息</p>
 </li>
@@ -339,24 +545,193 @@
 </li>
 </ul>
 <p>我的答案：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">readelf</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *binary, <span class="type">size_t</span> size)</span> &#123;</span><br><span class="line">    Elf32_Ehdr *ehdr = (Elf32_Ehdr *)binary; <span class="comment">// 将泛型指针binary转化为ELF头的指针ehdr</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check whether `binary` is a ELF file.</span></span><br><span class="line">    <span class="keyword">if</span> (!is_elf_format(binary, size)) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">&quot;not an elf file\n&quot;</span>, <span class="built_in">stderr</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the address of the section table, the number of section headers and the size of a</span></span><br><span class="line">    <span class="comment">// section header.</span></span><br><span class="line">    <span class="type">const</span> <span class="type">void</span> *sh_table; <span class="comment">// 节头表指针</span></span><br><span class="line">    Elf32_Half sh_entry_count; <span class="comment">// 节头表项数</span></span><br><span class="line">    Elf32_Half sh_entry_size; <span class="comment">// 节头表项大小</span></span><br><span class="line">    <span class="comment">/* Exercise 1.1: Your code here. (1/2) */</span></span><br><span class="line">    sh_table = binary + ehdr-&gt;e_shoff; <span class="comment">// 节头表第一项的地址，注意要用binary来加偏移值</span></span><br><span class="line">    sh_entry_count = ehdr-&gt;e_shnum;    <span class="comment">// 节头表项数</span></span><br><span class="line">    sh_entry_size = ehdr-&gt;e_shentsize; <span class="comment">// 节头表每一项的大小</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// For each section header, output its index and the section address.</span></span><br><span class="line">    <span class="comment">// The index should start from 0.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sh_entry_count; i++) &#123; <span class="comment">// 遍历所有的节头表项</span></span><br><span class="line">        <span class="type">const</span> Elf32_Shdr *shdr; <span class="comment">//节头表表项指针</span></span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> addr;</span><br><span class="line">        <span class="comment">/* Exercise 1.1: Your code here. (2/2) */</span></span><br><span class="line">        shdr = (Elf32_Shdr*)(sh_table + i * sh_entry_size); <span class="comment">// 找到节头表项的位置，指向它</span></span><br><span class="line">        addr = shdr-&gt;sh_addr;  <span class="comment">// 该节的地址</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d:0x%x\n&quot;</span>, i, addr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">int readelf(const void *binary, size_t size) &#123;
+    Elf32_Ehdr *ehdr = (Elf32_Ehdr *)binary; // 将泛型指针binary转化为ELF头的指针ehdr
 
+    // Check whether `binary` is a ELF file.
+    if (!is_elf_format(binary, size)) &#123;
+        fputs(&quot;not an elf file\n&quot;, stderr);
+        return -1;
+    &#125;
+
+    // Get the address of the section table, the number of section headers and the size of a
+    // section header.
+    const void *sh_table; // 节头表指针
+    Elf32_Half sh_entry_count; // 节头表项数
+    Elf32_Half sh_entry_size; // 节头表项大小
+    /* Exercise 1.1: Your code here. (1/2) */
+    sh_table = binary + ehdr-&gt;e_shoff; // 节头表第一项的地址，注意要用binary来加偏移值
+    sh_entry_count = ehdr-&gt;e_shnum;    // 节头表项数
+    sh_entry_size = ehdr-&gt;e_shentsize; // 节头表每一项的大小
+
+    // For each section header, output its index and the section address.
+    // The index should start from 0.
+    for (int i = 0; i &lt; sh_entry_count; i++) &#123; // 遍历所有的节头表项
+        const Elf32_Shdr *shdr; //节头表表项指针
+        unsigned int addr;
+        /* Exercise 1.1: Your code here. (2/2) */
+        shdr = (Elf32_Shdr*)(sh_table + i * sh_entry_size); // 找到节头表项的位置，指向它
+        addr = shdr-&gt;sh_addr;  // 该节的地址
+        printf(&quot;%d:0x%x\n&quot;, i, addr);
+    &#125;
+
+    return 0;
+&#125;
+</code></pre>
 <h3 id="Exercise-1-2"><a href="#Exercise-1-2" class="headerlink" title="Exercise 1.2"></a>Exercise 1.2</h3><p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定各节的位置，发现<code>Kernel Text</code>从<code>0x8002 0000</code>开始</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> o     4G -----------&gt;  +----------------------------+------------0x100000000</span></span><br><span class="line"><span class="comment"> o                      |       ...                  |  kseg2</span></span><br><span class="line"><span class="comment"> o      KSEG2    -----&gt; +----------------------------+------------0xc000 0000</span></span><br><span class="line"><span class="comment"> o                      |          Devices           |  kseg1</span></span><br><span class="line"><span class="comment"> o      KSEG1    -----&gt; +----------------------------+------------0xa000 0000</span></span><br><span class="line"><span class="comment"> o                      |      Invalid Memory        |   /|\</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+----|-------Physical Memory Max</span></span><br><span class="line"><span class="comment"> o                      |       ...                  |  kseg0</span></span><br><span class="line"><span class="comment"> o      KSTACKTOP-----&gt; +----------------------------+----|-------0x8040 0000-------end</span></span><br><span class="line"><span class="comment"> o                      |       Kernel Stack         |    | KSTKSIZE            /|\</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+----|------                |</span></span><br><span class="line"><span class="comment"> o                      |       Kernel Text          |    |                    PDMAP</span></span><br><span class="line"><span class="comment"> o      KERNBASE -----&gt; +----------------------------+----|-------0x8002 0000    |</span></span><br><span class="line"><span class="comment"> o                      |      Exception Entry       |   \|/                    \|/</span></span><br><span class="line"><span class="comment"> o      ULIM     -----&gt; +----------------------------+------------0x8000 0000-------</span></span><br><span class="line"><span class="comment"> o                      |         User VPT           |     PDMAP                /|\</span></span><br><span class="line"><span class="comment"> o      UVPT     -----&gt; +----------------------------+------------0x7fc0 0000    |</span></span><br><span class="line"><span class="comment"> o                      |           pages            |     PDMAP                 |</span></span><br><span class="line"><span class="comment"> o      UPAGES   -----&gt; +----------------------------+------------0x7f80 0000    |</span></span><br><span class="line"><span class="comment"> o                      |           envs             |     PDMAP                 |</span></span><br><span class="line"><span class="comment"> o  UTOP,UENVS   -----&gt; +----------------------------+------------0x7f40 0000    |</span></span><br><span class="line"><span class="comment"> o  UXSTACKTOP -/       |     user exception stack   |     BY2PG                 |</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+------------0x7f3f f000    |</span></span><br><span class="line"><span class="comment"> o                      |                            |     BY2PG                 |</span></span><br><span class="line"><span class="comment"> o      USTACKTOP ----&gt; +----------------------------+------------0x7f3f e000    |</span></span><br><span class="line"><span class="comment"> o                      |     normal user stack      |     BY2PG                 |</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+------------0x7f3f d000    |</span></span><br><span class="line"><span class="comment"> a                      |                            |                           |</span></span><br><span class="line"><span class="comment"> a                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           |</span></span><br><span class="line"><span class="comment"> a                      .                            .                           |</span></span><br><span class="line"><span class="comment"> a                      .                            .                         kuseg</span></span><br><span class="line"><span class="comment"> a                      .                            .                           |</span></span><br><span class="line"><span class="comment"> a                      |~~~~~~~~~~~~~~~~~~~~~~~~~~~~|                           |</span></span><br><span class="line"><span class="comment"> a                      |                            |                           |</span></span><br><span class="line"><span class="comment"> o       UTEXT   -----&gt; +----------------------------+------------0x0040 0000    |</span></span><br><span class="line"><span class="comment"> o                      |      reserved for COW      |     BY2PG                 |</span></span><br><span class="line"><span class="comment"> o       UCOW    -----&gt; +----------------------------+------------0x003f f000    |</span></span><br><span class="line"><span class="comment"> o                      |   reversed for temporary   |     BY2PG                 |</span></span><br><span class="line"><span class="comment"> o       UTEMP   -----&gt; +----------------------------+------------0x003f e000    |</span></span><br><span class="line"><span class="comment"> o                      |       invalid memory       |                          \|/</span></span><br><span class="line"><span class="comment"> a     0 ------------&gt;  +----------------------------+ ----------------------------</span></span><br><span class="line"><span class="comment"> o</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-c">/*
+ o     4G -----------&gt;  +----------------------------+------------0x100000000
+ o                      |       ...                  |  kseg2
+ o      KSEG2    -----&gt; +----------------------------+------------0xc000 0000
+ o                      |          Devices           |  kseg1
+ o      KSEG1    -----&gt; +----------------------------+------------0xa000 0000
+ o                      |      Invalid Memory        |   /|\
+ o                      +----------------------------+----|-------Physical Memory Max
+ o                      |       ...                  |  kseg0
+ o      KSTACKTOP-----&gt; +----------------------------+----|-------0x8040 0000-------end
+ o                      |       Kernel Stack         |    | KSTKSIZE            /|\
+ o                      +----------------------------+----|------                |
+ o                      |       Kernel Text          |    |                    PDMAP
+ o      KERNBASE -----&gt; +----------------------------+----|-------0x8002 0000    |
+ o                      |      Exception Entry       |   \|/                    \|/
+ o      ULIM     -----&gt; +----------------------------+------------0x8000 0000-------
+ o                      |         User VPT           |     PDMAP                /|\
+ o      UVPT     -----&gt; +----------------------------+------------0x7fc0 0000    |
+ o                      |           pages            |     PDMAP                 |
+ o      UPAGES   -----&gt; +----------------------------+------------0x7f80 0000    |
+ o                      |           envs             |     PDMAP                 |
+ o  UTOP,UENVS   -----&gt; +----------------------------+------------0x7f40 0000    |
+ o  UXSTACKTOP -/       |     user exception stack   |     BY2PG                 |
+ o                      +----------------------------+------------0x7f3f f000    |
+ o                      |                            |     BY2PG                 |
+ o      USTACKTOP ----&gt; +----------------------------+------------0x7f3f e000    |
+ o                      |     normal user stack      |     BY2PG                 |
+ o                      +----------------------------+------------0x7f3f d000    |
+ a                      |                            |                           |
+ a                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           |
+ a                      .                            .                           |
+ a                      .                            .                         kuseg
+ a                      .                            .                           |
+ a                      |~~~~~~~~~~~~~~~~~~~~~~~~~~~~|                           |
+ a                      |                            |                           |
+ o       UTEXT   -----&gt; +----------------------------+------------0x0040 0000    |
+ o                      |      reserved for COW      |     BY2PG                 |
+ o       UCOW    -----&gt; +----------------------------+------------0x003f f000    |
+ o                      |   reversed for temporary   |     BY2PG                 |
+ o       UTEMP   -----&gt; +----------------------------+------------0x003f e000    |
+ o                      |       invalid memory       |                          \|/
+ a     0 ------------&gt;  +----------------------------+ ----------------------------
+ o
+*/
+</code></pre>
 <p>我的答案：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">    /* fill in the correct address of the key sections: text, data, bss. */</span><br><span class="line">    /* Hint: The loading address can be found in the memory layout. And the data section</span><br><span class="line">            and bss section are right after the text section, so you can just define</span><br><span class="line">            them after the text section.</span><br><span class="line">    */</span><br><span class="line">    /* Step 1: Set the loading address of the text section to the location counter &quot;.&quot;. */</span><br><span class="line">    /* Exercise 1.2: Your code here. (1/4) */</span><br><span class="line">  .= 0x80020000;</span><br><span class="line">    /* Step 2: Define the text section. */</span><br><span class="line">    /* Exercise 1.2: Your code here. (2/4) */</span><br><span class="line">   .text : &#123; *(.text) &#125;</span><br><span class="line">    /* Step 3: Define the data section. */</span><br><span class="line">    /* Exercise 1.2: Your code here. (3/4) */</span><br><span class="line">   .data : &#123; *(.data) &#125;</span><br><span class="line">    /* Step 4: Define the bss section. */</span><br><span class="line">    /* Exercise 1.2: Your code here. (4/4) */</span><br><span class="line">    bss_start =. ;</span><br><span class="line">   .bss : &#123; *(.bss) &#125;</span><br><span class="line">    bss_end =. ;</span><br><span class="line">  .= 0x80400000;</span><br><span class="line">    end =. ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>SECTIONS
+&#123;
+    /* fill in the correct address of the key sections: text, data, bss. */
+    /* Hint: The loading address can be found in the memory layout. And the data section
+            and bss section are right after the text section, so you can just define
+            them after the text section.
+    */
+    /* Step 1: Set the loading address of the text section to the location counter &quot;.&quot;. */
+    /* Exercise 1.2: Your code here. (1/4) */
+  .= 0x80020000;
+    /* Step 2: Define the text section. */
+    /* Exercise 1.2: Your code here. (2/4) */
+   .text : &#123; *(.text) &#125;
+    /* Step 3: Define the data section. */
+    /* Exercise 1.2: Your code here. (3/4) */
+   .data : &#123; *(.data) &#125;
+    /* Step 4: Define the bss section. */
+    /* Exercise 1.2: Your code here. (4/4) */
+    bss_start =. ;
+   .bss : &#123; *(.bss) &#125;
+    bss_end =. ;
+  .= 0x80400000;
+    end =. ;
+&#125;
+</code></pre>
 <h3 id="Exercise-1-3"><a href="#Exercise-1-3" class="headerlink" title="Exercise 1.3"></a>Exercise 1.3</h3><p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定栈指针的初始位置<code>0x80400000</code></p>
 <p>注意：栈是<strong>从高到低</strong>增长的</p>
 <p>我的答案：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">clear_bss_done:</span><br><span class="line">    /* disable interrupts */</span><br><span class="line">    mtc0    zero, CPO_STATUS</span><br><span class="line"></span><br><span class="line">    /* hint: you can refer to the memory layout in include/mmu.h */</span><br><span class="line">    /* set up the kernel stack */</span><br><span class="line">    /* Exercise 1.3: Your code here. (1/2) */</span><br><span class="line">    la      sp, 0x80400000 # 加载地址，最好用la</span><br><span class="line">    /* jump to mips_init */</span><br><span class="line">    /* Exercise 1.3: Your code here. (2/4) */</span><br><span class="line">    j       mips_init # 不用返回，用j指令即可</span><br></pre></td></tr></table></figure>
+<pre><code class="language-assembly">clear_bss_done:
+    /* disable interrupts */
+    mtc0    zero, CPO_STATUS
 
+    /* hint: you can refer to the memory layout in include/mmu.h */
+    /* set up the kernel stack */
+    /* Exercise 1.3: Your code here. (1/2) */
+    la      sp, 0x80400000 # 加载地址，最好用la
+    /* jump to mips_init */
+    /* Exercise 1.3: Your code here. (2/4) */
+    j       mips_init # 不用返回，用j指令即可
+</code></pre>
 <h3 id="Exercise-1-4"><a href="#Exercise-1-4" class="headerlink" title="Exercise 1.4"></a>Exercise 1.4</h3><p>按照给定的格式<code>%[flags][width][length]&lt;specifier&gt;</code>，考虑每部分的情况，逐个解析即可</p>
 <p>8&#x2F;8的部分是输出十进制数，注意<code>neg_flag</code>要根据数值的正负来变化，<code>print_num()</code>的<code>base</code>参数改为10</p>
 <p>我的答案：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* scan for the next &#x27;%&#x27; */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (1/8) */</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> * p = fmt;</span><br><span class="line"><span class="keyword">while</span> (*p != <span class="string">&#x27;%&#x27;</span> &amp;&amp; *p != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">	p++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* flush the string found so far */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (2/8) */</span></span><br><span class="line">out(data, fmt, p - fmt);</span><br><span class="line">fmt = p;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* check &quot;are we hitting the end?&quot; */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (3/8) */</span></span><br><span class="line"><span class="keyword">if</span> (*fmt == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* we found a &#x27;%&#x27; */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (4/8) */</span></span><br><span class="line">fmt++;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* check format flag */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (5/8) */</span></span><br><span class="line">ladjust = <span class="number">0</span>;</span><br><span class="line">padc = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="keyword">if</span> (*fmt == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">	ladjust = <span class="number">1</span>;</span><br><span class="line">	fmt++;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (*fmt == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">	padc = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	fmt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* get width */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (6/8) */</span></span><br><span class="line">width = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="string">&#x27;0&#x27;</span> &lt;= *fmt &amp;&amp; *fmt &lt;= <span class="string">&#x27;9&#x27;</span> &amp;&amp; *fmt != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">	width *= <span class="number">10</span>;</span><br><span class="line">	width += *fmt - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	fmt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* check for long */</span></span><br><span class="line"><span class="comment">/* Exercise 1.4: Your code here. (7/8) */</span></span><br><span class="line">long_flag = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (*fmt == <span class="string">&#x27;l&#x27;</span>) &#123;</span><br><span class="line">	long_flag = <span class="number">1</span>;</span><br><span class="line">	fmt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/*</span></span><br><span class="line"><span class="comment">       * Refer to other parts (case &#x27;b&#x27;, case &#x27;o&#x27;, etc.) and func &#x27;print_num&#x27; to</span></span><br><span class="line"><span class="comment">       * complete this part. Think the differences between case &#x27;d&#x27; and the</span></span><br><span class="line"><span class="comment">       * others. (hint: &#x27;neg_flag&#x27;).</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="comment">/* Exercise 1.4: Your code here. (8/8) */</span></span><br><span class="line">      <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">              num = - num;</span><br><span class="line">              neg_flag = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      print_num(out, data, num, <span class="number">10</span>, neg_flag, width, ladjust, padc, <span class="number">0</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-c">		/* scan for the next &#39;%&#39; */
+		/* Exercise 1.4: Your code here. (1/8) */
+		const char * p = fmt;
+		while (*p != &#39;%&#39; &amp;&amp; *p != &#39;\0&#39;) &#123;
+			p++;
+		&#125;
 
+		/* flush the string found so far */
+		/* Exercise 1.4: Your code here. (2/8) */
+		out(data, fmt, p - fmt);
+		fmt = p;
+
+		/* check &quot;are we hitting the end?&quot; */
+		/* Exercise 1.4: Your code here. (3/8) */
+		if (*fmt == &#39;\0&#39;) &#123;
+			break;
+		&#125;
+
+		/* we found a &#39;%&#39; */
+		/* Exercise 1.4: Your code here. (4/8) */
+		fmt++;
+
+		/* check format flag */
+		/* Exercise 1.4: Your code here. (5/8) */
+		ladjust = 0;
+		padc = &#39; &#39;;
+		if (*fmt == &#39;-&#39;) &#123;
+			ladjust = 1;
+			fmt++;
+		&#125; else if (*fmt == &#39;0&#39;) &#123;
+			padc = &#39;0&#39;;
+			fmt++;
+		&#125;
+
+		/* get width */
+		/* Exercise 1.4: Your code here. (6/8) */
+		width = 0;
+		while (&#39;0&#39; &lt;= *fmt &amp;&amp; *fmt &lt;= &#39;9&#39; &amp;&amp; *fmt != &#39;\0&#39;) &#123;
+			width *= 10;
+			width += *fmt - &#39;0&#39;;
+			fmt++;
+		&#125;
+
+		/* check for long */
+		/* Exercise 1.4: Your code here. (7/8) */
+		long_flag = 0;
+		if (*fmt == &#39;l&#39;) &#123;
+			long_flag = 1;
+			fmt++;
+		&#125;
+
+        /*
+         * Refer to other parts (case &#39;b&#39;, case &#39;o&#39;, etc.) and func &#39;print_num&#39; to
+         * complete this part. Think the differences between case &#39;d&#39; and the
+         * others. (hint: &#39;neg_flag&#39;).
+         */
+        /* Exercise 1.4: Your code here. (8/8) */
+        if (num &lt; 0) &#123;
+                num = - num;
+                neg_flag = 1;
+        &#125;
+        print_num(out, data, num, 10, neg_flag, width, ladjust, padc, 0);
+        break;
+</code></pre>
 <h2 id="体会与感想"><a href="#体会与感想" class="headerlink" title="体会与感想"></a>体会与感想</h2><p>相较于边学习边写代码，我更喜欢系统性地全部学习了解了以后再写代码，所以lab1学习的流程就是不停地看指导书，然后遇到不懂的内容立刻去查资料，遇到不会的代码使用工具辅助理解最后着手写代码。</p>
 <p>lab1只有最后一个练习的代码量比较大，而且新知识很多，如变长参数列表、回调函数等等。所以我感觉大部分的时间都花在了读代码和理解代码逻辑上。尤其是<code>printk</code>的实现还分了三个文件，层层嵌套，目前我对于多个<code>.c</code>文件之间的关系理解的还比较浅薄，所以很多时间花在了明析各个文件的功能和协同工作上，它们是怎么一起实现一个函数功能的。</p>
 
