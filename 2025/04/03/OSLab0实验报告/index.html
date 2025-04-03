@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Lab0实验报告 | Windfallの异世界</title>
+    <meta name="author" content="Windfall" />
+    <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>WINDFALLの异世界</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WINDFALLの异世界</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Lab0实验报告</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/3
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Tech/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Tech
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/BUAA/" style="color: #03a9f4">
+                    BUAA
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/OS/" style="color: #00a596">
+                    OS
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NOTE/" style="color: #ff7d73">
+                    NOTE
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="Thinking-0-1"><a href="#Thinking-0-1" class="headerlink" title="Thinking 0.1"></a>Thinking 0.1</h2><ul>
+<li><p>执行<code>git status &gt; Untracked.txt</code>，查询当前工作区的状态。此时工作区的状态是修改了<code>README.txt</code>文件但未添加。<code>&gt;</code>表示输出重定向，将当前工作区的状态输出到目标文件<code>Untracked.txt</code>中。</p>
+</li>
+<li><p><code>add</code>命令表示将工作区的修改添加到暂存区，此时工作区的状态是修改了<code>README.txt</code>文件且已添加到暂存区。<code>&gt;</code>表示输出重定向，将当前工作区的状态输出到目标文件<code>Stage.txt</code>中。</p>
+</li>
+<li><p>提交命令为<code>git commit -m &quot;23373517&quot;</code></p>
+</li>
+<li><p><code>cat Untracked.txt</code>，第二行显示<code>Untracked files:</code>，说明在<code>README.txt</code>新建的时候，其处于为未跟踪状态 （untracked）。<code>cat Stage.txt</code>，第二行显示<code>Changes to be committed:</code>，说明文件处于暂存区，等待提交。</p>
+</li>
+<li><p>修改<code>README.txt </code>并将工作区状态保存到<code>Modified.txt</code>后，输出的状态为<code>Changes not staged for commit:</code>，与第一次<code>add</code>前的状态不同，说明在修改<code>README.txt</code>文件后其处于被修改状态（modified）</p>
+</li>
+</ul>
+<h2 id="Thinking-0-2"><a href="#Thinking-0-2" class="headerlink" title="Thinking 0.2"></a>Thinking 0.2</h2><ul>
+<li><code>add the file</code>：<code>git add</code></li>
+<li><code>stage the file</code>：<code>git add</code></li>
+<li><code>commit</code>：<code>git commit</code></li>
+</ul>
+<h2 id="Thinking-0-3"><a href="#Thinking-0-3" class="headerlink" title="Thinking 0.3"></a>Thinking 0.3</h2><ul>
+<li><code>git checkout --print.c</code></li>
+<li><code>git checkout --print.c</code></li>
+<li><code>git rm --cached print.c</code></li>
+</ul>
+<h2 id="Thinking-0-4"><a href="#Thinking-0-4" class="headerlink" title="Thinking 0.4"></a>Thinking 0.4</h2><ul>
+<li><p>第一次<code>git log</code></p>
+<p><img src="/../images/image-20250314224346696.png" alt="image-20250314224346696"></p>
+</li>
+<li><p>第二次<code>git log</code></p>
+<p><img src="/../images/image-20250314224443674.png" alt="image-20250314224443674"></p>
+</li>
+<li><p>第三次<code>git log</code></p>
+<p><img src="/../images/image-20250314224209354.png" alt="image-20250314224209354"></p>
+</li>
+<li><p>第四次<code>git log</code><img src="/../images/image-20250314224251666.png" alt="image-20250314224251666"></p>
+</li>
+</ul>
+<h2 id="Thinking-0-5"><a href="#Thinking-0-5" class="headerlink" title="Thinking 0.5"></a>Thinking 0.5</h2><ul>
+<li><p><code>echo first</code></p>
+<p><img src="/../images/image-20250314225038470.png" alt="image-20250314225038470"></p>
+</li>
+<li><p><code>echo second &gt; output.txt</code></p>
+<p><img src="/../images/image-20250314225120755.png" alt="image-20250314225120755"></p>
+</li>
+<li><p><code>echo third &gt; output.txt</code></p>
+<p><img src="/../images/image-20250314225200504.png" alt="image-20250314225200504"></p>
+</li>
+<li><p><code>echo forth &gt;&gt; output.txt</code></p>
+<p><img src="/../images/image-20250314225246436.png" alt="image-20250314225246436"></p>
+</li>
+</ul>
+<h2 id="Thinking-0-6"><a href="#Thinking-0-6" class="headerlink" title="Thinking 0.6"></a>Thinking 0.6</h2><ul>
+<li><p>command:</p>
+<p><code>echo</code>命令后加单引号会将内容视为字面量字符串，不做任何扩展或替换，保留所有特殊字符和空格。</p>
+<pre><code class="language-shell">#!/bin/bash                                                  touch test
+echo &#39;echo Shell Start...&#39; &gt; test
+echo &#39;echo set a = 1&#39; &gt;&gt; test
+echo &#39;a=1&#39; &gt;&gt; test
+echo &#39;echo set b = 2&#39; &gt;&gt; test
+echo &#39;b=2&#39; &gt;&gt; test
+echo &#39;echo set c = a+b&#39; &gt;&gt; test
+echo &#39;c=$[$a+$b]&#39; &gt;&gt; test
+echo &#39;echo c = $c&#39; &gt;&gt; test
+echo &#39;echo save c to ./file1&#39; &gt;&gt; test
+echo &#39;echo $c&gt;file1&#39; &gt;&gt; test
+echo &#39;echo save b to ./file2&#39; &gt;&gt; test
+echo &#39;echo $b&gt;file2&#39; &gt;&gt; test
+echo &#39;echo save a to ./file3&#39; &gt;&gt; test
+echo &#39;echo $a&gt;file3&#39; &gt;&gt; test
+echo &#39;echo save file1 file2 file3 to file4&#39; &gt;&gt; test
+echo &#39;cat file1&gt;file4&#39; &gt;&gt; test
+echo &#39;cat file2&gt;&gt;file4&#39; &gt;&gt; test
+echo &#39;cat file3&gt;&gt;file4&#39; &gt;&gt; test
+echo &#39;echo save file4 to ./result&#39; &gt;&gt; test
+echo &#39;cat file4&gt;&gt;result&#39; &gt;&gt; test
+</code></pre>
+</li>
+<li><p>result:</p>
+<pre><code>3
+2
+1
+</code></pre>
+</li>
+<li><p><code>echo echo Shell Start</code>直接把“echo Shell Start”作为字符串输出</p>
+<p>如果在后面的内容加上反顿号，是将内部<code>echo</code>命令的输出作为外层<code>echo</code>的输出，会输出”Shell Start”</p>
+</li>
+<li><p><code>echo echo $c&gt;file1</code> 直接把“echo $c&gt;file1”作为字符串输出</p>
+<p>如果在后面的内容加上反顿号，是将内部<code>echo</code>命令的输出作为外层<code>echo</code>的输出，会输出 变量c的具体内容&gt;file1</p>
+</li>
+</ul>
+<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><h3 id="Exercise-0-1"><a href="#Exercise-0-1" class="headerlink" title="Exercise 0.1"></a>Exercise 0.1</h3><ul>
+<li>注意复制文件的命令<code>cp</code>和移动文件的命令<code>mv</code>不同，<code>mv</code>以后源目录下就不存在该文件了</li>
+<li>提取AAA文件的第8行到BBB文件中：sed -n ‘8p’ AAA &gt; BBB (安静模式-n，且仅输出不编辑，不写-i)</li>
+</ul>
+<h3 id="Exercise-0-2"><a href="#Exercise-0-2" class="headerlink" title="Exercise 0.2"></a>Exercise 0.2</h3><ul>
+<li><code>rmdir </code>命令只能删除空目录，如果想要递归删除目录及其内容，需要使用<code>rm -r ./&quot;file$a&quot;</code>。注意要使用双引号才能得到变量的值。</li>
+</ul>
+<h3 id="Exercise-0-3"><a href="#Exercise-0-3" class="headerlink" title="Exercise 0.3"></a>Exercise 0.3</h3><ul>
+<li><p>寻找文件<code>file</code>中所有含有<code>sign</code>字符串的行号使用<code>grep</code>命令</p>
+<pre><code class="language-shell">grep -n &quot;$int&quot; &quot;$file&quot; | awk -F: &#39;&#123;print $1&#125;&#39; &gt; $result
+</code></pre>
+<p><code>awk</code>命令用来分割答案，只输出行号</p>
+</li>
+</ul>
+<h3 id="Exercise-0-4"><a href="#Exercise-0-4" class="headerlink" title="Exercise 0.4"></a>Exercise 0.4</h3><ul>
+<li><p>执行<code>make</code>命令时，默认执行当前目录下的makefile文件中的第一个命令</p>
+</li>
+<li><p>makefile文件中可以执行另一个makefile文件的内容</p>
+<pre><code class="language-shell">$(MAKE) -C ./code
+</code></pre>
+<p><code>$(MAKE)</code> 是一个特殊的变量，它在 <code>Makefile</code> 中指向当前的 <code>make</code> 命令</p>
+<p><code>-C</code> 是 <code>make</code> 的一个选项，表示改变目录执行 <code>make</code></p>
+<p>本题文件树如下</p>
+<pre><code>csc/
+│
+├── Makefile
+└── code/
+    └── Makefile
+    └── fibo.c
+    └── main.c
+</code></pre>
+<p>可以在csc目录下执行<code>make</code>，执行csc&#x2F;code中Makefile文件的内容，省去一些麻烦</p>
+</li>
+<li><p>注意头文件的依赖。<code>csc/code</code>中的<code>fibo.c</code>和<code>main.c</code>均引入头文件<code>#include &lt;fibo.h&gt;</code>，但是csc&#x2F;code中没有这个头文件，因此在编译时要加上头文件的目录，否则会提示找不到头文件</p>
+<p>csc&#x2F;Makefile如下：</p>
+<pre><code class="language-shell">1 CFLAGS = -I./include # -I用来指定头文件的搜索路径，为当前目录下的include
+2 all:
+3         $(MAKE) -C ./code # 执行csc/code的Makefile
+4         gcc $(CFLAGS) ./code/main.o ./code/fibo.o -o fibo # 在编译时加入头文件的环境变量
+5 
+6 clean:
+7         rm -f ./code/main.o
+8         rm -f ./code/fibo.o
+</code></pre>
+</li>
+</ul>
+<h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a><strong>实验体会</strong></h2><p>写下实验过程中的体会。</p>
+<p>lab0课下实验主要是练习一些指令，并不复杂，不过如果不够熟练的话就要经常翻看指导书或者是上网查找，比较浪费时间。</p>
+<p>另外，实现同一个效果的途径可能很多，应该权衡最简便的方式。比如Exercise 0.4中csc&#x2F;Makefile的编写可能有很多种方式，可以像我现在写的，也可以先cd到csc&#x2F;code，再执行内部的Makefile文件。我个人认为一切从简比较好。</p>
+<p>以及，在生成可执行文件时，可以先看看.c文件中的头文件在当前目录下是否存在，不过就算不存在，当你编译时它也会提醒你，再去添加头文件就好喽。</p>
+<p>继续努力。</p>
+<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>在撰写过程中，我参考了 YannaZhang 张杨 学姐的博客，感觉学到了很多，在此致谢。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 Windfallの异世界
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Windfall
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
+</body>
+</html>
