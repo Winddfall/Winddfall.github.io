@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | Windfallの异世界</title>
+    <title>categories | Windfallの异世界</title>
     <meta name="author" content="Windfall" />
     <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
     <meta name="keywords" content="" />
@@ -39,8 +39,6 @@
 <script src="/js/lib/preview.js"></script>
 
 
-
-<script src="/js/lib/search.js"></script>
 
 
 
@@ -152,66 +150,24 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
+            <div id="archives">
     
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div id="timeline-wrap" ref="timeline">
+    <div class="categories-tags">
         
-        <div class="timeline" data-title="lab1实验报告">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/4/3</div>
-                <a href="/2025/04/03/OSLab1%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
-                    <h3>Lab1实验报告</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/Tech/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            Tech
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/BUAA/" style="color: #00bcd4">
-                                BUAA
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/OS/" style="color: #ff7d73">
-                                OS
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/NOTE/" style="color: #ffa2c4">
-                                NOTE
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+        
+        
+        <span>
+            <a href="/categories/Tech/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Tech
+            </a>
+        </span>
+        
         
     </div>
+    
 </div>
 
             <footer id="footer">

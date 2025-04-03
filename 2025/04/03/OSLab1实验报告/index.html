@@ -166,6 +166,15 @@
             2025/4/3
         </span>
         
+        <span class="category">
+            <a href="/categories/Tech/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Tech
+            </a>
+        </span>
+        
         
         <span class="tags">
             <span class="icon">
@@ -175,8 +184,22 @@
             
             <span class="tag">
                 
-                <a href="/tags/OS/" style="color: #ff7d73">
+                <a href="/tags/BUAA/" style="color: #ffa2c4">
+                    BUAA
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/OS/" style="color: #03a9f4">
                     OS
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NOTE/" style="color: #00bcd4">
+                    NOTE
                 </a>
             </span>
             
@@ -185,7 +208,7 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Lab1实验报告"><a href="#Lab1实验报告" class="headerlink" title="Lab1实验报告"></a>Lab1实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-1-1"><a href="#Thinking-1-1" class="headerlink" title="Thinking 1.1"></a>Thinking 1.1</h3><p>编写程序hello.c</p>
+        <h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-1-1"><a href="#Thinking-1-1" class="headerlink" title="Thinking 1.1"></a>Thinking 1.1</h3><p>编写程序hello.c</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 int main()
 &#123;
@@ -779,5 +802,22 @@ readelf -l &lt;elf_file&gt; //查看各段
 
 
     
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
 </body>
 </html>
