@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>计算机组成理论 | Windfallの异世界</title>
+    <meta name="author" content="Windfall" />
+    <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>WINDFALLの异世界</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WINDFALLの异世界</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>计算机组成理论</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/6
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Tech/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Tech
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/BUAA/" style="color: #00a596">
+                    BUAA
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CO/" style="color: #ffa2c4">
+                    CO
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="组合逻辑电路"><a href="#组合逻辑电路" class="headerlink" title="组合逻辑电路"></a>组合逻辑电路</h2><h3 id="逻辑代数基本定理"><a href="#逻辑代数基本定理" class="headerlink" title="逻辑代数基本定理"></a>逻辑代数基本定理</h3><p>1.重叠律：A+A&#x3D;A	A•A&#x3D;A</p>
+<p>2.吸收律：A+A•B&#x3D;A	A•(A+B)&#x3D;A</p>
+<p>3.还原律：~~A&#x3D;A</p>
+<p>4.反演律：<del>(A+B)&#x3D;</del>A•<del>B	~(A•B)&#x3D;</del>A+~B</p>
+<p>5.包含律：A•B+<del>A•C+B•C&#x3D;A•B+</del>A•C	 （A+B)•(<del>A+C)•(B+C)&#x3D;(A+B)•(</del>A+C)</p>
+<p>​					A•B+<del>A•C+B•C•D•E•F…&#x3D;A•B+</del>A•C</p>
+<h3 id="逻辑代数的规则"><a href="#逻辑代数的规则" class="headerlink" title="逻辑代数的规则"></a>逻辑代数的规则</h3><ul>
+<li><p>带入规则：在任何一个包含某个变量的逻辑等式中，用另一个函数式代入式中所有这个变量的位置，等式依然成立</p>
+</li>
+<li><p>反演规则：将原函数中所有的•换成+，+换成•，0换成1，1换成0，原变量换成反变量，反变量换成原变量，就得到原函数的反函数**（不属于单个变量上的”非号”在变换中不变）**</p>
+</li>
+<li><p>对偶规则：将原函数中所有的•换成+，+换成•，0换成1，1换成0，就得到原函数的对偶式。对偶式与原式等价</p>
+</li>
+</ul>
+<h3 id="逻辑函数"><a href="#逻辑函数" class="headerlink" title="逻辑函数"></a>逻辑函数</h3><h4 id="常用表达式"><a href="#常用表达式" class="headerlink" title="常用表达式"></a>常用表达式</h4><ul>
+<li>与或式 F&#x3D;AB+CD</li>
+<li>或与式 F&#x3D;(A+B)(C+D)</li>
+<li>与或非式 F&#x3D;~（AB+CD)</li>
+</ul>
+<h4 id="标准表达式"><a href="#标准表达式" class="headerlink" title="标准表达式"></a>标准表达式</h4><ul>
+<li>最小项表达式：全部由最小项构成的与或式（积之和式）</li>
+</ul>
+<p>写出真值表，把输出为1的输入组合写成<strong>乘积项</strong>的形式，取值为<strong>1</strong>的输入用<strong>原变量</strong>表示，取值为<strong>0</strong>的输入用<strong>反变量</strong>表示，然后将它们加起来</p>
+<ul>
+<li>最大项表达式：全部由最大项构成的或与式（和之积式）</li>
+</ul>
+<p>写出真值表，把输出为0的输入组合写成<strong>和项</strong>的形式，取值为<strong>0</strong>的输入用<strong>原变量</strong>表示，取值为<strong>1</strong>的输入用<strong>反变量</strong>表示，然后将它们乘起来</p>
+<h4 id="逻辑函数的简化法"><a href="#逻辑函数的简化法" class="headerlink" title="逻辑函数的简化法"></a>逻辑函数的简化法</h4><ul>
+<li><p>利用对偶规则，将“或与”式转化为“与或”式来化简</p>
+</li>
+<li><p>代数法：利用公理、定理和规则进行化简，有合并乘积项法、吸收项法、配项法</p>
+</li>
+<li><p>卡诺图法</p>
+<p><img src="/../images/image-20241113153707805.png" alt="image-20241113153707805"></p>
+</li>
+</ul>
+<h3 id="基本组合逻辑部件设计"><a href="#基本组合逻辑部件设计" class="headerlink" title="基本组合逻辑部件设计"></a>基本组合逻辑部件设计</h3><p>数字电路分为组合逻辑电路和时序逻辑电路。</p>
+<p>组合逻辑电路：将逻辑门以一定的方式组合在一起，使其具有一定逻辑功能的数字电路。</p>
+<p>组合逻辑电路没有反馈电路和存储电路，当时的输出仅由当时的输入决定，是一种无记忆电路</p>
+<h4 id="加法运算电路"><a href="#加法运算电路" class="headerlink" title="加法运算电路"></a>加法运算电路</h4><p>半加器：对两个1位二进制数进行相加求和，并向高位进位的逻辑电路，<strong>不考虑来自低位的进位</strong></p>
+<p>C0是进位，S0是和</p>
+<p><img src="/..images/image-20241022101439400.png" alt="image-20241022101439400"></p>
+<p>全加器：对两个1位二进制数进行相加求和，<strong>考虑来自低位的进位</strong>，并向高位进位的逻辑电路</p>
+<p>Ci是低位进位，C0是进位</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20241022101410603.png" alt="image-20241022101410603"></p>
+<p>并行加法器–串行进位</p>
+<p><img src="/../images/image-20241001211740637.png" alt="image-20241001211740637"></p>
+<p>A,B是两个加数，每位分别相加，从低位串行进位，进位延时较长</p>
+<p>并行加法器–并行进位</p>
+<p><img src="/../images/image-20241001212946665.png" alt="image-20241001212946665"></p>
+<p>使用<strong>迭代</strong>的方法直接算出每一位的进位量</p>
+<h5 id="减法运算的实现"><a href="#减法运算的实现" class="headerlink" title="减法运算的实现"></a>减法运算的实现</h5><p>[A+B]补 &#x3D; [A]补 + [B]补</p>
+<p>[A-B]补 &#x3D; [A]补 + [-B]补</p>
+<p>-X的补码：对X的补码各位取反，然后加1</p>
+<p>[A-B]补 &#x3D; [A]补 + ~[B]补 + 1</p>
+<p>所以，加减法可以共用同一套加法器电路</p>
+<h5 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h5><p>溢出指运算结果超出计数系统所能表示的范围</p>
+<p>如果符号位相同的两数相加，所得结果的符号位与之相反，结果溢出</p>
+<p>如果符号位相异的两数相减，所得结果的符号位与减数相同，结果溢出</p>
+<p>溢出的判断：采用双符号位，“00”表示正，“11”表示负，如果 运算结果符号位出现“01”或“10”表示出现溢出。</p>
+<h4 id="数值比较器"><a href="#数值比较器" class="headerlink" title="数值比较器"></a>数值比较器</h4><p>用于比较两个二进制数的大小</p>
+<h4 id="运算单元电路"><a href="#运算单元电路" class="headerlink" title="运算单元电路"></a>运算单元电路</h4><p>可执行1位与、或、或非、与非、加、减运算</p>
+<h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><p>编码：为区分一系列不同的事物，对其中的每个事物用一组二值（0或1）的二进制代码表示。从广义上讲，编码是信息从一种形式转换为另一种形式的过程。</p>
+<p>编码器：实现编码功能的数字电路称为编码器</p>
+<p><img src="/../images/image-20241001214629652.png" alt="image-20241001214629652"></p>
+<h5 id="二进制编码器"><a href="#二进制编码器" class="headerlink" title="二进制编码器"></a>二进制编码器</h5><p>用n位二进制代码，对2^n个信号进行编码。任一时刻只能对其中一个信号进行编码，即只允许其中一个输入信号有效，其余为无效电平。</p>
+<p>高电平输入有效：在输入等于1时，对输入信号进行编码，输出等于对应有效输入信号的二进制编码</p>
+<h5 id="8线-3线编码器（高电平输入有效）"><a href="#8线-3线编码器（高电平输入有效）" class="headerlink" title="8线-3线编码器（高电平输入有效）"></a>8线-3线编码器（高电平输入有效）</h5><p>8个输入信号：Y0，Y1，…，Y7。任何时刻最多只有其中一个信号为1（高电平），其余均为0（低电平）</p>
+<p>三位输出编码：C,B,A</p>
+<p>C &#x3D; Y4 + Y5 + Y6 + Y7</p>
+<p>B &#x3D; Y2 + Y3 + Y6 + Y7</p>
+<p>A &#x3D; Y1 + Y3 + Y5 + Y7</p>
+<p><img src="/../images/image-20241111141931565.png" alt="image-20241111141931565"></p>
+<h5 id="8421BCD码编码器（高电平输入有效）"><a href="#8421BCD码编码器（高电平输入有效）" class="headerlink" title="8421BCD码编码器（高电平输入有效）"></a>8421BCD码编码器（高电平输入有效）</h5><p>输入：Y0，Y1，…，Y9，分别代表十进制数字0~9</p>
+<p>输出 ：4位编码，DCBA</p>
+<p><img src="/../images/image-20241111142949232.png" alt="image-20241111142949232"></p>
+<h5 id="优先编码器"><a href="#优先编码器" class="headerlink" title="优先编码器"></a>优先编码器</h5><p>克服二进制编码器仅允许1个输入信号有限的局限，允许两个以上 输入信号同时有效；</p>
+<p>对所有输入信号进行优先级别排序，任何时刻只对<strong>优先级最高</strong>的输入信号编码，对优先级别低的输入信号则不响应，以保证编码器可靠工作。</p>
+<p>优点：当有两个或两个以上的输入有效时，输出不会发生混乱。 广泛应用于计算机的优先中断系统、键盘编码系统中。</p>
+<h6 id="74147优先编码器（低电平有效）"><a href="#74147优先编码器（低电平有效）" class="headerlink" title="74147优先编码器（低电平有效）"></a>74147优先编码器（低电平有效）</h6><p>10线-4线优先编码器，10个输入信号，<strong>低电平有效</strong>。4个输出端，<strong>反码</strong>输出</p>
+<p><img src="/../images/image-20241111143921050.png" alt="image-20241111143921050"></p>
+<h4 id="译码器"><a href="#译码器" class="headerlink" title="译码器"></a>译码器</h4><p>将二进制代码所表示的信息翻译成对应高低电平信号输出的过程称为译码，译码是编码的反操作。实现译码功能的电路称为译码器</p>
+<h5 id="二进制译码器"><a href="#二进制译码器" class="headerlink" title="二进制译码器"></a>二进制译码器</h5><p>将每个输入二进制代码，译成<strong>对应的一根输出线</strong>上的高电平（低电平）信号</p>
+<p>任一时刻最多只允许一个输出有效</p>
+<h5 id="3线-8线译码器（74138）"><a href="#3线-8线译码器（74138）" class="headerlink" title="3线-8线译码器（74138）"></a>3线-8线译码器（74138）</h5><p>3个输入：A2，A1，A0；共8种组合</p>
+<p>8个输出：Y7~Y0，<strong>低电平输出有效</strong>，且任一时刻最多只有一个输出有效。如：输入000时Y0输出有效，输入001时Y1输出有效。</p>
+<p>3个使能控制：S0,S1,S2为使能输入，当它们为1、0、0时译码器才正常译码，否则禁止工作</p>
+<h4 id="多路选择器"><a href="#多路选择器" class="headerlink" title="多路选择器"></a>多路选择器</h4><p>从一组输入数据选出其中一个作为数据输出的电路</p>
+<h5 id="8选1多路选择器（74151）"><a href="#8选1多路选择器（74151）" class="headerlink" title="8选1多路选择器（74151）"></a>8选1多路选择器（74151）</h5><ul>
+<li><p>功能一：8选1数据选择器</p>
+<p>D7~D0为数据输入端，A2 A1 A0为选择控制端</p>
+<p><img src="/../images/image-20241113093414641.png" alt="image-20241113093414641"> </p>
+<p>下图通过简单的“和逻辑”就能解释，无需画真值表，注意最小项之间都是互斥的</p>
+<p><img src="/../images/image-20241113093524470.png" alt="image-20241113093524470"></p>
+</li>
+<li><p>功能二 ：多功能运算电路</p>
+<p>根据上图，我们可以发现，输出的内容是变量A2A1A0的最小项的组合，因此很容易想到我们可以用它来计算A2A1A0的组合逻辑</p>
+<p>D7~D0为控制输入端</p>
+<p>通过D7~D0取不同的值，从输入变量A2、A1、A0的各个最小项中选取某几个最小项的<strong>或</strong>输出，实现不同的运算电路</p>
+<p>3个变量，共有8个最小项，有2^8&#x3D;256种功能，包含3变量的所有最小项表达式，可实现任意组合逻辑电路的设计。m0~m7代表8个最小项 </p>
+<p><img src="/../images/image-20241113114228285.png" alt="image-20241113114228285"></p>
+</li>
+</ul>
+<h4 id="竞争与冒险"><a href="#竞争与冒险" class="headerlink" title="竞争与冒险"></a>竞争与冒险</h4><p>竞争：在组合电路逻辑中，某个输入变量通过两条或两条以上的途径传到输出端，由于每条途径延迟时间不同，到达输出门的时间就有先有后，这种现象称为竞争</p>
+<p>冒险：门电路因输入端的竞争，而导致输出端产生不正常的尖峰干扰冒险信号（毛刺）的现象，称为冒险</p>
+<p>竞争冒险的原因：门电路的延时</p>
+<h5 id="竞争冒险的判断"><a href="#竞争冒险的判断" class="headerlink" title="竞争冒险的判断"></a>竞争冒险的判断</h5><ul>
+<li><p>代数法</p>
+<p>逻辑函数 F 中，若某个变量（假定为 A ）同时以原变量和反变量形式存在，逻辑函数<strong>在一定条件下</strong>（其它变量取特定的值1或0）可以简化为F&#x3D; A+ <del>A或F&#x3D;A</del>A的形式， 则该逻辑电路存在冒险。F&#x3D; A+<del>A存在“0”冒险， F&#x3D;A</del>A存在“1”冒险。</p>
+</li>
+</ul>
+<h2 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h2><p>由组合逻辑电路和存储电路构成</p>
+<h3 id="锁存器和触发器"><a href="#锁存器和触发器" class="headerlink" title="锁存器和触发器"></a>锁存器和触发器</h3><h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><p>一种有记忆功能的逻辑单元电路，是构成时序逻辑电路的基本器件</p>
+<p>特点：</p>
+<ul>
+<li><p>有两个互非的输出Q和~Q，Q称为状态变量</p>
+<p>Q&#x3D;0，称为0态</p>
+<p>Q&#x3D;1，称为1态</p>
+</li>
+<li><p>无外加信号时，触发器保持原有状态不变，n级触发器可以记忆n位二进制信息的2^n种状态</p>
+</li>
+<li><p>在外加信号作用（触发）时，可以改变原态：Q^n–&gt;Q^n+1</p>
+</li>
+</ul>
+<h4 id="双稳态电路"><a href="#双稳态电路" class="headerlink" title="双稳态电路"></a>双稳态电路</h4><p>可以有两种稳定的状态，储存一位二进制信息</p>
+<p>但是，初次加电，初值未知，Q未知。缺少输入，状态无法变换，没有价值<img src="../images/image-20241113160712022.png" alt="image-20241113160712022" style="zoom: 50%;" /></p>
+<p>改进：</p>
+<p>这是使用NOR门实现的RS锁存器，注意<strong>不允许Q和~Q同值</strong></p>
+<p>RS：</p>
+<p>R<del>Reset</del>置0</p>
+<p>S<del>Set</del>置1</p>
+<p><img src="/../images/image-20241113161353381.png" alt="image-20241113161353381"></p>
+<h4 id="基本RS锁存器"><a href="#基本RS锁存器" class="headerlink" title="基本RS锁存器"></a>基本RS锁存器</h4><p>这是使用NAND实现的RS锁存器</p>
+<p><img src="/../images/image-20241113162854915.png" alt="image-20241113162854915"></p>
+<p>锁存器的逻辑功能可以用功能表、特性表（真值表）、 特性方程（函数表达式）、状态转换图、时序图等表示</p>
+<p><img src="/../images/image-20241113163633184.png" alt="image-20241113163633184"></p>
+<p><img src="/../images/image-20241113163801887.png" alt="image-20241113163801887"></p>
+<p><img src="/../images/image-20241113163858801.png" alt="image-20241113163858801"></p>
+<h4 id="钟控RS锁存器"><a href="#钟控RS锁存器" class="headerlink" title="钟控RS锁存器"></a>钟控RS锁存器</h4><p>基本RS锁存器中，是由输入信号直接控制锁存器的输出。在数字系统中，为了协调各部分电路的运行，常常要求某些锁存器在时钟信号的控制下同时动作，这就需要增加一个控制端（时钟），只有在控制端作用脉冲时，锁存器才能动作，这种有时钟控制端的锁存器叫做钟控锁存器。</p>
+<p>由于这里时钟信号为高电位（或低电位）时锁存器的状态 随输入变化，因此，钟控锁存器是电位触发方式的锁存器。钟控锁存器在时钟控制下同步工作，因此也称同步锁存器。</p>
+<h5 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h5><p>在高电平，锁存器才会被触发</p>
+<p><img src="/../images/image-20241113164457762.png" alt="image-20241113164457762"></p>
+<p>特性与基本RS锁存器相同</p>
+<h4 id="钟控D锁存器"><a href="#钟控D锁存器" class="headerlink" title="钟控D锁存器"></a>钟控D锁存器</h4><p>问题：如何消除RS锁存器的不定状态（RS同时为1）？</p>
+<p>可以想办法让RS始终互非，将输入由R、S双端输入，改为单端输入（D）， 即：将其S输入端改为D输入端，然后经过非门接R端。</p>
+<p><img src="/../images/image-20241113170024354.png" alt="image-20241113170024354"></p>
+<p><img src="/../images/image-20241113170346925.png" alt="image-20241113170346925"></p>
+<p><img src="/../images/image-20241113170428071.png" alt="image-20241113170428071"></p>
+<p>即：时钟为0时输出不变（无法写入），时钟为1时输出D的值（可以写入），为<strong>电平触发</strong>，只有在高（低）电平时，锁存器的状态才可能发生变化</p>
+<h4 id="D触发器"><a href="#D触发器" class="headerlink" title="D触发器"></a>D触发器</h4><p>D触发器就是一位寄存器，<strong>有效沿触发</strong></p>
+<p>一个D触发器可由两个反相的D锁存器构成</p>
+<p>当CP&#x3D;0时，主锁存器可以写入，从锁存器无法写入，N1更新为D的值，输出不变</p>
+<p>当CP&#x3D;1时，主锁存器输出不变且无法写入，从锁存器可以写入，输出N1的值</p>
+<p>不管CP为0还是1，在这个期间里，D触发器都无法写入，输出都是不会变化的</p>
+<p>因此，它宏观上表现为：<strong>在时钟上升沿时写入，其它时候都无法写入</strong>，只有在有效沿，它的输出才可能发生变化</p>
+<p><img src="/../images/image-20241113171559647.png" alt="image-20241113171559647"></p>
+<p>n个D触发器就能构成n位寄存器，它们共用时钟信号和复位信号</p>
+<h4 id="钟控JK触发器"><a href="#钟控JK触发器" class="headerlink" title="钟控JK触发器"></a>钟控JK触发器</h4><p>在RS锁存器的基础上，增加两条反馈线：</p>
+<ul>
+<li>Q 反馈到 R 钟控门的输入端，并把 R 改名为 K</li>
+<li>~Q反馈到 S 钟控门的输入端，并把 S 改名为 J</li>
+</ul>
+<p><img src="/../images/image-20241113222611265.png" alt="image-20241113222611265"></p>
+<p><img src="/../images/image-20241113222550359.png" alt="image-20241113222550359"></p>
+<h3 id="有限状态机"><a href="#有限状态机" class="headerlink" title="有限状态机"></a>有限状态机</h3><p>比较简单，不细讲</p>
+<h3 id="时序逻辑电路设计与分析"><a href="#时序逻辑电路设计与分析" class="headerlink" title="时序逻辑电路设计与分析"></a>时序逻辑电路设计与分析</h3><h4 id="数据寄存器-数据锁存器"><a href="#数据寄存器-数据锁存器" class="headerlink" title="数据寄存器&#x2F;数据锁存器"></a>数据寄存器&#x2F;数据锁存器</h4><p>一位寄存器就是D触发器，多位寄存器是由D触发器组成的</p>
+<ul>
+<li><p>数据寄存器</p>
+<p><strong>边沿敏感</strong></p>
+<p><img src="/../images/image-20241119201804991.png" alt="image-20241119201804991"></p>
+</li>
+<li><p>数据锁存器</p>
+<p><strong>电平敏感</strong></p>
+<p><img src="/../images/image-20241119202113850.png" alt="image-20241119202113850"></p>
+</li>
+</ul>
+<h4 id="移位寄存器"><a href="#移位寄存器" class="headerlink" title="移位寄存器"></a>移位寄存器</h4><p>具有移位功能的寄存器，每来一个时钟脉冲，寄存器中数据就依次向左或向右移动一位</p>
+<p>不难想到，n位移位寄存器就是由n个寄存器组成的，首位相接即可</p>
+<h5 id="4位右移移位寄存器"><a href="#4位右移移位寄存器" class="headerlink" title="4位右移移位寄存器"></a>4位右移移位寄存器</h5><p><img src="/../images/image-20241119202607516.png" alt="image-20241119202607516"></p>
+<p>4位右移移位寄存器的工作方式：</p>
+<ul>
+<li><p>串入并出</p>
+<p>串并转换需要n个周期</p>
+<p>串行输入，4个周期后Q3Q2Q1Q0并行输出</p>
+</li>
+<li><p>串入串出</p>
+<p>把最右边的触发器的输出作为电路的输出。经过4个CP后， Q3 输出的是 最先串行输入的数据。</p>
+</li>
+</ul>
+<h5 id="4位串行输入、串-并行输出双向移位寄存器"><a href="#4位串行输入、串-并行输出双向移位寄存器" class="headerlink" title="4位串行输入、串&#x2F;并行输出双向移位寄存器"></a>4位串行输入、串&#x2F;并行输出双向移位寄存器</h5><h5 id="4位双向移位寄存器"><a href="#4位双向移位寄存器" class="headerlink" title="4位双向移位寄存器"></a>4位双向移位寄存器</h5><h4 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h4><p>可以统计输入脉冲个数的器件</p>
+<h4 id="时序电路的时序"><a href="#时序电路的时序" class="headerlink" title="时序电路的时序"></a>时序电路的时序</h4><h5 id="寄存器的时序"><a href="#寄存器的时序" class="headerlink" title="寄存器的时序"></a>寄存器的时序</h5><p>寄存器存在孔径时间，可以类比为相机的快门时间。在孔径时间内输入必须稳定，这样才能存储正确的结果。</p>
+<p>Tctq：稳定时间</p>
+<p><img src="/../images/image-20241118151456720.png" alt="image-20241118151456720"></p>
+<h5 id="同步时序电路时钟周期"><a href="#同步时序电路时钟周期" class="headerlink" title="同步时序电路时钟周期"></a>同步时序电路时钟周期</h5><p><img src="/../images/image-20241118152315353.png" alt="image-20241118152315353"></p>
+<h5 id="保持时间约束"><a href="#保持时间约束" class="headerlink" title="保持时间约束"></a>保持时间约束</h5><p>tccq：从时钟有效沿到输出发生变化的时间</p>
+<p><img src="/../images/image-20241119195459976.png" alt="image-20241119195459976"></p>
+<h2 id="主存储器"><a href="#主存储器" class="headerlink" title="主存储器"></a>主存储器</h2><h3 id="半导体存储器"><a href="#半导体存储器" class="headerlink" title="半导体存储器"></a>半导体存储器</h3><p>从访问形式上可分为</p>
+<ul>
+<li><p>随机访问存储器：RAM</p>
+</li>
+<li><p>只读存储器：ROM</p>
+</li>
+</ul>
+<p>RAM从实现原理上可分为：</p>
+<ul>
+<li><p>静态随机访问存储器SRAM</p>
+<p>用作cache</p>
+</li>
+<li><p>动态随机访问存储器DRAM</p>
+<p>用作主存</p>
+</li>
+</ul>
+<h3 id="存储芯片内部结构"><a href="#存储芯片内部结构" class="headerlink" title="存储芯片内部结构"></a>存储芯片内部结构</h3><h4 id="存储芯片容量的基本描述（字单元数×每个字单元的位数2-n-×-m）"><a href="#存储芯片容量的基本描述（字单元数×每个字单元的位数2-n-×-m）" class="headerlink" title="存储芯片容量的基本描述（字单元数×每个字单元的位数	2^n × m）"></a>存储芯片容量的基本描述（字单元数×每个字单元的位数	2^n × m）</h4><p>字单元：存储器中数据的基本访问单位</p>
+<p>1K×2：1024个字单元，每个字单元2位（二进制位）</p>
+<p>意味着任一时刻可以（也只能）访问1024个独立字单元中的任意一个，每次读写的数据位数是一个字单元的容量（2位）</p>
+<p>对于1K×2的存储芯片：</p>
+<p>有多少个存储位元？共1K个（1024个）字单元，每个字单元2位   <strong>2048</strong></p>
+<p><strong>存储位元 &#x3D; 字单元 × 位数</strong></p>
+<p>需多少条地址线？按字单元寻址，1K个（1024个 或 2^10个）字单元  <strong>10</strong></p>
+<p>地址线需要能表示1024种不同的组合，1024是2^10，因此需要10条地址线</p>
+<p><strong>地址线 &#x3D; n</strong></p>
+<p>需要多少条数据线？一次访问一个字单元，每个字单元是2位  <strong>2</strong></p>
+<p>数据线的数量决定了<strong>每次读写操作能够传输的数据位数</strong></p>
+<p><strong>数据线 &#x3D; m</strong></p>
+<h4 id="存储芯片结构（一维地址结构）"><a href="#存储芯片结构（一维地址结构）" class="headerlink" title="存储芯片结构（一维地址结构）"></a>存储芯片结构（一维地址结构）</h4><p>棕线是地址线，蓝线是字选择线，黄块是存储位元，红线是数据线</p>
+<p><img src="/../images/image-20241113195458583.png" alt="image-20241113195458583"></p>
+<p>当容量大了以后，一维地址结构需要的地址线太多了，而且很难分块管理。于是我们需要二维地址结构</p>
+<h4 id="二维地址结构（SRAM）"><a href="#二维地址结构（SRAM）" class="headerlink" title="二维地址结构（SRAM）"></a>二维地址结构（SRAM）</h4><h5 id="128×128"><a href="#128×128" class="headerlink" title="128×128"></a>128×128</h5><p>容量：4096×4</p>
+<p>存储矩阵：2^7×2^7（128行×128列）</p>
+<p><img src="/../images/image-20241113212338271.png" alt="image-20241113212338271"></p>
+<p>行译码：X译码，行地址需要7位A0~A6</p>
+<p>一行包括32个字单元共128位，任何时刻只能其中1个字单元被选中，每个字单元的位线分别接到数据线D0D1D2D3</p>
+<p>列译码：Y译码，以字单元为单位，每行32个字单元，需要5位A7~A11</p>
+<p><img src="/../images/image-20241113213147424.png" alt="image-20241113213147424"></p>
+<p>注意：128×128存储单元矩阵行地址与列地址数不等，而64×256存储矩阵行地址数与列地址数相等。<strong>后者往往要除以位数之后再比较</strong></p>
+<h5 id="一些概念辨析"><a href="#一些概念辨析" class="headerlink" title="一些概念辨析"></a>一些概念辨析</h5><p><strong>字单元</strong>：每个字单元能够存储一个独立的m位二进制数，每个字单元对应一个确定的地址，换言之，按照行列地址去寻址，找到的就是一个字单元</p>
+<p><strong>行地址和列地址</strong>：就是地址线的数量。地址能找到的最小单位就是字单元，所以它们只和字单元数量有关。</p>
+<p>如果说行地址和列地址数量相同，指的就是行地址线和列地址线数量相同，换言之，一行与一列的字单元个数相同</p>
+<p><strong>行选择线和列选择线</strong>：行译码器和列译码器输出端的导线数量，它们是真正连接到每行每列的</p>
+<p>若地址线有n条，则行&#x2F;列选择线就有2^n条</p>
+<h3 id="存储器扩展"><a href="#存储器扩展" class="headerlink" title="存储器扩展"></a>存储器扩展</h3><p>单个存储器芯片不能满足存储系统的容量需求</p>
+<p>位空间不够：芯片32K×8    主存32K×16</p>
+<p>字空间不够：芯片8K×16	主存32K×16</p>
+<p>位空间和字空间都不够：芯片8K×8	主存32K×16</p>
+<p>存储扩展：位扩展、字扩展、混合扩展</p>
+<h4 id="存储器芯片的扩展"><a href="#存储器芯片的扩展" class="headerlink" title="存储器芯片的扩展"></a>存储器芯片的扩展</h4><h5 id="位扩展"><a href="#位扩展" class="headerlink" title="位扩展"></a>位扩展</h5><p>存储器芯片提供的字空间满足整个存储空间的字空间要求，但存储器芯片的位空间不能满足要求</p>
+<p>方法：多个存储器芯片的数据位空间拼在一起，分别存储数据的高4位和低4位</p>
+<p><img src="/../images/image-20241113215850851.png" alt="image-20241113215850851"></p>
+<h5 id="字扩展"><a href="#字扩展" class="headerlink" title="字扩展"></a>字扩展</h5><p>存储器芯片提供的字空间不能满足整个存储空间的字空间要求，但存储器芯片的位空间满足要求</p>
+<p>方法：多个存储器芯片的字空间（地址空间）拼在一起，使用片选信号来判断应该启用哪块芯片</p>
+<p>下面的例子，如果把AB11 AB10 AB9 …… AB0拼起来，那么和一块字空间4K的芯片是完全一样的</p>
+<p><img src="/../images/image-20241118141714636.png" alt="image-20241118141714636"></p>
+<p>图示如下：<br><img src="/../images/image-20241118143326503.png" alt="image-20241118143326503"></p>
+<h5 id="混合扩展"><a href="#混合扩展" class="headerlink" title="混合扩展"></a>混合扩展</h5><p>存储器芯片提供的字空间和位空间都不能满足整个存储空间的字空间要求</p>
+<p>方法：字扩展 + 位扩展</p>
+<p><img src="/../images/image-20241118144119329.png" alt="image-20241118144119329"></p>
+<p>图示如下：     </p>
+<p><img src="/../images/image-20241118144304574.png" alt="image-20241118144304574"></p>
+<p><img src="/../images/image-20241118144845766.png" alt="image-20241118144845766"></p>
+<p><img src="/../images/image-20241118145211887.png" alt="image-20241118145211887"></p>
+<h3 id="关于片选信号"><a href="#关于片选信号" class="headerlink" title="关于片选信号"></a>关于片选信号</h3><p>片选信号不能简单地理解成“选择某一芯片的信号”，在存在字扩展的时候，多个芯片拼接在一起才能得到完整的字单元，那么在考虑片选信号位数的时候，就需要把这几个芯片当成一个整体来看待。</p>
+<h3 id="DRAM的刷新"><a href="#DRAM的刷新" class="headerlink" title="DRAM的刷新"></a>DRAM的刷新</h3><p>刷新的实质：先将原信息读出，再由刷新放大器形成原信息重新写入的再生成的过程，等于一次读写</p>
+<p><strong>刷新周期</strong>：对DRAM的<strong>所有</strong>存储单元恢复一次原状态的时间间隔</p>
+<p><strong>刷新间隔</strong>：两次刷新的起始时间差（某行从第一次刷新到第二次刷新的等待时间）</p>
+<p>行刷新间隔&#x2F;刷新信号周期：两行刷新的起始时间差（连续两次刷新两行的时间间隔）</p>
+<p>刷新时间：规定的一个周期内刷新的总时间</p>
+<p>特点：</p>
+<ul>
+<li><p>按行刷新，每次刷新一行，故而要有<strong>刷新地址计数器</strong>，<strong>其位数即行地址位数</strong></p>
+</li>
+<li><p>刷新与CPU访问内存分开进行</p>
+</li>
+<li><p><strong>刷新一行的时间等于读&#x2F;写周期</strong>，因为刷新的过程与一次读写相同</p>
+</li>
+<li><p>在主存储器中，所有芯片的刷新同时进行</p>
+</li>
+</ul>
+<h4 id="刷新方式"><a href="#刷新方式" class="headerlink" title="刷新方式"></a>刷新方式</h4><h5 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h5><p>将<strong>刷新周期</strong>分成两部分：在一个时间段内，刷新存储器所有行，此时CPU停止访问内存；而另一个时间段内，CPU可以访问内存，刷新电路不工作。</p>
+<p>如图：</p>
+<p><img src="/../images/image-20241208150849428.png" alt="image-20241208150849428"></p>
+<p>由于在一个周期里，集中刷新的时间是固定的，很容易知道：<strong>刷新间隔&#x3D;刷新周期</strong></p>
+<p>优点：速度快</p>
+<p>缺点：当集中刷新时，不能进行任何的读写操作，这部分时间称作<strong>死区时间</strong></p>
+<p>死区时间所占的比率称为“死时间率”</p>
+<h5 id="分散式"><a href="#分散式" class="headerlink" title="分散式"></a>分散式</h5><p>CPU与刷新电路交替访问内存，一个存储周期刷新一行，下一个存储周期刷新另一行，直至最后一行后，又开始刷新第一行。此时存储周期不仅包含一次读写的时间，还包含了刷新时间，所以一共是两次读写的时间。</p>
+<p>如图：</p>
+<p><img src="/../images/image-20241208150910980.png" alt="image-20241208150910980"></p>
+<p><strong>刷新间隔&#x3D;刷新行数 × 存储周期</strong></p>
+<p>优点：不存在死时间</p>
+<p>缺点：系统速度降低</p>
+<h5 id="分布式-异步"><a href="#分布式-异步" class="headerlink" title="分布式&#x2F;异步"></a>分布式&#x2F;异步</h5><p>保证在一个刷新周期内，将存储芯片内所有行刷新一遍，两次刷新操作之间，可能等时间间距，也可能不等。是前两者的结合，可减少死时间，同时保证性能。</p>
+<p><img src="/../images/image-20241208151959337.png" alt="image-20241208151959337"></p>
+<p><strong>刷新间隔&#x3D;刷新周期</strong></p>
+<h2 id="高速缓冲存储器"><a href="#高速缓冲存储器" class="headerlink" title="高速缓冲存储器"></a>高速缓冲存储器</h2><h3 id="Cache的原理"><a href="#Cache的原理" class="headerlink" title="Cache的原理"></a>Cache的原理</h3><p><img src="/../images/image-20241208161356231.png" alt="image-20241208161356231"></p>
+<p>Cache结构示意：S组，每组E行，每数据块包含B个字节</p>
+<p>Cache的读操作过程：</p>
+<p><img src="/../images/image-20241208162212799.png" alt="image-20241208162212799"></p>
+<h3 id="Cache的映射机制"><a href="#Cache的映射机制" class="headerlink" title="Cache的映射机制"></a>Cache的映射机制</h3><p>由于Cache的块比主存块少，所以多个主存块映射到一个Cache块中</p>
+<h4 id="全相联映射"><a href="#全相联映射" class="headerlink" title="全相联映射"></a>全相联映射</h4><p>主存分为若干Block，Cache按同样大小分成若干Block</p>
+<p>Cache中的Block数目显然比主存的Block数少得多</p>
+<p>主存中的某一Block可以映射到Cache中的任意一Blcok</p>
+<h5 id="全相联映射的地址"><a href="#全相联映射的地址" class="headerlink" title="全相联映射的地址"></a>全相联映射的地址</h5><p>主存的地址格式：块地址 + 块内地址		块内地址位数保证按字节寻址</p>
+<p>Cache的Tag内容：与该Cache块对应的主存块的<strong>块地址</strong></p>
+<p><strong>Tag位数 &#x3D; 主存块地址位数</strong></p>
+<p><img src="/../images/image-20241208163951071.png" alt="image-20241208163951071"></p>
+<h4 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h4><p>假设Cache中有M块，那么将主存以M块为一区进行分区，一个区中的块按顺序与Cache对应的块映射</p>
+<p>主存中某一块J的映射就是J mod M</p>
+<p><img src="/../images/image-20241209144220776.png" alt="image-20241209144220776"></p>
+<h5 id="直接映射的地址"><a href="#直接映射的地址" class="headerlink" title="直接映射的地址"></a>直接映射的地址</h5><p>主存的地址格式：区地址Tag + 区内块地址 + 块内地址		块内地址位数保证按字节寻址</p>
+<p>Cache的Tag内容：与该Cache块对应的主存块的<strong>区地址</strong></p>
+<p><img src="/../images/image-20241209144651663.png" alt="image-20241209144651663"></p>
+<h5 id="访存逻辑"><a href="#访存逻辑" class="headerlink" title="访存逻辑"></a>访存逻辑</h5><p>主存地址：区地址 + 区内块地址 + 块内地址</p>
+<p>拿着区内块地址，找到Cache相应块。比较这两块的区地址，如果相同，则说明命中，否则缺失</p>
+<p>如图：</p>
+<p><img src="/../images/image-20241209145703465.png" alt="image-20241209145703465"></p>
+<h4 id="组相连映射"><a href="#组相连映射" class="headerlink" title="组相连映射"></a>组相连映射</h4><p>组相联映射是直接映射和全相联映射的折中</p>
+<p>与全相联映射相比，组相联映射的约束更严格，每个主存块映射有一定范围</p>
+<p>与直接映射相比，组相联映射的约束更宽松，每个主存块可以映射到一定范围内的任意一块</p>
+<p>Cache分成K组，每组L块。主存的块J以下列原则映射到Cache的组I中的任意一块，其中：</p>
+<p>I &#x3D; J mod K</p>
+<p>这意味着，主存中的每一块都对应着Cache中的一组</p>
+<p>实际上主存与Cache都分成K组，主存每一组组内的块数与Cache一组内的块数不一致，主存组M内的某一块只能映射到Cache组M内，但可以是组M内的任意一块</p>
+<p>不难理解，主存的组地址在空间上是不连续的，是周期性变化的</p>
+<h5 id="组相连映射的地址"><a href="#组相连映射的地址" class="headerlink" title="组相连映射的地址"></a>组相连映射的地址</h5><p>主存的地址格式：组内块地址Tag + 组地址 + 块内地址</p>
+<p>Tag的内容：主存中与该Cache数据块对应的数据块的组内块地址</p>
+<p><img src="/../images/image-20241209153924841.png" alt="image-20241209153924841"></p>
+<h5 id="访存逻辑-1"><a href="#访存逻辑-1" class="headerlink" title="访存逻辑"></a>访存逻辑</h5><p>主存地址：组内块地址 + 组地址 + 块内地址		块内地址保证按字节寻址</p>
+<p>拿着组地址，找到Cache相应组。同时将这组中每一块的Tag，和组内块地址比较，如果有相同的则说明命中，否则缺失</p>
+<p>如图：</p>
+<p><img src="/../images/image-20241209154731870.png" alt="image-20241209154731870"></p>
+<h3 id="Cache的替换策略"><a href="#Cache的替换策略" class="headerlink" title="Cache的替换策略"></a>Cache的替换策略</h3><h4 id="Cache的缺失处理"><a href="#Cache的缺失处理" class="headerlink" title="Cache的缺失处理"></a>Cache的缺失处理</h4><p><img src="/../images/31437b0333f94802bd660488b00d0d65.png" alt="31437b0333f94802bd660488b00d0d65.png"></p>
+<p>CPU访问Cache缺失时，CPU必须等待数据装入Cache后才能访问Cache，这期间的时间损失称为缺失损失。</p>
+<p>取出块的时间： 第一个字的延迟时间（存储器访问）+  块的剩余部分的传送时间。</p>
+<p>总线宽度？单字宽？</p>
+<p><img src="/../images/image-20241209161706506.png" alt="image-20241209161706506"></p>
+<p>单字宽：每次可以传输1字</p>
+<p>访问并传输1个字所需时间（15+1）</p>
+<p>每次读取1字，共有4&#x2F;1&#x3D;4个总线事务</p>
+<p>1+4*（15+1）&#x3D; 65T</p>
+<p>4字宽：每次可以传输4字</p>
+<p>访问并传输4个字所需时间（15+1）</p>
+<p>每次读取4字，共有4&#x2F;4&#x3D;1个总线事务</p>
+<p>1+1*（15+1）&#x3D; 17T</p>
+<h4 id="Cache块的替换"><a href="#Cache块的替换" class="headerlink" title="Cache块的替换"></a>Cache块的替换</h4><p><img src="/../images/image-20241217095559426.png" alt="image-20241217095559426"></p>
+<p>因此，组相联和全相联在替换时要采用策略替换</p>
+<p><img src="/../images/image-20241217095755004.png" alt="image-20241217095755004"></p>
+<h5 id="最近最少使用法LRU：将最久没有使用的块替换出去"><a href="#最近最少使用法LRU：将最久没有使用的块替换出去" class="headerlink" title="最近最少使用法LRU：将最久没有使用的块替换出去"></a>最近最少使用法LRU：将最久没有使用的块替换出去</h5><p>Cache的每一块都设置一个计数器，用来标记该块已经多久没有使用过，初始时计数值都为0</p>
+<p>访问命中时，所有块的计数值与命中块相比：</p>
+<ul>
+<li><p>若计数值小于命中块的计数值，则该块的计数值加一</p>
+</li>
+<li><p>若计数值大于命中块的计数值，则该块的计数值不变</p>
+<p>最后将命中块的计数器清零</p>
+</li>
+</ul>
+<p>访问缺失时，选择计数值最大的块来替换，被替换的块的计数器清零</p>
+<p>注意：每次更新计数器的规模是本组内</p>
+<h5 id="先进先出法FIFO：将最先调入Cache的块替换出去"><a href="#先进先出法FIFO：将最先调入Cache的块替换出去" class="headerlink" title="先进先出法FIFO：将最先调入Cache的块替换出去"></a>先进先出法FIFO：将最先调入Cache的块替换出去</h5><p>类似于将块排成队列，队首的块是最先调入的，队尾的块是最近调入的，用计数器标记块的顺序</p>
+<p>访问命中时，无事发生</p>
+<p>访问缺失时，当某块被装入或替换时，该块的计数器清零，同组的其它各块的计数值加一</p>
+<p>需要替换时选择计数值最大的块来替换</p>
+<h4 id="Cache的性能分析"><a href="#Cache的性能分析" class="headerlink" title="Cache的性能分析"></a>Cache的性能分析</h4><h5 id="Cache的容量"><a href="#Cache的容量" class="headerlink" title="Cache的容量"></a>Cache的容量</h5><p>不作特殊申明时，Cache的容量指所有Cache数据块的总容量</p>
+<p>Cache实际总的存储容量，实际上还包含tag和valid bit等的位数</p>
+<p><img src="/../images/image-20241224115203550.png" alt="image-20241224115203550"></p>
+<h5 id="Cache性能"><a href="#Cache性能" class="headerlink" title="Cache性能"></a>Cache性能</h5><p><img src="/../images/image-20241224120918866.png" alt="image-20241224120918866"></p>
+<h2 id="虚拟存储系统"><a href="#虚拟存储系统" class="headerlink" title="虚拟存储系统"></a>虚拟存储系统</h2><h3 id="硬磁盘存储器"><a href="#硬磁盘存储器" class="headerlink" title="硬磁盘存储器"></a>硬磁盘存储器</h3><h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h4><p>每个盘有两个盘面，每盘面有若干磁道，每磁道有若干扇区，每扇区容量512byte</p>
+<h4 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h4><p><strong>存储容量</strong>：盘面数 × 每盘面的磁道数 × 每磁道的扇区数 × 扇区容量</p>
+<p><strong>访问时间&#x2F;寻址时间</strong>：寻道时间 + 寻区时间</p>
+<ul>
+<li>寻道时间：磁头从当前位置定位到目标磁道所需时间</li>
+<li>寻区时间：磁头定位到目标磁道后，等待目标扇区旋转到磁头下所需的时间（盘面转半圈所需的时间）</li>
+</ul>
+<p><strong>数据传输率</strong>：单位时间内传输的数据位数（b&#x2F;s）</p>
+<p>计算公式：每秒旋转的圈数 × 每条磁道的容量</p>
+<h3 id="页式虚拟存储器"><a href="#页式虚拟存储器" class="headerlink" title="页式虚拟存储器"></a>页式虚拟存储器</h3><h4 id="虚地址格式和实地址格式"><a href="#虚地址格式和实地址格式" class="headerlink" title="虚地址格式和实地址格式"></a>虚地址格式和实地址格式</h4><p>虚地址格式：虚页号 + 页内地址</p>
+<p>实地址格式：实页号 + 页内地址</p>
+<p><strong>注意：虚拟页和实际页的大小是相同的。即它们的页内地址（页内偏移量）相同</strong></p>
+<h4 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h4><p>每个程序被分为若干虚页，操作系统会为<strong>每道程序</strong>都建立一个页表</p>
+<p>页表用<strong>虚页号</strong>作索引</p>
+<ul>
+<li>类比Cache组相联中的组索引、直接映射中的区内块地址</li>
+</ul>
+<p>页表项中仅仅包含<strong>有效位、修改位和对应的实页号，不包含虚页号</strong></p>
+<ul>
+<li>与TLB或Cache中的Tag做区分</li>
+</ul>
+<p><img src="/../images/image-20241217104034807.png" alt="image-20241217104034807"></p>
+<p><img src="/../images/image-20241217104116034.png" alt="image-20241217104116034"></p>
+<p><img src="/../images/image-20241217104134867.png" alt="image-20241217104134867"></p>
+<p>由上图可知，在无TLB的情况下，既要先根据虚地址，访问主存中的页表以获得实地址；其次还要根据实地址，访问主存中的物理页，前后共需两次访问主存，时间成本较高。</p>
+<h4 id="虚实地址的转换"><a href="#虚实地址的转换" class="headerlink" title="虚实地址的转换"></a>虚实地址的转换</h4><h5 id="快表TLB"><a href="#快表TLB" class="headerlink" title="快表TLB"></a>快表TLB</h5><p>本质上是一种Cache，存储部分活跃的页表项，包含了最近使用的那些页表项，是页表的真子集</p>
+<p>因此不可能出现页表未命中但TLB命中的情况</p>
+<p>TLB本质上是一种Cache，它的块就是我们想要的信息，也就是实页号。与它做映射的是<strong>整张页表</strong>，其中页表项就等价于之前所说的块，这样就能确保任一虚页都能映射到某一实页</p>
+<p>TLB内容：(页表项就相当于Cache中的块）</p>
+<ul>
+<li>全相联：虚页号（Tag） +  页表项</li>
+<li>组相联：组内块地址（Tag） +  页表项</li>
+</ul>
+<p><img src="/../images/image-20241217120324518.png" alt="image-20241217120324518"></p>
+<p>当我们要求<strong>TLB的大小</strong>时，主要就是求Tag的位数。全相联的Tag位数就等于虚页号，组相联的Tag位数等于组内块地址位数：</p>
+<p>组内块地址位数 &#x3D; 虚页号位数 - 组地址位数</p>
+<p><img src="/../images/image-20241217191731487.png" alt="image-20241217191731487"></p>
+<p>页表中有时并不能囊括所有的虚页号，<strong>页表发生缺页等价于该页表项的有效位为0，代表此页一定不在主存中</strong>，即实页的信息并不在内存中，故而也一定不在 cache 中</p>
+<h2 id="总线与I-O"><a href="#总线与I-O" class="headerlink" title="总线与I&#x2F;O"></a>总线与I&#x2F;O</h2><h3 id="总线的一般概念"><a href="#总线的一般概念" class="headerlink" title="总线的一般概念"></a>总线的一般概念</h3><p>总线：一组公共的信号通道</p>
+<h4 id="总线的分类"><a href="#总线的分类" class="headerlink" title="总线的分类"></a>总线的分类</h4><p>片内总线：CPU内部的总线。是CPU内部各寄存器之间、寄存器与ALU之间传递信息的公共通道</p>
+<p>系统总线：CPU、主存、I&#x2F;O部件（I&#x2F;O接口）之间传递信息的公 共通道。一般分为数据总线、地址总线和控制总线三部分</p>
+<ul>
+<li>数据总线：传输数据</li>
+<li>地址总线：传输存储器地址和I&#x2F;O地址</li>
+<li>控制总线：数据传输控制信号、总线请求和响应信号、其它控制信号</li>
+</ul>
+<p>通信总线：用于计算机系统间或计算机系统与其它系统间的通信</p>
+<h4 id="性能指标-1"><a href="#性能指标-1" class="headerlink" title="性能指标"></a>性能指标</h4><p>总线宽度：数据总线的位数</p>
+<p>标准传输率：每秒传输的最大字节量（B&#x2F;s），与总线宽度和频率相关。宽度越大，频率越高，传输率越大</p>
+<p><img src="/../images/image-20241217194800575.png" alt="image-20241217194800575"></p>
+<h3 id="总线的通信过程"><a href="#总线的通信过程" class="headerlink" title="总线的通信过程"></a>总线的通信过程</h3><p>总线的一次信息传送过程，大致可以分为5个阶段：</p>
+<ul>
+<li>请求总线：由需要使用总线的部件或设备，提出总线使用申请</li>
+<li>总线仲裁：仲裁器决定下一传输周期的总线使用权是否授予该部件或设备</li>
+<li>寻址：获得总线使用权的部件或设备，发出地址和有关命令</li>
+<li>信息传送：进行数据传输</li>
+<li>状态返回：该部件或设备有关信息从总线上撤除，让出总线使用权</li>
+</ul>
+<p>整个过程涉及两个方面的控制：总线仲裁、通信控制</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 Windfallの异世界
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Windfall
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
+</body>
+</html>
