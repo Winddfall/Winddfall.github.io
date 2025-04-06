@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Lab0实验报告 | Windfallの异世界</title>
+    <title>OS Lab0实验报告 | Windfallの异世界</title>
     <meta name="author" content="Windfall" />
     <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
     <meta name="keywords" content="" />
@@ -34,6 +34,11 @@
 />
 <script src="/js/lib/highlight.js"></script>
 
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
 
 
 <script src="/js/lib/preview.js"></script>
@@ -156,7 +161,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Lab0实验报告</h1>
+        <h1>OS Lab0实验报告</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -184,21 +189,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #03a9f4">
+                <a href="/tags/BUAA/" style="color: #00a596">
                     BUAA
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/OS/" style="color: #00a596">
+                <a href="/tags/OS/" style="color: #03a9f4">
                     OS
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/NOTE/" style="color: #ff7d73">
+                <a href="/tags/NOTE/" style="color: #00bcd4">
                     NOTE
                 </a>
             </span>
@@ -260,7 +265,8 @@
 <h2 id="Thinking-0-6"><a href="#Thinking-0-6" class="headerlink" title="Thinking 0.6"></a>Thinking 0.6</h2><ul>
 <li><p>command:</p>
 <p><code>echo</code>命令后加单引号会将内容视为字面量字符串，不做任何扩展或替换，保留所有特殊字符和空格。</p>
-<pre><code class="language-shell">#!/bin/bash                                                  touch test
+<pre><code class="language-shell">#!/bin/bash                                                  
+touch test
 echo &#39;echo Shell Start...&#39; &gt; test
 echo &#39;echo set a = 1&#39; &gt;&gt; test
 echo &#39;a=1&#39; &gt;&gt; test

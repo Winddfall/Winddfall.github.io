@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>categories | Windfallの异世界</title>
+    <title>卷积神经网络CNN | Windfallの异世界</title>
     <meta name="author" content="Windfall" />
     <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
     <meta name="keywords" content="" />
@@ -42,6 +42,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -155,14 +159,20 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>卷积神经网络CNN</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/6
+        </span>
         
-        
-        
-        <span>
-            <a href="/categories/Tech/" style="background: #ff7d73">
+        <span class="category">
+            <a href="/categories/Tech/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -171,7 +181,68 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/NOTE/" style="color: #ffa2c4">
+                    NOTE
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CNN/" style="color: #03a9f4">
+                    CNN
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: #00a596">
+                    深度学习
+                </a>
+            </span>
+            
+        </span>
+        
     </div>
+    
+    <div class="content" v-pre>
+        <h2 id="卷积原理"><a href="#卷积原理" class="headerlink" title="卷积原理"></a>卷积原理</h2><h3 id="概念与参数"><a href="#概念与参数" class="headerlink" title="概念与参数"></a>概念与参数</h3><p><strong>Input Volume</strong>：输入，通常是像素矩阵，（7 * 7 * 3个通道）</p>
+<p><strong>Filter</strong>：卷积核，是一个矩阵（3 * 3 * 3个通道），可以有多个</p>
+<p><strong>Output Volume</strong>：输出</p>
+<p><strong>pad</strong>：空洞，在输入矩阵周围增加一圈0，目的是更好地提取边缘特征</p>
+<p><strong>stride</strong>：步长，卷积核每次移动的长度</p>
+<p><strong>卷积核个数</strong>：一个卷积核对应一个特征图</p>
+<p><strong>神经元</strong>：输出特征图中一个元素叫做神经元</p>
+<p><strong>感受野</strong>：输出特征图中一个神经元在原始图像上能感知的大小</p>
+<p><strong>偏置</strong>：一个卷积核对应一个偏置，在卷积完之后给输出特征图每个加上</p>
+<h3 id="卷积结果计算公式"><a href="#卷积结果计算公式" class="headerlink" title="卷积结果计算公式"></a>卷积结果计算公式</h3><p>P是pad厚度，H1是输入矩阵长度，<br>$$<br>P：pad厚度，F_H：卷积核长度，F_w：卷积核宽度，S：步长，H_1：输入长度，W_1：输入宽度<br>$$</p>
+<p>长度：<br>$$<br>H_2 &#x3D; \frac{H_1 - F_H + 2P}{S} + 1<br>$$<br>宽度：<br>$$<br>W_2 &#x3D; \frac{W_1 - F_W + 2P}{S} + 1<br>$$</p>
+<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p>所谓“层数”，是连续做卷积操作的次数。通常控制一次卷积的输入输出维度是不变的，因此层数无限制。</p>
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>把卷积层得到的特征图缩小，目的是为了提高运算速度，会损失一些特征。为了弥补这部分特征，往往在池化后会将特征图的个数翻倍</p>
+<p>池化需要一步一步去做，一次性不要缩的太小</p>
+<p>224 * 224 * 64 -&gt; 112* 112 * 64</p>
+<h3 id="最大池化MAX-POOLING"><a href="#最大池化MAX-POOLING" class="headerlink" title="最大池化	MAX POOLING"></a>最大池化	MAX POOLING</h3><p>特征图某区域内取出最大值来代表这个区域的特征</p>
+<p><img src="/../images/image-20250403020236955.png" alt="image-20250403020236955"></p>
+<h2 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h2><p>把特征图拉长成向量，wx+b，得到分类结果</p>
+<p>全连接层通常只用于最后的输出，而不用于提取特征</p>
+<h2 id="其它细节"><a href="#其它细节" class="headerlink" title="其它细节"></a>其它细节</h2><p>标准化：在最初预处理数据和每次卷积操作后进行，和卷积层是绑定的，不加的话可能导致深度学习出现严重偏离。</p>
+<h2 id="经典网络"><a href="#经典网络" class="headerlink" title="经典网络"></a>经典网络</h2><h3 id="Resnet网络：残差学习"><a href="#Resnet网络：残差学习" class="headerlink" title="Resnet网络：残差学习"></a>Resnet网络：残差学习</h3><p>解决深层网络效果反而减弱的问题，在卷积后加上原来的权重参数，“至少不比原来差”</p>
+<p><img src="/../images/image-20250404110109653.png" alt="image-20250404110109653"></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -203,6 +274,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 
     <script src="/js/<file>"></script>
