@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>前缀、后缀与词根 | Windfallの异世界</title>
+    <meta name="author" content="Windfall" />
+    <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>WINDFALLの异世界</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WINDFALLの异世界</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>前缀、后缀与词根</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/5/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/English/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                English
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/WORDS/" style="color: #03a9f4">
+                    WORDS
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="前缀"><a href="#前缀" class="headerlink" title="前缀"></a>前缀</h1><p>re-再，重新 &#x2F; 返回，向后：	<strong>re</strong>write 重写	<strong>re</strong>view 复习	<strong>re</strong>vise 修订，温习	<strong>re</strong>build 重建	<strong>re</strong>start 重新开始	<strong>re</strong>cover 恢复	<strong>re</strong>form 改革	<strong>re</strong>turn 返回	<strong>re</strong>flect 反射	<strong>re</strong>verse 逆转，撤销&#x2F;相反的 adj.	<strong>re</strong>deem 赎回，挽回-&gt;redeemable 可挽回的</p>
+<p>pro&#x2F;pre-前，向前，在前面：	<strong>pro</strong>ceed 前进，继续进行	<strong>pro</strong>mote 促进，提升	<strong>pro</strong>gress 进步	<strong>pre</strong>dict 预测	<strong>pre</strong>pare 准备	<strong>pre</strong>heat 预热	<strong>pre</strong>lude 前奏	<strong>pre</strong>liminary 初步的	<strong>pre</strong>mary 最初的，基本的	<strong>pre</strong>cede 发生在…之前	<strong>pre</strong>vious 先前的</p>
+<p>de-</p>
+<ul>
+<li>下降，减少：<strong>de</strong>cline 减少，下降	<strong>de</strong>crease 减少	<strong>de</strong>scend 下降	<strong>de</strong>grade 降级，退化，贬低	<strong>de</strong>press 使沮丧</li>
+<li>否定，去除：<strong>de</strong>ny 否认	<strong>de</strong>code 译码，解码</li>
+<li>分离：	<strong>de</strong>part 离开	<strong>de</strong>tach 分离    <strong>de</strong>viate 偏离    <strong>de</strong>fect 背叛</li>
+</ul>
+<p>dis-</p>
+<ul>
+<li>否定：	<strong>dis</strong>agree 不同意	<strong>dis</strong>appear 消失	<strong>dis</strong>honest 不诚实	<strong>dis</strong>order 混乱失调	<strong>dis</strong>advantage 劣势</li>
+<li>散开：    <strong>dis</strong>solve 溶解	<strong>dis</strong>tribute 分发	<strong>dis</strong>perse 使散开	<strong>dis</strong>integrate 瓦解，崩溃</li>
+</ul>
+<p>con&#x2F;com-全部，都：	<strong>con</strong>sist 组成	<strong>com</strong>plete 完成	<strong>con</strong>stitute 组成	<strong>con</strong>nect 连接	<strong>con</strong>clude 推断出，总结出	<strong>con</strong>form 符合，一致	<strong>com</strong>bine 结合	<strong>com</strong>press 压缩	<strong>com</strong>pose 创作，组成	<strong>com</strong>prise 包含，包括&#x2F;组成</p>
+<h1 id="后缀"><a href="#后缀" class="headerlink" title="后缀"></a>后缀</h1><p>let &#x2F; ette-小东西：	tablet 小药片，平板电脑	booklet 小册子	cigarette 香烟</p>
+<h1 id="词根"><a href="#词根" class="headerlink" title="词根"></a>词根</h1><p>spect-看：	in<strong>spect</strong> 检查	<strong>spect</strong>ator 观众	pro<strong>spect</strong> 前景	retro<strong>spect</strong> 回想，回顾	<strong>spect</strong>acle 场面，奇观-&gt;spectacular 壮丽的	re<strong>spect</strong> 尊重	su<strong>spect</strong> 怀疑	per<strong>spect</strong>ive 观点，视角	a<strong>spect</strong> 方面	<strong>spect</strong>or 因素	<strong>spect</strong>rum 光谱，范围</p>
+<p>spir-呼吸，精神：	re<strong>spir</strong>e 呼吸	in<strong>spir</strong>e 启发	ex<strong>pir</strong>e 断气，到期	con<strong>spir</strong>e 密谋	a<strong>spir</strong>e 渴望，追求-&gt;aspiration 抱负	<strong>spir</strong>it 精神，灵魂-&gt;spiritual 精神的</p>
+<p>tain-保持：	main<strong>tain</strong> 保持，坚持认为	ob<strong>tain</strong> 获得	at<strong>tain</strong> 获得	con<strong>tain</strong> 包含	re<strong>tain</strong> 保持	sus<strong>tain</strong> 支持，维持-&gt;sustainable 可持续的	de<strong>tain</strong> 拘留，关押</p>
+<p>mon-提醒，警告：	<strong>mon</strong>itor 监视	ad<strong>mon</strong>ish 警告</p>
+<p>lude-play：	pre<strong>lude</strong> 前奏	de<strong>lude</strong> 欺骗	al<strong>lude</strong> 暗指，间接提到</p>
+<p>rid-笑：	de<strong>rid</strong>e 嘲笑	<strong>rid</strong>icule 嘲笑-&gt;<strong>rid</strong>iculous 荒谬好笑的</p>
+<p>fus-流，倾泻：	dif<strong>fus</strong>e 扩散	con<strong>fus</strong>e 使困惑	re<strong>fus</strong>e 拒绝</p>
+<p>gress-行走，步伐：	pro<strong>gress</strong> 进步	re<strong>gress</strong> 后退，退化	di<strong>gress</strong> 离题（走偏了）	ag<strong>gress</strong> 攻击	con<strong>gress</strong> 国会（都走到一块）</p>
+<p>curs-跑：	<strong>curs</strong>ory 匆忙的	<strong>curs</strong>ive 草书	dis<strong>curs</strong>ive 杂乱无章的</p>
+<p>ple-fill充满：	com<strong>ple</strong>te 完成	<strong>ple</strong>nty 充足的，大量的	com<strong>ple</strong>ment 补充，补充物	de<strong>ple</strong>te 耗尽	re<strong>ple</strong>te 充满的</p>
+<p>scend-攀爬，上升：	a<strong>scend</strong> 上升	de<strong>scend</strong> 下降-&gt;de<strong>scent</strong> n.	tran<strong>scend</strong> 超越</p>
+<p>sen-感觉：	<strong>sen</strong>se 感觉	<strong>sen</strong>tient 有感情的	<strong>sen</strong>sor 传感器	<strong>sen</strong>timent 感情	<strong>sen</strong>timental 多愁善感的</p>
+<p>court-庭院，宫廷，法庭：	court 法庭	<strong>court</strong>yard 庭院	<strong>court</strong>esy 礼貌-&gt;<strong>court</strong>eous 有礼貌的	</p>
+<p>tend-伸展，趋向：	ex<strong>tend</strong> 延伸，扩展-&gt;extensive 广泛的	in<strong>tend</strong> 意图	<strong>ten</strong>tative 尝试性的	con<strong>tend</strong> 竞争，争论	<strong>tend</strong>ency 趋势</p>
+<p>cede &#x2F; ceed &#x2F; cess-走，移动：	pre<strong>cede</strong> 在…之前发生	ac<strong>cede</strong> 就任，加入	re<strong>cede</strong> 后退，渐渐减弱-&gt;recession 衰退	pro<strong>ceed</strong> 前进，继续进行	ex<strong>ceed</strong> 超出	suc<strong>ceed</strong> 成功，继承（跟着走）-&gt;success n.</p>
+<p>quir-寻求，询问：	ex<strong>qui</strong>site 精致的	ac<strong>quir</strong>e 学习获得	re<strong>quir</strong>e 需要	<strong>quer</strong>y 询问	in<strong>quir</strong>y 询问</p>
+<p>gl-光，亮，闪耀：	<strong>gl</strong>ow 光芒	<strong>gl</strong>ory 荣耀	<strong>gl</strong>oom 昏暗，忧郁	<strong>gl</strong>are 怒目而视	<strong>gl</strong>eam 闪烁，微光	<strong>gl</strong>immer 闪烁，微光	<strong>gl</strong>ee 高兴</p>
+<p>punct-点，刺：	<strong>punct</strong>ure 刺穿	<strong>punct</strong>ual 准时的	acu<strong>punct</strong>ure 针灸	<strong>punct</strong>uation 标点符号</p>
+<p>jud-判断：	<strong>jud</strong>ge 评判	<strong>jud</strong>gment 判决	pre<strong>jud</strong>ice 偏见</p>
+<p>mire &#x2F; mer-泥潭，困境：	mire 泥潭	quag<strong>mire</strong> 泥潭	im<strong>mer</strong>se 淹没，沉浸	e<strong>mer</strong>ge 出现	sub<strong>mer</strong>ge 淹没，潜入	night<strong>mire</strong> 噩梦	<strong>mer</strong>ge 融合</p>
+<p>nom &#x2F; nym-name名字：	<strong>nom</strong>inate 提名	<strong>nom</strong>inal 名义上的	ano<strong>nym</strong>ous 匿名的	pseudo<strong>nym</strong> 假名，笔名</p>
+<p>vi-生命:	<strong>vivi</strong>d 生动的，鲜明的	<strong>vi</strong>gorous 有活力的	<strong>vi</strong>tal 必不可少的，生死攸关的	<strong>re</strong>vive 复活，复苏	con<strong>vivi</strong>al 欢乐的</p>
+<p>trem-颤抖，震动：	<strong>trem</strong>or 颤动，颤抖，小型地震	<strong>trem</strong>ble 颤抖，哆嗦	<strong>trem</strong>endous 巨大的</p>
+<p>clude-关闭，封闭：	in<strong>clude</strong> 包含	ex<strong>clude</strong> 排除	con<strong>clude</strong> 总结，得出结论	se<strong>clude</strong> 使与世隔绝	pre<strong>clude</strong> 阻止，妨碍</p>
+<p>opt-选择 &#x2F; 视觉：	opt 选择	<strong>opt</strong>ion 选择<del>optional	ad<strong>opt</strong> 采纳，收养	<strong>opt</strong>imum 最佳的	<strong>opt</strong>imistic 乐观主义的</del>optimist 乐观者	<strong>opt</strong>ics 光学~optical 光学的 </p>
+<p>vers-转动：	<strong>vers</strong>e 诗句	<strong>vers</strong>atle 多才多艺的，全能的	con<strong>ver</strong>se 交谈<del>conversation	con<strong>ver</strong>sant 精通的	con<strong>ver</strong>t 转化，转换	di<strong>ver</strong>se 多样的，丰富的</del>diversity多样性	ad<strong>ver</strong>se 相反的，不利的	uni<strong>ver</strong>se 宇宙~universal 普遍的</p>
+<p>uni-单一，唯一：	<strong>uni</strong>form 制服	<strong>uni</strong>verse 宇宙	<strong>uni</strong>que 独特的	<strong>uni</strong>ty 团结	<strong>uni</strong>on 联合，联盟	<strong>uni</strong>fy 使联合，统一	<strong>uni</strong>corn 独角兽	<strong>uni</strong>t 单元</p>
+<p>aster-星星：	aster 星星	<strong>astr</strong>onaut 宇航员	<strong>astr</strong>onomy 天文学	<strong>dis</strong>aster 灾难	cat<strong>astr</strong>ophy 浩劫</p>
+<p>neg-否定：	<strong>neg</strong>ate 否定	<strong>neg</strong>ative 消极的，否定的	<strong>neg</strong>lect 忽视	<strong>neg</strong>ligence 疏忽~negligent 粗心的	ab<strong>neg</strong>ate 放弃，拒绝</p>
+<p>lect &#x2F; lig &#x2F; leg-选择，收集：	e<strong>lect</strong> 选举	col<strong>lect</strong> 收集<del>collective 集体的，共同的	se<strong>lect</strong> 选择	intel<strong>lig</strong>ence 智力</del>intelligent	neg<strong>lect</strong> 忽视	neg<strong>lig</strong>ence 疏忽	e<strong>leg</strong>ant 优雅的（精心挑选的）</p>
+<p>lect-说话：	<strong>lect</strong>ure 演讲~lecturer 演讲者	dia<strong>lect</strong> 方言	<strong>leg</strong>end 传说</p>
+<p>cap &#x2F; cept &#x2F; ceive-拿去，抓住：	<strong>cap</strong>ture 捕获	<strong>cap</strong>acity 容量，能力~capable能够	in<strong>cap</strong>acitate 使不能	<strong>cap</strong>itulate 投降 	ac<strong>cept</strong> 接受	ex<strong>cept</strong> 除了	con<strong>cept</strong> 概念	inter<strong>cept</strong> 拦截，截取	re<strong>cept</strong>ion 接收	sus<strong>cept</strong>ible 易受影响的	re<strong>ceive</strong> 接收	de<strong>ceive</strong> 欺骗（错误地拿取）	per<strong>ceive</strong> 感知	con<strong>ceive</strong> 构思，设想</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 Windfallの异世界
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Windfall
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
+</body>
+</html>
