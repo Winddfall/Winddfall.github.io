@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>关于大模型：提问的艺术 | Windfallの异世界</title>
+    <meta name="author" content="Windfall" />
+    <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>WINDFALLの异世界</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WINDFALLの异世界</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>关于大模型：提问的艺术</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/8
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文的目的在于提供一些高效使用大模型的方法，而非“教会”大家如何“正确”使用大模型。事实上，怎么使用AI工具没有标准答案，完全看个人的心情。你当然可以把长篇大论直接扔给AI让它进行总结，或者这样直白地命令它：给我一篇读后感，500字以上。而且这么做有时是更有效率的方式，<del>因为你完全不需要自己动脑</del></p>
+<p>但是，大模型生成的内容不总是那么尽人意的，我们不能苛求它完全理解我们的意思并和我们心意相通，这就是这篇文章存在的意义：在AI还不够智能的时候，如何让它更好地辅助我们工作？</p>
+<p>在这里，笔者希望大家不是简单地把任务要求抛给大模型，而是希望通过一些设计，<strong>引导</strong>大模型获得更好的结果</p>
+<p>本文创作动机来源于笔者面向对象课程实验中的教程，在此感谢BUAA面向对象课程组对OO作业和实验中使用大模型的指导，以及对AI工具辅助编程宽松自由的教学态度，他们一直在鼓励对新技术的拥抱和探索，没有这样开放的学习研究氛围，学术是不会繁荣的</p>
+<p>好了，让我们开始吧</p>
+<h2 id="什么是Prompt"><a href="#什么是Prompt" class="headerlink" title="什么是Prompt"></a>什么是Prompt</h2><p>生成式大模型的基本使用方法是人类用户输入问题和指令，大模型作出回答，给出结果。那么如何让大模型更好地理解我们的需求，实现一系列细节就成为我们要着重讨论的议题</p>
+<p>如果你用过一些生图AI（如kusapics），你一定对这个词不陌生。和字面意思（提示）一致，<strong>Prompt</strong>是指在大语言模型应用中，用简单的“提示词”来唤醒模型以解决特定任务的提问方式。简单来说，prompt就是一把钥匙，可以引导模型从预训练的海量信息中捕捉到能满足用户需求的信息，可以显著提升模型理解复杂文本、提取信息、逻辑推理、总结结论等能力。设计优质的prompt对利用好大语言模型意义重大</p>
+<p>prompt的<strong>基本要素</strong>包括：</p>
+<ul>
+<li>指令：指定模型需要完成的任务</li>
+<li>上下文：额外信息，引导LLM更好响应任务</li>
+<li>输入数据：用户的问题或内容</li>
+<li>输出指示：输出格式或规范</li>
+</ul>
+<p>设计有效的prompt能够帮助大模型精确了解我们所需的信息！</p>
+<h2 id="一些框架"><a href="#一些框架" class="headerlink" title="一些框架"></a>一些框架</h2><p>针对具体的情景我们需要设计不同的prompt，以下推荐一些简单好用的prompt设计框架：</p>
+<h3 id="RTF框架"><a href="#RTF框架" class="headerlink" title="RTF框架"></a>RTF框架</h3><p><strong>RTF</strong>（Role-Task-Format）框架是一个非常<strong>简单通用</strong>的提示框架，其基本思想是让LLM担当某一角色（程序员、研究员、算法工程师等等），让模型能够快速响应相关领域的问答。适用于明确角色、任务、格式的简单任务。</p>
+<ul>
+<li>Role：指定大模型担当的角色</li>
+<li>Task：告诉大模型任务定义和要求</li>
+<li>Format：定义大模型返回回答的格式</li>
+</ul>
+<p>例如：</p>
+<pre><code>[Role] 你是一位资深市场分析师。
+[Task] 分析当前新能源汽车行业的市场趋势，重点包括技术发展、竞争对手动态和消费者偏好变化。
+[Format] 输出一份结构化报告，包含以下部分：
+1. 标题：清晰概括主题；
+2. 关键趋势（分点列出技术、竞争、消费三方面）；
+3. 结论与建议（不超过200字）
+</code></pre>
+<h3 id="ROSES框架"><a href="#ROSES框架" class="headerlink" title="ROSES框架"></a>ROSES框架</h3><p><strong>ROSES</strong>框架在RTF框架的基础上将输入细分为5个核心部分，以确保清晰、有目的的交互。ROSES在明确角色和目标的基础上，更强调场景和解决方案。</p>
+<ul>
+<li>Role：指定大模型担当的角色</li>
+<li>Objective：描述想要实现的目标或想要完成的任务</li>
+<li>Scenario：提供与请求相关的背景信息或上下文</li>
+<li>Expected Solution：描述期望解决方案或结果</li>
+<li>Steps：询问实现问题的具体方法或步骤</li>
+</ul>
+<p>例如：</p>
+<pre><code>[Role] 你是某科技公司的公关经理。
+[Objective] 为即将发布的智能手表撰写一篇吸引投资人和媒体的演讲稿。
+[Scenario] 发布会面向投资者、科技媒体和潜在消费者，需突出产品创新性和市场潜力。
+[Expected Output] 一篇800字左右的演讲稿，包含开场白、产品亮点、技术参数、市场定位和结尾呼吁。
+[Steps]  
+1. 用故事或数据开场，引起听众兴趣；  
+2. 分模块介绍核心功能（健康监测、续航能力、设计美学）；  
+3. 引用第三方机构的市场预测数据；  
+4. 结尾强调品牌愿景，呼吁合作。  
+</code></pre>
+<h3 id="COT模式"><a href="#COT模式" class="headerlink" title="COT模式"></a>COT模式</h3><p><strong>COT</strong>（Chain of Thought）模式适合分析型逻辑推理或分析型任务，可以很好的改善大模型的推理能力，在一些决策步骤中能发挥高效作用。我们需要提供情景下模型思考问题或解决问题的步骤样例，引导模型形成一个完整的推理逻辑链，并在输入的最后加上“<strong>让我们逐步思考</strong>”，这样完成了COT的设计。</p>
+<p>例如如下问题场景：</p>
+<pre><code>问题：甲从A地以5km/h速度出发，乙1小时后从B地以7km/h速度出发，AB两地相距20km。问：乙需要多久追上甲？  
+要求：分步骤给出解题过程，最后用公式总结答案。  
+</code></pre>
+<p>可以给模型如下示例：</p>
+<pre><code>步骤1：设乙出发后经过t小时追上甲，则甲的行驶时间为(t+1)小时。  
+步骤2：甲行驶距离 = 5*(t+1)，乙行驶距离 = 7*t。  
+步骤3：追上时两人距离相等：5*(t+1) + 20 = 7*t → 5t + 5 + 20 = 7t → 2t = 25 → t=12.5小时。  
+答案：乙需12.5小时追上甲。  
+</code></pre>
+<p>这样就能引导模型按照示例提供的逻辑链进行思考，给出完整的推理过程。</p>
+<h3 id="SAGE框架"><a href="#SAGE框架" class="headerlink" title="SAGE框架"></a>SAGE框架</h3><p><strong>SAGE</strong>框架聚焦明确与优化和 AI 模型交互流程，在需清晰梳理任务执行背景、操作、目标与结果要求的场景效率最高，比如复杂业务流程咨询（如项目管理流程优化、多条件业务规则落地）、专业技能指导（如编程调试步骤规划、设计方案推导 ）等，能让 AI 输出更贴合实际执行逻辑与预期。</p>
+<ul>
+<li>Situation：描述任务执行的上下文、背景信息</li>
+<li>Action：明确需要 AI 执行的具体操作、步骤，是 Prompt 的核心指令</li>
+<li>Goal：阐述任务要达成的最终目的、期望效果，回答 “做这件事为了什么”</li>
+<li>Expectation：对输出结果的具体要求，含格式、细节深度、特殊规则等</li>
+</ul>
+<p>例如：</p>
+<pre><code>[Situation] 当前电商平台商品推荐点击率低迷，现有算法未结合商品时效性（新品、促销）与用户近期购买意图变化。需在618大促预热期优化策略，目标用户为月访问≥5次的活跃用户，可调用近3个月用户行为日志、商品库信息。
+[Action] 分析算法短板，结合商品时效性与用户购买意图，设计新推荐策略框架，含推荐逻辑、优先级规则、特殊场景适配方案。
+[Goal] 输出可落地开发策略，预期大促预热期推荐点击率提升15%、新品销量增长20%。
+[Expectation] 以Markdown呈现，包含问题诊断、新策略逻辑、规则说明、效果预测；标注数据依赖、用流程图简化特殊场景流程；规避过度复杂、小众数据依赖逻辑。
+</code></pre>
+<h3 id="RISEN框架"><a href="#RISEN框架" class="headerlink" title="RISEN框架"></a>RISEN框架</h3><p><strong>RISEN</strong>框架是专为<strong>复杂问题拆解与系统性解决方案生成</strong>设计的 Prompt 构建框架。</p>
+<ul>
+<li>R（Root Cause）：明确问题本质与核心矛盾</li>
+<li>I（Information）：整合关键信息与约束条件</li>
+<li>S（Solution）：设计分层解决方案</li>
+<li>E（Evaluation）：制定验证标准与风险预案</li>
+<li>N（Next Step）：规划迭代路径与执行优先级</li>
+</ul>
+<p>例如：</p>
+<pre><code>R: 如何规划一次成功的周末家庭野餐（核心问题）
+I: 
+I1: 家庭成员：2大1小（孩子5岁）
+I2: 预算限制：300元以内
+I3: 时间：周六上午10点-下午3点
+I4: 地点：附近公园（有草坪，但无遮阳棚）
+I5: 孩子需求：想玩泡泡机、吃小蛋糕
+S: 
+S1(基础准备层):
+- S1.1: 购买野餐垫（预算50元）、遮阳伞（预算80元）
+- S1.2: 准备食物：三明治（自制，预算30元）、水果拼盘（50元）、小蛋糕（80元）
+- S1.3: 携带物品：保温袋、纸巾、垃圾袋、孩子的泡泡机（自带）
+S2(体验优化层):
+- S2.1: 提前1天查看天气预报，若下雨改期
+- S2.2: 在草坪附近找有树荫的位置，避免正午暴晒
+- S2.3: 安排孩子的活动：12点午餐后玩泡泡机，14点讲故事
+S3(应急保障层):
+- S3.1: 准备常用药品（驱蚊液、创可贴）
+- S3.2: 随身携带手机充电器，确保能联系家人
+E: 
+E1: 全家人在野餐过程中无中暑、受伤情况
+E2: 孩子主动表示“玩得开心”
+E3: 实际花费控制在300元以内
+N: 
+N1: 下次野餐尝试自制寿司，丰富食物种类
+N2: 购买便携折叠桌椅，提升舒适度（预算可调整至400元）
+</code></pre>
+<p>相信大家都和我一样，感觉如果自己要写这么多，还不如直接用自然语言命令大模型。事实上，在面对复杂任务体系和大量已知信息时，我们很难在几句话之内说清楚自己的需求。 </p>
+<h2 id="一些方法"><a href="#一些方法" class="headerlink" title="一些方法"></a>一些方法</h2><h3 id="零样本提示（Zero-shot）"><a href="#零样本提示（Zero-shot）" class="headerlink" title="零样本提示（Zero-shot）"></a>零样本提示（Zero-shot）</h3><p>定义：不提供任何示例，直接通过自然语言指令让模型完成任务，依赖模型预训练阶段的知识储备。</p>
+<p>其实就是用大白话直接告诉大模型你想要它做什么</p>
+<pre><code>[任务指令] + [输出要求]
+</code></pre>
+<p>这种方法就是大部分人使用大模型的方法，在简单常识、客观知识等方面有很高的效率，但是难以解决复杂情景问题</p>
+<h3 id="少样本提示（Few-shot）"><a href="#少样本提示（Few-shot）" class="headerlink" title="少样本提示（Few-shot）"></a><strong>少样本提示</strong>（Few-shot）</h3><p>定义：提供少量（1-10 个）示例，引导模型模仿示例结构完成任务，通过 “示例 + 指令” 模式降低理解成本。</p>
+<pre><code>[示例1] + [示例2] + ... + [任务指令] + [输出要求]
+</code></pre>
+<p>如果你和笔者一样每天高强度使用大模型的话，就一定知道给它多举例子超有用的！</p>
+<p>例如：</p>
+<pre><code>示例1：  
+输入：“用户想查询订单状态”  
+输出：“SELECT status FROM orders WHERE user_id=?”  
+
+示例2：  
+输入：“用户想获取商品价格”  
+输出：“SELECT price FROM products WHERE product_id=?”  
+
+任务：“用户想更新收货地址”  
+输出：__________
+</code></pre>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>正如我一开始所说的那样，如何使用大模型并没有标准答案。不过我仍然希望大家能不断探索与AI交互的技巧，设计契合自己领域的提问框架，完全发挥它的能力。</p>
+<p>当然，你不用以上提到的这些方法也完全是可以的，目前并没有证据表明大模型的推理方式与人类完全相同，或许你自己开创的方法能实现更高的效率。</p>
+<p>正如同我们盼望大模型做出回答时的那样，大模型只是将它所了解到的“告诉”我们，笔者也只是将一些方法告诉大家，仅此而已。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 Windfallの异世界
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Windfall
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
+</body>
+</html>
