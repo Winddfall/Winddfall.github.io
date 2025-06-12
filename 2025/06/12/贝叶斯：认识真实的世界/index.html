@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>“贝叶斯：认识真实的世界（1）” | Windfallの异世界</title>
+    <meta name="author" content="Windfall" />
+    <meta name="description" content="对技术和艺术都有点想法。如果你喜欢，那就太好了。" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>WINDFALLの异世界</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WINDFALLの异世界</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>“贝叶斯：认识真实的世界（1）”</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/12
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Tech/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Tech
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在开始这篇文章以前，笔者有一些话不得不一吐为快</p>
+<p>中国的义务教育缺乏逻辑学，这已经是一个公认的事实。无论在什么社交平台上，无论对于什么现象或话题，我们都能看到大量词不达意、胡搅蛮缠的发言，而人云亦云、对这些发言深信不疑者更是不在少数。大多数人缺乏自己的思考与推断，只是不停地重述着从别人那里得来的某个观点，已经让一小部分有独立思考能力的人受尽折磨，不堪其扰</p>
+<p>于是笔者决定用这篇文章作为某种“启蒙”。我们常听别人说“先问是不是，再问为什么”，这句话让我们注重对客观世界的观察是否正确。本文则强调后半句话，告诉大家：在完成了对客观世界的观察后，该如何通过紧密的逻辑完成信息推断，得出合理的结论</p>
+<p>本文基于<strong>贝叶斯公式</strong>——这个高中生都能烂熟于心的概率公式，期望用它来完成一系列与概率有关的逻辑推理与信息推断</p>
+<p>希望能够用轻松的方式，改变你认识的世界<br>$$<br>P(A|B) &#x3D; P(A)\frac{P(B|A)}{P(B)}<br>$$</p>
+<h2 id="黑白思维vs概率思维"><a href="#黑白思维vs概率思维" class="headerlink" title="黑白思维vs概率思维"></a>黑白思维vs概率思维</h2><p>我们或多或少都见过那种固执己见的人。对于某个现象，他们总能不假思索地给出自己的解释，并对此深信不疑。即使旁人给出了不同的观点，或者又出现了新的现象，他们也从不会去思考其它可能性</p>
+<p>对于这样的人，我会说他们拥有<strong>黑白思维</strong></p>
+<p><strong>黑白思维</strong>：对于某个现象，先入为主地给出自己的<strong>一个</strong>观点或解释，然后收集能够佐证自己观点的证据，最后加深对自己观点的信心</p>
+<p>你可能已经发现这种思维方式的问题了：一开始的观点就是最后的结论，观察到的证据没有起到任何作用。我可以毫不客气地说，对于这样的思维方式，一切观测的信息量都几乎为0</p>
+<p>与黑白思维相对的，是我提倡的<strong>概率思维</strong></p>
+<p><strong>概率思维</strong>：对于某个现象，考虑几种观点或解释，思考它们成立的概率，最后取一个概率最大的观点作为结论</p>
+<p>问题来了，你怎么知道哪个概率最大？你用什么手段确定它的概率最大？</p>
+<p>所以，下面介绍一种朴素的概率思维：最大似然估计</p>
+<h2 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h2><h3 id="似然概率"><a href="#似然概率" class="headerlink" title="似然概率"></a>似然概率</h3><p>现在有一个现象A，对于这个现象，我们提出原因1、原因2、原因3这三种可能的原因。分别在这三种原因下，现象A发生的概率就叫做<strong>似然概率</strong></p>
+<ul>
+<li>P(现象A|原因1)</li>
+<li>P(现象A|原因2)</li>
+<li>P(现象A|原因3)</li>
+</ul>
+<p>似然概率的意义是原因对现象的“解释力”。似然概率越高，代表在这种原因下发生现象A的<strong>可能性</strong>越大，就是这种原因对现象的<strong>解释力</strong>更大</p>
+<h3 id="哪个原因解释得最好？"><a href="#哪个原因解释得最好？" class="headerlink" title="哪个原因解释得最好？"></a>哪个原因解释得最好？</h3><p>最大似然估计，就是找一个<strong>对该现象解释得最好的原因</strong>作为最后的原因，也就是找一个似然概率最大的原因</p>
+<p>最大似然估计体现了最朴素的概率思维，最符合我们的直觉。从这一步开始，面对生活中的一切现象，你就已经培养起了最基本的逻辑能力，再也不会固步自封</p>
+<h3 id="你为什么害怕坐飞机"><a href="#你为什么害怕坐飞机" class="headerlink" title="你为什么害怕坐飞机"></a>你为什么害怕坐飞机</h3><p>想象这样一个场景</p>
+<p>假期伊始的你正在飞机上，准备去度假享受美好时光。突然飞机剧烈颠簸起来，你害怕极了，大脑一片空白，心脏快要跳到嗓子眼</p>
+<p>即使理性提醒你飞机坠落的概率极低，但是你仍然无比担心飞机出现事故，为什么？因为你的大脑自动帮你计算了似然概率，进行了最大似然估计</p>
+<p>P(剧烈颠簸 | 飞机即将坠落) &#x3D; 1，只要飞机坠落，一定会出现剧烈颠簸</p>
+<p>P(剧烈颠簸 | 飞机只是遇见气流) &#x3D; 0.1，如果飞机遇见气流，只有比较小的概率会出现剧烈颠簸</p>
+<p>因此你的直觉告诉你危险，因为它认为飞机即将坠落这个原因能更好地解释剧烈颠簸，自动把剧烈颠簸归因为飞机即将坠落</p>
+<p>那么，这种论断是否正确呢？</p>
+<p>一段时间后，这次飞机正常降落了，并没有出现事故，你也安全抵达了目的地。你可能会觉得很幸运地没有遇到事故，可如果我告诉你这不是幸运，而是几乎必然出现的结果呢？</p>
+<p>让我们接下来正式进入贝叶斯定理</p>
+<h2 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h2><p>让我们回到刚才的飞机上，你肯定已经发现了最大似然估计在逻辑上的某点不合理之处</p>
+<p>P(剧烈颠簸 | 飞机即将坠落) &#x3D; 1，这个条件概率引导了我们的直觉，让我们觉得自己身处险境。然而，仔细想一想我们所处的境遇</p>
+<p><strong>现象</strong>：飞机出现颠簸</p>
+<p><strong>原因</strong>：</p>
+<ul>
+<li>飞机即将坠落</li>
+<li>飞机只是遇见气流</li>
+</ul>
+<p>我们<strong>已知的</strong>是飞机出现颠簸，<strong>未知的</strong>是原因，因此条件概率应该这么写：</p>
+<p>P(飞机即将坠落 | 剧烈颠簸) &#x3D; ?，在剧烈颠簸的情况下，飞机即将坠落的可能性是多少呢？</p>
+<p>P(飞机只是遇见气流 | 剧烈颠簸) &#x3D; ?，在剧烈颠簸的情况下，飞机只是遇见气流的可能性是多少呢？</p>
+<p>发现最大似然估计的不合逻辑之处了吗？它只关注了原因对现象的解释力，而实际上原因究竟是什么，取决于上面的两个条件概率</p>
+<p>用贝叶斯定理解答上面的两个式子吧<br>$$<br>P(飞机即将坠落|剧烈颠簸) &#x3D; P(飞机即将坠落)\frac{P(剧烈颠簸|飞机即将坠落)}{P(剧烈颠簸)}<br>$$</p>
+<p>$$<br>P(飞机只是遇见气流|剧烈颠簸) &#x3D; P(飞机只是遇见气流)\frac{P(剧烈颠簸|飞机只是遇见气流)}{P(剧烈颠簸)}<br>$$</p>
+<h3 id="先验概率"><a href="#先验概率" class="headerlink" title="先验概率"></a>先验概率</h3><p>用贝叶斯定理展开条件概率后，右侧的部分就是似然概率&#x2F;定值，而左边的部分代表的是这个原因本身发生的概率，我们称为<strong>先验概率</strong></p>
+<p>先验概率，是在我们拿到观测之前，对于该原因本身成立概率的评估，这就是该原因的基础概率</p>
+<h3 id="后验概率"><a href="#后验概率" class="headerlink" title="后验概率"></a>后验概率</h3><p>好了，我们该对P(飞机即将坠落 | 剧烈颠簸) 和P(飞机只是遇见气流 | 剧烈颠簸) 这两个条件概率改个称呼了，从今以后它们就叫做<strong>后验概率</strong>，即，在得到了某观测后，认为是某原因的概率<br>$$<br>后验概率 &#x3D; 先验概率\frac{似然概率}{P(观测)}<br>$$<br>后验概率的相对大小取决于<strong>先验概率×似然概率</strong></p>
+<h3 id="别再害怕坐飞机"><a href="#别再害怕坐飞机" class="headerlink" title="别再害怕坐飞机"></a>别再害怕坐飞机</h3><p>好了，让我们回到你飞机颠簸的那个时刻，你本能地依旧很害怕，但是如果你冷静地掏出纸笔来计算一下在当前现象下飞机坠毁的概率，能让你镇定不少</p>
+<p>从我国有民航开始，只发生过9起有人员伤亡的空难，从统计数据来讲，飞机坠落的概率极低：</p>
+<p>P(飞机即将坠落) &#x3D; $2 \cdot 10^{-7}$</p>
+<p>飞机遇到气流就比这要常见多了：</p>
+<p>P(飞机遇见气流) &#x3D; 0.2</p>
+<p>有了先验概率，让我们来计算后验概率的相对大小<br>$$<br>P(飞机即将坠落|剧烈颠簸) &#x3D; 2 \cdot 10^{-7} \cdot 1 &#x3D; 2 \cdot 10^{-7}<br>$$</p>
+<p>$$<br>P(飞机只是遇见气流|剧烈颠簸) &#x3D; 0.2 \cdot 0.1 &#x3D; 0.02<br>$$</p>
+<p>所以飞机只是遇见气流的可能性远远大于飞机即将坠落的可能性，你不必担心</p>
+<h3 id="奥卡姆剃刀与贝叶斯定理"><a href="#奥卡姆剃刀与贝叶斯定理" class="headerlink" title="奥卡姆剃刀与贝叶斯定理"></a>奥卡姆剃刀与贝叶斯定理</h3><p>这部分做为一个小科普吧</p>
+<p>“奥卡姆剃刀”是14世纪逻辑学家奥卡姆提出的一个法则：如非必须，勿增实体</p>
+<p>如果关于一个或多个现象，有许多种理论都能做出<strong>同样准确的解释</strong>，那么应该挑选那个<strong>最简单的</strong></p>
+<p>是不是感觉和贝叶斯有异曲同工之妙</p>
+<p>如果用贝叶斯来解释，就是在似然概率相同的情况下，选择<strong>先验概率较大</strong>的原因。因为先验概率较大说明该原因更容易发生，也就是更简单</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 Windfallの异世界
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Windfall
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+
+    <script src="/js/<file>"></script>
+    <link rel="stylesheet" href="/css/<file>" />
+
+    
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+>   </canvas>
+    <script src="/js/background.min.js"></script>
+</body>
+</html>
