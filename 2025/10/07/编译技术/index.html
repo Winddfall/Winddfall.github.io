@@ -189,7 +189,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #03a9f4">
+                <a href="/tags/BUAA/" style="color: #00a596">
                     BUAA
                 </a>
             </span>
@@ -225,12 +225,10 @@
 <p>对于无二义性文法，因为语法树不包含顺序信息，<strong>无论用什么顺序推导，语法树都是相同的</strong>。即，无二义性文法只有一棵语法树</p>
 <h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h3><p><strong>左线性文法</strong>：::&#x3D;右侧的非终结符一定在左边</p>
 <p>换言之，非终结符可以在<strong>右侧</strong>添加某些终结符。这符合我们读句型时从左到右的习惯，状态图应运而生</p>
-<img src="../images/image-20251007220512098.png" alt="image-20251007220512098"  />
-
+<p><img src="/../images/image-20251007220512098.png" alt="image-20251007220512098"></p>
 <p>顶层状态就是终止状态</p>
 <p>识别一个字符串是否是句子：</p>
-<img src="../images/image-20251007220944537.png" alt="image-20251007220944537" style="zoom:67%;" />
-
+<p><img src="/../images/image-20251007220944537.png" alt="image-20251007220944537"></p>
 <p>上图可以由下面这句话概括：状态图和推导为互逆过程，如果一个字符串不能回到终止状态，说明它不能由开始符号推导得到，则它不是句子</p>
 <h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>由状态图的思想，我们可以设计词法分析程序：</p>
 <p><img src="/../images/image-20251007221734602.png" alt="image-20251007221734602"></p>
