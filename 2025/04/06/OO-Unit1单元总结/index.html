@@ -206,18 +206,24 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="度量程序架构"><a href="#度量程序架构" class="headerlink" title="度量程序架构"></a>度量程序架构</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><h4 id="架构解说"><a href="#架构解说" class="headerlink" title="架构解说"></a>架构解说</h4><p>第一次作业中，我将所有类分为了主类<code>MainClass</code>和4个包，如下</p>
+        <h2 id="度量程序架构">度量程序架构</h2>
+<h3 id="第一次作业">第一次作业</h3>
+<h4 id="架构解说">架构解说</h4>
+<p>第一次作业中，我将所有类分为了主类<code>MainClass</code>和4个包，如下</p>
 <p><code>Expression</code>：管理解析表达式时生成的<code>Expr</code>、<code>Term</code>和<code>Factor</code>实例，其中<code>Num</code>、<code>Var</code>和<code>Expr</code>类实现了<code>Factor</code>接口。这样做的好处是不用另开“子表达式”这一类。另外，我的<code>Term</code>类中有一个属性为<code>Sign</code>，它表示在表达式中每项的正负号，这样表达式在解析项时返回的项就完全包含了这个项的全部信息，递归下降就能发挥出威力，</p>
 <p><code>LexerAndParser</code>：管理词法分析器<code>Lexer</code>类、语法分析器<code>Parser</code>类，是递归下降分析表达式层次的主要工具</p>
 <p><code>PolyandUnit</code>：管理和运算生成的多项式，其中<code>Poly</code>类包含多项式相加、相乘和<code>toString</code>方法。值得一提的是，第一次作业我没有构建<code>Unit</code>类，而是在<code>Poly</code>类中直接用一个<code>Hashmap&lt;指数，系数&gt;</code>存所有的因子，由于第一次作业只有变量因子可以这么做，迭代后显然不行了。</p>
 <p><code>Tool</code>：管理工具类，目前负责化简输入的表达式使其能够被解析</p>
-<p><img src="/../images/image-20250321223457064.png" alt="image-20250321223457064"></p>
-<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>可以看到<code>Parser</code>、<code>Lexer</code>和<code>Poly</code>类的复杂度远高于其它类，我认为主要原因是<code>Parser</code>和<code>Lexer</code>两类高度耦合，在<code>Parser</code>类中大量调用<code>Lexer</code>类的方法，并且两个类本身就具有比较高的复杂度。而<code>Poly</code>类中有较多对于多项式运算的方法（包括一个优化方法）以及<code>toString</code>方法，因此复杂度高也是正常的。</p>
-<p><img src="/../images/image-20250321223724276.png" alt="image-20250321223724276"> </p>
+<p><img src="../images/image-20250321223457064.png" alt="image-20250321223457064"></p>
+<h4 id="复杂度分析">复杂度分析</h4>
+<p>可以看到<code>Parser</code>、<code>Lexer</code>和<code>Poly</code>类的复杂度远高于其它类，我认为主要原因是<code>Parser</code>和<code>Lexer</code>两类高度耦合，在<code>Parser</code>类中大量调用<code>Lexer</code>类的方法，并且两个类本身就具有比较高的复杂度。而<code>Poly</code>类中有较多对于多项式运算的方法（包括一个优化方法）以及<code>toString</code>方法，因此复杂度高也是正常的。</p>
+<p><img src="../images/image-20250321223724276.png" alt="image-20250321223724276"></p>
 <p>由于我比较注重封装的意识，因此写了不少方法。除了<code>Poly</code>类的<code>toString</code>和<code>seekPositiveNum</code>方法以外，都比较简单。关于这两个方法为什么如此复杂，实际上是我在第一次作业中走的一些弯路。比如<code>toString</code>方法中大量嵌套了分支结构，事实上只需要考虑单项式各个部分在什么情况下需要输出，<code>seekPositiveNum</code>方法可以被给单项式降序排序的方法替代。</p>
-<p><img src="/../images/image-20250321224930445.png" alt="image-20250321224930445"></p>
-<p><img src="/../images/image-20250321225022232.png" alt="image-20250321225022232"></p>
-<h3 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h3><h4 id="架构解说-1"><a href="#架构解说-1" class="headerlink" title="架构解说"></a>架构解说</h4><p>正如前面所说，在加入了三角函数因子后，我不得不构造了<code>Unit</code>类用来代表一个单项式，并且修改了相关逻辑。由于现在的单项式比较复杂，可能含有三角函数，因此我的<code>Unit</code>类包含4个属性，能够唯一确定一个单项式：</p>
+<p><img src="../images/image-20250321224930445.png" alt="image-20250321224930445"></p>
+<p><img src="../images/image-20250321225022232.png" alt="image-20250321225022232"></p>
+<h3 id="第二次作业">第二次作业</h3>
+<h4 id="架构解说-2">架构解说</h4>
+<p>正如前面所说，在加入了三角函数因子后，我不得不构造了<code>Unit</code>类用来代表一个单项式，并且修改了相关逻辑。由于现在的单项式比较复杂，可能含有三角函数，因此我的<code>Unit</code>类包含4个属性，能够唯一确定一个单项式：</p>
 <pre><code class="language-java">private BigInteger coe; // 系数
 private int exp; // x的指数
 private HashMap&lt;Poly,Integer&gt; sinMap; // sin函数集合&lt;内部多项式，指数&gt;
@@ -237,608 +243,620 @@ private int exp; // 三角函数的指数
 </ul>
 <p>前一次作业<code>Poly</code>类的<code>toString</code>方法写的笨拙且臃肿，加入三角函数以后我不可能再在原来的代码块上添加，否则就会超出60行的限制，在借助了AI工具后我很好地将它变得逻辑清晰，大大减少了分支数量和代码量。其原因在于我一开始是将一个<code>Unit</code>看成一个整体，而前面已经提到<code>Unit</code>有4个属性，这就导致要不停地考虑每个属性对应的多种情况，其分支多达十几种。化简后的代码独立考虑四个属性分别怎么输出，逻辑上简便了不少。</p>
 <p>在这次作业中令我印象深刻的是封装了两个判断单项式和多项式是否为0的方法。在判断单项式是否为0时不得不判断三角函数中是否有0，而三角函数中又有多项式，需要挨个判断里面的单项式是否为0。这里再次用到了递归的思想，方法写成后非常成功。</p>
-<p><img src="/../images/image-20250322011400914.png" alt="image-20250322011400914"></p>
-<h4 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>可以看到，由于<code>toString</code>方法在逻辑上的大大简化，在加入了三角函数方法后，<code>Poly</code>类的复杂度甚至比之前还要低！而剩下两个类的复杂度和之前相比只有略微提升，这是正常的。</p>
-<p><img src="/../images/image-20250322011500134.png" alt="image-20250322011500134"></p>
+<p><img src="../images/image-20250322011400914.png" alt="image-20250322011400914"></p>
+<h4 id="复杂度分析-2">复杂度分析</h4>
+<p>可以看到，由于<code>toString</code>方法在逻辑上的大大简化，在加入了三角函数方法后，<code>Poly</code>类的复杂度甚至比之前还要低！而剩下两个类的复杂度和之前相比只有略微提升，这是正常的。</p>
+<p><img src="../images/image-20250322011500134.png" alt="image-20250322011500134"></p>
 <p>可以清楚地看到，这次的<code>toString</code>方法复杂度由35降到了26，说明分支机构的嵌套确实会大大增加复杂度。</p>
 <p><code>unitIsZero</code>这个方法就是用来判断单项式是否为0的，因为有递归的存在导致复杂度较高。</p>
 <p><code>appTriFunc</code>方法封装了三角函数的<code>toString</code>，其逻辑本身就比较复杂，有几层分支嵌套，我还考虑了优化cos(-x)，我认为这块代码已经无法再简化，因此第三次作业也一直沿用</p>
-<p><img src="/../images/image-20250322011646668.png" alt="image-20250322011646668"></p>
-<h3 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h3><h4 id="架构解说-2"><a href="#架构解说-2" class="headerlink" title="架构解说"></a>架构解说</h4><p>第三次作业和第二次作业相比，架构几乎没有变化，只是增加了一些类和对应的方法。</p>
+<p><img src="../images/image-20250322011646668.png" alt="image-20250322011646668"></p>
+<h3 id="第三次作业">第三次作业</h3>
+<h4 id="架构解说-3">架构解说</h4>
+<p>第三次作业和第二次作业相比，架构几乎没有变化，只是增加了一些类和对应的方法。</p>
 <p>我为求导因子增加了<code>Dx</code>类，，为自定义普通函数增加了<code>NomFuncModel</code>和<code>NomFuncModel</code>类，功能和递推函数类似</p>
 <p>对于求导的解析，我受到课上作业的启发，只需要对各种各样的因子都分别写好求导方法即可。</p>
 <p>值得一提的是，我沿用了课上作业的求导方法，即：除了<code>Term</code>类求导返回<code>Expr</code>类型，其它类求导均返回<code>Term</code>类型，这样做的原因是：我的<code>Term</code>类是自带正负号的，三角函数因子求导后符号可能会改变，这样才能将符号的改变正确地传递出来。</p>
-<p><img src="/../images/image-20250322110854178.png" alt="image-20250322110854178"></p>
-<h4 id="复杂度分析-2"><a href="#复杂度分析-2" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>下表均为对最终程序架构的度量</p>
+<p><img src="../images/image-20250322110854178.png" alt="image-20250322110854178"></p>
+<h4 id="复杂度分析-3">复杂度分析</h4>
+<p>下表均为对最终程序架构的度量</p>
 <table>
 <thead>
 <tr>
-<th align="center">类名</th>
+<th style="text-align:center">类名</th>
 <th>属性个数</th>
 <th>方法个数</th>
 <th>平均圈复杂度</th>
 <th>最大圈复杂度</th>
 <th>方法权重和</th>
-<th align="center">规模（总代码行数）</th>
+<th style="text-align:center">规模（总代码行数）</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Dx</td>
+<tbody>
+<tr>
+<td style="text-align:center">Dx</td>
 <td>1</td>
 <td>3</td>
 <td>1</td>
 <td>1</td>
 <td>3</td>
-<td align="center">20</td>
+<td style="text-align:center">20</td>
 </tr>
 <tr>
-<td align="center">Expr</td>
+<td style="text-align:center">Expr</td>
 <td>1</td>
 <td>4</td>
 <td>1.75</td>
 <td>3</td>
 <td>7</td>
-<td align="center">40</td>
+<td style="text-align:center">40</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
+<td style="text-align:center">Lexer</td>
 <td>4</td>
 <td>9</td>
 <td>3.4</td>
 <td>10</td>
 <td>34</td>
-<td align="center">142</td>
+<td style="text-align:center">142</td>
 </tr>
 <tr>
-<td align="center">MainClass</td>
+<td style="text-align:center">MainClass</td>
 <td>0</td>
 <td>1</td>
 <td>4</td>
 <td>4</td>
 <td>4</td>
-<td align="center">44</td>
+<td style="text-align:center">44</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
+<td style="text-align:center">NomFunc</td>
 <td>2</td>
 <td>5</td>
 <td>1</td>
 <td>1</td>
 <td>5</td>
-<td align="center">30</td>
+<td style="text-align:center">30</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
+<td style="text-align:center">NomFuncModel</td>
 <td>2</td>
 <td>5</td>
 <td>2.3</td>
 <td>8</td>
 <td>14</td>
-<td align="center">70</td>
+<td style="text-align:center">70</td>
 </tr>
 <tr>
-<td align="center">Num</td>
+<td style="text-align:center">Num</td>
 <td>1</td>
 <td>5</td>
 <td>1</td>
 <td>1</td>
 <td>5</td>
-<td align="center">35</td>
+<td style="text-align:center">35</td>
 </tr>
 <tr>
-<td align="center">Parser</td>
+<td style="text-align:center">Parser</td>
 <td>1</td>
 <td>10</td>
 <td>3.5</td>
 <td>8</td>
 <td>35</td>
-<td align="center">191</td>
+<td style="text-align:center">191</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
+<td style="text-align:center">Poly</td>
 <td>1</td>
 <td>11</td>
 <td>4.1</td>
 <td>11</td>
 <td>45</td>
-<td align="center">239</td>
+<td style="text-align:center">239</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
+<td style="text-align:center">RecuFunc</td>
 <td>2</td>
 <td>5</td>
 <td>1</td>
 <td>1</td>
 <td>5</td>
-<td align="center">33</td>
+<td style="text-align:center">33</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
+<td style="text-align:center">RecuFuncModel</td>
 <td>5</td>
 <td>6</td>
 <td>2.5</td>
 <td>8</td>
 <td>27</td>
-<td align="center">202</td>
+<td style="text-align:center">202</td>
 </tr>
 <tr>
-<td align="center">Term</td>
+<td style="text-align:center">Term</td>
 <td>2</td>
 <td>7</td>
 <td>2</td>
 <td>4</td>
 <td>14</td>
-<td align="center">78</td>
+<td style="text-align:center">78</td>
 </tr>
 <tr>
-<td align="center">Token</td>
+<td style="text-align:center">Token</td>
 <td>2</td>
 <td>3</td>
 <td>1</td>
 <td>1</td>
 <td>3</td>
-<td align="center">27</td>
+<td style="text-align:center">27</td>
 </tr>
 <tr>
-<td align="center">Tool</td>
+<td style="text-align:center">Tool</td>
 <td>0</td>
 <td>2</td>
 <td>3</td>
 <td>5</td>
 <td>6</td>
-<td align="center">47</td>
+<td style="text-align:center">47</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
+<td style="text-align:center">Tri</td>
 <td>3</td>
 <td>5</td>
 <td>1.6</td>
 <td>3</td>
 <td>8</td>
-<td align="center">65</td>
+<td style="text-align:center">65</td>
 </tr>
 <tr>
-<td align="center">Unit</td>
+<td style="text-align:center">Unit</td>
 <td>4</td>
 <td>9</td>
 <td>1.9</td>
 <td>7</td>
 <td>17</td>
-<td align="center">92</td>
+<td style="text-align:center">92</td>
 </tr>
 <tr>
-<td align="center">Var</td>
+<td style="text-align:center">Var</td>
 <td>1</td>
 <td>3</td>
 <td>1</td>
 <td>1</td>
 <td>3</td>
-<td align="center">27</td>
+<td style="text-align:center">27</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
-<th align="center">类名</th>
-<th align="center">方法名</th>
-<th align="center">方法规模（行数）</th>
-<th align="center">控制分支数目</th>
+<th style="text-align:center">类名</th>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">方法规模（行数）</th>
+<th style="text-align:center">控制分支数目</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">calcuPoly</td>
-<td align="center">11</td>
-<td align="center">2</td>
+<tbody>
+<tr>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">calcuPoly</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">calcuPoly_0_1</td>
-<td align="center">17</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">calcuPoly_0_1</td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">calcuPoly_n</td>
-<td align="center">35</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">calcuPoly_n</td>
+<td style="text-align:center">35</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">matchModel</td>
-<td align="center">11</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">matchModel</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">replace_a_b</td>
-<td align="center">8</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">replace_a_b</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">replacePara</td>
-<td align="center">25</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">replacePara</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">funcToExpr</td>
-<td align="center">11</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">funcToExpr</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">funcToExpr_0_1</td>
-<td align="center">17</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">funcToExpr_0_1</td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">RecuFuncModel</td>
-<td align="center">funcToExpr_n</td>
-<td align="center">35</td>
-<td align="center">2</td>
+<td style="text-align:center">RecuFuncModel</td>
+<td style="text-align:center">funcToExpr_n</td>
+<td style="text-align:center">35</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">mulPoly</td>
-<td align="center">42</td>
-<td align="center">0</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">mulPoly</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">addPoly</td>
-<td align="center">32</td>
-<td align="center">2</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">addPoly</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">toString</td>
-<td align="center">58</td>
-<td align="center">6</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">toString</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">6</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">appTriFunc</td>
-<td align="center">29</td>
-<td align="center">4</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">appTriFunc</td>
+<td style="text-align:center">29</td>
+<td style="text-align:center">4</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">equals</td>
-<td align="center">16</td>
-<td align="center">3</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">equals</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">3</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">hashCode</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">hashCode</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">polyIsZero</td>
-<td align="center">10</td>
-<td align="center">1</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">polyIsZero</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">countChar</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">countChar</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">onlyOneUnit</td>
-<td align="center">7</td>
-<td align="center">1</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">onlyOneUnit</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">getUnits</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">getUnits</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Poly</td>
-<td align="center">addUnit</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Poly</td>
+<td style="text-align:center">addUnit</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
-<td align="center">构造函数</td>
-<td align="center">4</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFunc</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
-<td align="center">getLevel</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFunc</td>
+<td style="text-align:center">getLevel</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
-<td align="center">getArgus</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFunc</td>
+<td style="text-align:center">getArgus</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
-<td align="center">toPoly</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFunc</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">RecuFunc</td>
-<td align="center">derive</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">RecuFunc</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Num</td>
-<td align="center">构造函数</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Num</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Num</td>
-<td align="center">getValue</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Num</td>
+<td style="text-align:center">getValue</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Num</td>
-<td align="center">toPoly</td>
-<td align="center">4</td>
-<td align="center">0</td>
+<td style="text-align:center">Num</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Num</td>
-<td align="center">negate</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Num</td>
+<td style="text-align:center">negate</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Num</td>
-<td align="center">derive</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Num</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">构造函数</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">LexerBuild</td>
-<td align="center">13</td>
-<td align="center">3</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">LexerBuild</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">3</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">addNum</td>
-<td align="center">10</td>
-<td align="center">1</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">addNum</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">addSign</td>
-<td align="center">13</td>
-<td align="center">7</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">addSign</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">7</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">addTri</td>
-<td align="center">6</td>
-<td align="center">1</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">addTri</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">addFunc</td>
-<td align="center">11</td>
-<td align="center">3</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">addFunc</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">3</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">addDx</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">addDx</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">getCurToken</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">getCurToken</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">nextToken</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">nextToken</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Lexer</td>
-<td align="center">isEnd</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Lexer</td>
+<td style="text-align:center">isEnd</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
-<td align="center">构造函数</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFunc</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
-<td align="center">getName</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFunc</td>
+<td style="text-align:center">getName</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
-<td align="center">getArgus</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFunc</td>
+<td style="text-align:center">getArgus</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
-<td align="center">toPoly</td>
-<td align="center">5</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFunc</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFunc</td>
-<td align="center">derive</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFunc</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">构造函数</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">addModel</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">addModel</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">replace_a_b</td>
-<td align="center">6</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">replace_a_b</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">calcuPoly</td>
-<td align="center">5</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">calcuPoly</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">funcToExpr</td>
-<td align="center">5</td>
-<td align="center">0</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">funcToExpr</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">NomFuncModel</td>
-<td align="center">replacePara</td>
-<td align="center">25</td>
-<td align="center">2</td>
+<td style="text-align:center">NomFuncModel</td>
+<td style="text-align:center">replacePara</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">构造函数</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">getSign</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">getSign</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">addFactor</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">addFactor</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">getFactors</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">getFactors</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">toPoly</td>
-<td align="center">10</td>
-<td align="center">0</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">mergeTerm</td>
-<td align="center">13</td>
-<td align="center">2</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">mergeTerm</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">Term</td>
-<td align="center">derive</td>
-<td align="center">14</td>
-<td align="center">1</td>
+<td style="text-align:center">Term</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Expr</td>
-<td align="center">addTerm</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Expr</td>
+<td style="text-align:center">addTerm</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Expr</td>
-<td align="center">getTerms</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Expr</td>
+<td style="text-align:center">getTerms</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Expr</td>
-<td align="center">toPoly</td>
-<td align="center">5</td>
-<td align="center">0</td>
+<td style="text-align:center">Expr</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Expr</td>
-<td align="center">derive</td>
-<td align="center">10</td>
-<td align="center">1</td>
+<td style="text-align:center">Expr</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
-<td align="center">构造函数</td>
-<td align="center">3</td>
-<td align="center">0</td>
+<td style="text-align:center">Tri</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
-<td align="center">toCos</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Tri</td>
+<td style="text-align:center">toCos</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
-<td align="center">toSin</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<td style="text-align:center">Tri</td>
+<td style="text-align:center">toSin</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
-<td align="center">toPoly</td>
-<td align="center">14</td>
-<td align="center">2</td>
+<td style="text-align:center">Tri</td>
+<td style="text-align:center">toPoly</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">Tri</td>
-<td align="center">derive</td>
-<td align="center">9</td>
-<td align="center">1</td>
+<td style="text-align:center">Tri</td>
+<td style="text-align:center">derive</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">1</td>
 </tr>
-</tbody></table>
-<h3 id="设想新的迭代场景"><a href="#设想新的迭代场景" class="headerlink" title="设想新的迭代场景"></a>设想新的迭代场景</h3><p>假设新的迭代场景是加入求多阶导数因子<code>dx&#123;n&#125;(表达式)</code></p>
+</tbody>
+</table>
+<h3 id="设想新的迭代场景">设想新的迭代场景</h3>
+<p>假设新的迭代场景是加入求多阶导数因子<code>dx&#123;n&#125;(表达式)</code></p>
 <p>则我的<code>Dx</code>类要添加属性：“序号”，来说明该求导因子求的是几阶导。</p>
 <p>而所有因子类的<code>derive()</code>方法都要加入新的参数“序号”，来标明要求几阶导。<code>derive()</code>函数内部要通过循环来返回相应阶数的求导结果</p>
-<h2 id="bug分析"><a href="#bug分析" class="headerlink" title="bug分析"></a>bug分析</h2><h3 id="我自己的bug"><a href="#我自己的bug" class="headerlink" title="我自己的bug"></a>我自己的bug</h3><p>第二次作业出现的两个bug均是因为我在<code>lexer</code>类分支复制粘贴时忘记修改相应token了，没有技术含量可言。</p>
+<h2 id="bug分析">bug分析</h2>
+<h3 id="我自己的bug">我自己的bug</h3>
+<p>第二次作业出现的两个bug均是因为我在<code>lexer</code>类分支复制粘贴时忘记修改相应token了，没有技术含量可言。</p>
 <p>第三次作业出现的两处bug均是与求导有关：</p>
 <ul>
 <li>忽略了求导时的符号问题，所有类的derive()方法都没有传入符号，默认求导得到的都是正项，事实上对Term求导时得到的是表达式因子，其中的子Term的符号需要与父Term保持一致。修复bug时给所有derive()方法补充了sign参数，同时将该参数填入正确的位置</li>
 <li>忽略了对求导因子求导（嵌套）的问题，<code>Dx</code>类中没有写对本类实例求导的方法，导致对于<code>dx(dx(x))</code>这样的因子只进行了一次求导</li>
 </ul>
 <p>由于bug是因为逻辑不完整导致的，所以修复bug前后的代码圈复杂度没有区别。如果想要降低方法的复杂度，我认为应该多封装方法，少写分支嵌套，这样会减小圈复杂度。</p>
-<h3 id="在互测中发现的bug"><a href="#在互测中发现的bug" class="headerlink" title="在互测中发现的bug"></a>在互测中发现的bug</h3><p>在互测中我发现了一些比较有代表性的bug，其中大部分都与优化有关。因为A组的同学在正确性上的得分较高，所以我在互测会比较偏向优化hack。同时，这样的判断也源于我观察同学们的代码后可以清晰地看到他们进行了哪些优化。事实上，有些同学的优化方法名写的通俗易懂，这在一定程度上给我构造样例也提供了方向。</p>
+<h3 id="在互测中发现的bug">在互测中发现的bug</h3>
+<p>在互测中我发现了一些比较有代表性的bug，其中大部分都与优化有关。因为A组的同学在正确性上的得分较高，所以我在互测会比较偏向优化hack。同时，这样的判断也源于我观察同学们的代码后可以清晰地看到他们进行了哪些优化。事实上，有些同学的优化方法名写的通俗易懂，这在一定程度上给我构造样例也提供了方向。</p>
 <ul>
 <li>关于<code>sin(0)</code>和<code>cos(0)</code>的问题，一部分同学没有直接把sin(0)存成0，或者是最后的<code>toString</code>方法分支判断有疏漏，导致<code>sin(sin(0)^0)</code>这样的样例输出为0</li>
 <li>关于<code>sin(x)^2+cos(x)^2</code>的问题，一部分同学没有完全检验三角函数内部的因子是否完全相同，或是三角函数以外的部分是否完全相同，导致错误优化</li>
@@ -853,18 +871,21 @@ private int exp; // 三角函数的指数
 <p><code>dx(sin(-x))</code>：内层负项求导</p>
 <p><code>dx(sin((sin(x)+x+1))</code>：嵌套求导</p>
 <p>所以以后在构造测试样例的时候也可以这样层层递进地进行，有时能够构造出一些评测机不容易构造的样例</p>
-<h2 id="优化分析"><a href="#优化分析" class="headerlink" title="优化分析"></a>优化分析</h2><p>我做了对负项不放在开头、sin(0)和cos(0)的优化、余弦函数偶函数性质的优化、以及sin(x)^2+cos(x)^2的优化</p>
+<h2 id="优化分析">优化分析</h2>
+<p>我做了对负项不放在开头、sin(0)和cos(0)的优化、余弦函数偶函数性质的优化、以及sin(x)^2+cos(x)^2的优化</p>
 <p>负项尽可能不放在开头：在<code>toPoly</code>后将单项式按系数降序排序即可</p>
 <p>sin(0)：在最后输出之前判断单项式是否为0即可，已经被封装进入方法。</p>
 <p>cos(0)：在余弦函数<code>toPoly</code>方法中直接将它存成常量1</p>
 <p>余弦函数偶函数性质：判断内部是否是单项式且第一项为负号</p>
 <p>sin(x)^2+cos(x)^2：三层遍历，找到匹配的内容就合并放入新容器</p>
 <p>我的优化可以保证代码的简洁性和正确性，因为我将大块的优化方法封装进了工具类，小块的优化方法也放入了各自的类，需要时调用即可。没有必要封装成方法的用注释说明这部分功能。</p>
-<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>Unit1给我的感觉属于不轻松也不算难，因为有大量的往届博客可以借鉴，所以在架构选择和递归下降算法上并不困难，但是到具体细节的实现上还是挺繁琐的。第一次作业之前我还反复看了上学期OOpre最后一次作业的递归下降解说，但是直到看完博客之后才完全理解这一算法的妙处。</p>
+<h2 id="心得体会">心得体会</h2>
+<p>Unit1给我的感觉属于不轻松也不算难，因为有大量的往届博客可以借鉴，所以在架构选择和递归下降算法上并不困难，但是到具体细节的实现上还是挺繁琐的。第一次作业之前我还反复看了上学期OOpre最后一次作业的递归下降解说，但是直到看完博客之后才完全理解这一算法的妙处。</p>
 <p>第一次作业我几乎花了4天的时间才完成，第二次和第三次都是两天多一点，感觉是有些极限了，尤其是第二次作业，周六下午才完全通过。不过不管我在写代码时有多么极限，最终总能成功地在ddl之前通过中测。感觉以后最好周二就开始着手写代码，否则会来不及。</p>
-<p> 此外，感觉我对面向对象的思想理解更深刻了。在面向对象设计与构造中，一切方法几乎都是要依靠对象而存在（除了静态方法），而在写作业的过程中，常常是一上来先建一个类。这就意味着我们要事先想好每个类代表的到底是什么，因为类是实例的抽象，所以它需要高度概括我所需要的实例的特性。</p>
+<p>此外，感觉我对面向对象的思想理解更深刻了。在面向对象设计与构造中，一切方法几乎都是要依靠对象而存在（除了静态方法），而在写作业的过程中，常常是一上来先建一个类。这就意味着我们要事先想好每个类代表的到底是什么，因为类是实例的抽象，所以它需要高度概括我所需要的实例的特性。</p>
 <p>最后，我很感谢课程组、各位助教的辛苦编写指导书和答疑。第一单元的三次作业难度安排也非常合理，通过解析表达式的过程让我们深刻理解了递归下降法的实际应用。</p>
-<h2 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h2><ul>
+<h2 id="未来方向">未来方向</h2>
+<ul>
 <li>可以尝试创新题目，加入更多实际应用的色彩，这样在解决问题的过程中会有更多的乐趣</li>
 <li>迭代难度适当均衡，避免某一次迭代太难或者太简单的情况</li>
 </ul>

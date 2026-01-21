@@ -189,7 +189,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #00bcd4">
+                <a href="/tags/BUAA/" style="color: #ff7d73">
                     BUAA
                 </a>
             </span>
@@ -206,33 +206,41 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><h3 id="32个通用寄存器-GPR"><a href="#32个通用寄存器-GPR" class="headerlink" title="32个通用寄存器(GPR)"></a>32个通用寄存器(GPR)</h3><p>编号从00000到11111</p>
-<p><img src="/../images/image-20240924103709031.png" alt="image-20240924103709031"></p>
+        <h2 id="寄存器">寄存器</h2>
+<h3 id="32个通用寄存器-GPR">32个通用寄存器(GPR)</h3>
+<p>编号从00000到11111</p>
+<p><img src="../images/image-20240924103709031.png" alt="image-20240924103709031"></p>
 <p><code>$zero</code>的值永远是0，无法改变</p>
 <p><code>$1</code>保留给汇编器，一般不使用此寄存器</p>
-<h3 id="三个特殊寄存器"><a href="#三个特殊寄存器" class="headerlink" title="三个特殊寄存器"></a>三个特殊寄存器</h3><ul>
+<h3 id="三个特殊寄存器">三个特殊寄存器</h3>
+<ul>
 <li><strong>PC</strong>：它用于存储当前 CPU 正在执行的指令在内存中的<strong>地址</strong>。需要注意的是，这个寄存器的值不能用常规的指令进行取值和赋值，但这并不意味着不能做到，只是麻烦一些。那么，怎样对其取值、赋值呢？这可以作为一个思考的题目，在之后的学习中自行探索。（提示：跳转）</li>
 <li><strong>HI</strong>：这个寄存器用于乘除法。它被用来存放每次乘法结果的<strong>高 32 位</strong>，也被用来存放除法结果的<strong>余数</strong>。</li>
 <li><strong>LO</strong>：HI 的孪生兄弟。它被用来存放每次乘法结果的<strong>低 32 位</strong>，也被用来存放除法结果的<strong>商</strong>。</li>
 </ul>
-<h3 id="CP0寄存器"><a href="#CP0寄存器" class="headerlink" title="CP0寄存器"></a>CP0寄存器</h3><p>CP0 是一个系统控制<strong>协处理器</strong>，而 CP0 寄存器则是该协处理器工作时需要用到的一些寄存器。在我们的实验中，只会用到其中的 4 个寄存器：SR、Cause、EPC 和 PRId。</p>
+<h3 id="CP0寄存器">CP0寄存器</h3>
+<p>CP0 是一个系统控制<strong>协处理器</strong>，而 CP0 寄存器则是该协处理器工作时需要用到的一些寄存器。在我们的实验中，只会用到其中的 4 个寄存器：SR、Cause、EPC 和 PRId。</p>
 <ul>
 <li>**SR：**用于系统控制，决定是否允许异常和中断</li>
 <li>**Cause：**记录异常和中断的类型</li>
 <li>**EPC：**保存异常或中断发生时的 PC 值，也就是发送异常或中断时 CPU 正在执行的那条指令的地址。当处理完成之后，CPU 会根据这个地址返回到正常程序中继续往下执行。</li>
 <li>**PRId：**处理器 ID，用于实现个性的寄存器。</li>
 </ul>
-<h2 id="MIPS汇编指令"><a href="#MIPS汇编指令" class="headerlink" title="MIPS汇编指令"></a>MIPS汇编指令</h2><p>指令，即是由处理器指令集架构（Instruction Set Architecture，可以理解为计算机体系结构中对程序相关的部分所做的定义）定义的处理器的独立操作，这个操作一般是运算、存储、读取等。一个指令在 CPU 中真正的存在形式是高低电平，也可以理解为由 01 序列组成的机器码。</p>
+<h2 id="MIPS汇编指令">MIPS汇编指令</h2>
+<p>指令，即是由处理器指令集架构（Instruction Set Architecture，可以理解为计算机体系结构中对程序相关的部分所做的定义）定义的处理器的独立操作，这个操作一般是运算、存储、读取等。一个指令在 CPU 中真正的存在形式是高低电平，也可以理解为由 01 序列组成的机器码。</p>
 <p>为了便于人类理解，指令一般由汇编语言来表示。汇编指令只是指令的一种表示形式而已，其实质是一样的。</p>
-<h3 id="指令的格式"><a href="#指令的格式" class="headerlink" title="指令的格式"></a>指令的格式</h3><p>在 MIPS 汇编语言中，指令一般由一个指令名作为开头，后跟该指令的操作数，中间由空格或逗号隔开。</p>
+<h3 id="指令的格式">指令的格式</h3>
+<p>在 MIPS 汇编语言中，指令一般由一个指令名作为开头，后跟该指令的操作数，中间由空格或逗号隔开。</p>
 <p>指令的操作数一般为0~3个，每个指令有其固定的操作数个数。一般格式如下两种：</p>
 <p><em>指令名</em> <em>操作数 1</em>, <em>操作数 2</em>, <em>操作数 3</em></p>
-<p><em>指令名</em> <em>操作数 1</em>, <em>操作数 3(操作数 2)</em>&#x2F;&#x2F;一般用于存取</p>
+<p><em>指令名</em> <em>操作数 1</em>, <em>操作数 3(操作数 2)</em>//一般用于存取</p>
 <p>所谓操作数，就是指令操作所作用的实体，可以是<strong>寄存器</strong>、<strong>立即数</strong>或<strong>标签</strong>，每个指令有其固定的对操作数形式的要求。标签最终会由汇编器转换为立即数。</p>
 <ul>
-<li><p>立即数：在指令中设定好的常数，可以直接参与运算，一般为16位二进制</p>
+<li>
+<p>立即数：在指令中设定好的常数，可以直接参与运算，一般为16位二进制</p>
 </li>
-<li><p>标签：表示一个地址，以供指令来引用。一般用于表示一个数据存取的地址（类似于数组名）、或者一个程序跳转的地址（类似于函数名，或者 C 语言中 <code>goto</code> 的跳转目标）。标签用如下的方式写出：</p>
+<li>
+<p>标签：表示一个地址，以供指令来引用。一般用于表示一个数据存取的地址（类似于数组名）、或者一个程序跳转的地址（类似于函数名，或者 C 语言中 <code>goto</code> 的跳转目标）。标签用如下的方式写出：</p>
 <p><code>name:</code></p>
 <p>name代表这个标签的名称，可以自行取名，这一行不占用内存</p>
 </li>
@@ -252,7 +260,8 @@ j loop
 <p>注意：标签标记的是一个位置，而不是某一行！跳转后会从标签的下一行开始逐行执行</p>
 <p><strong>注意：在 MARS 中，跳转指令只能使用标签来进行跳转，不能使用立即数！</strong></p>
 <p>由此可以看出，操作数的形式并非严格固定，而是具有一定的灵活度。虽然在 MIPS 标准指令集中，一条机器码指令的格式是固定的，但汇编器可以将多种形式的汇编指令转换为同样意思的机器码指令。因此，许多指令有比标准写法简单的写法。</p>
-<h2 id="机器码指令"><a href="#机器码指令" class="headerlink" title="机器码指令"></a>机器码指令</h2><p>计算机只能理解二进制形式的数据，而我们前面所说的汇编语言，最终就会转化为机器语言——也就是机器码指令， CPU 可以直接识别这种机器语言，从而去完成相应的操作。</p>
+<h2 id="机器码指令">机器码指令</h2>
+<p>计算机只能理解二进制形式的数据，而我们前面所说的汇编语言，最终就会转化为机器语言——也就是机器码指令， CPU 可以直接识别这种机器语言，从而去完成相应的操作。</p>
 <p>在我们学习的 MIPS 汇编中，所有的指令长度均为 <strong>32位</strong> ，即 <strong>4 字节</strong>，或者说 <strong>1 字</strong>。以16进制来表示就是<strong>8位16进制数</strong>。例如下面这段汇编指令：</p>
 <pre><code class="language-assembly">.data
 .text
@@ -285,34 +294,43 @@ nop
 08000c0a
 00000000
 </code></pre>
-<h3 id="机器码指令格式"><a href="#机器码指令格式" class="headerlink" title="机器码指令格式"></a>机器码指令格式</h3><p>在 MIPS 指令集中，指令分为三种格式：R 型、I 型和 J 型。</p>
+<h3 id="机器码指令格式">机器码指令格式</h3>
+<p>在 MIPS 指令集中，指令分为三种格式：R 型、I 型和 J 型。</p>
 <p>以下的32位指的是二进制数。</p>
 <ul>
-<li><p><strong>R型指令</strong></p>
+<li>
+<p><strong>R型指令</strong></p>
 <p>操作数最多，一般用于运算指令。例如<code>add</code>、<code>sub</code>、<code>sll</code>等。其格式如下：</p>
-<p><img src="/../images/image-20240924114844056.png" alt="image-20240924114844056"></p>
+<p><img src="../images/image-20240924114844056.png" alt="image-20240924114844056"></p>
 </li>
-<li><p><strong>I型指令</strong></p>
+<li>
+<p><strong>I型指令</strong></p>
 <p>I 型指令的特点是有 <strong>16 位的立即数</strong>。一般用于<code>addi</code>、<code>subi</code>、<code>ori</code>等与立即数相运算的指令。（<strong>这里需要注意：在写汇编语言的时候，需要使用负号来标记负数，而不要和机器码一样认为首位的 1 就代表负数</strong>），或 <code>beq</code>、<code>bgtz</code> 等比较跳转指令，因为它们要让两个寄存器的值相比并让 PC 偏移 offset 这么多，刚好利用了全部的字段。还有存取指令，例如 <code>sw</code>、<code>lw</code>，它们在使用时需要对地址指定一个偏移值，也会用到立即数字段。</p>
-<p><img src="/../images/image-20240924115256457.png" alt="image-20240924115256457"></p>
+<p><img src="../images/image-20240924115256457.png" alt="image-20240924115256457"></p>
 </li>
-<li><p><strong>J型指令</strong></p>
+<li>
+<p><strong>J型指令</strong></p>
 <p>很少，常见的为 <code>j</code> 和 <code>jal</code>。他们需要直接跳转至某个地址，而非利用当前的 PC 值加上偏移量计算出新的地址，因此需要的位数较多。</p>
-<p><img src="/../images/image-20240924115351775.png" alt="image-20240924115351775"></p>
+<p><img src="../images/image-20240924115351775.png" alt="image-20240924115351775"></p>
 </li>
 </ul>
 <p>严格来说，并非所有的指令都严格遵守上面三种格式，有的如 <code>eret</code>、<code>syscall</code> 指令一样没有操作数；有的如 <code>jalr</code> 指令一样某些字段被固定为某个值。不过，就大部分指令而言，都可按上面三种格式进行解释，某些字段被固定也可以按照格式来识别为 R、I、J 中的一种，因此这三种格式要着重理解。</p>
 <p><strong>解读：</strong></p>
 <ul>
-<li><p>**op:**也称 opcode、操作码，用于标识指令的功能。CPU 需要通过这个字段来识别这是一条什么指令。不过，由于 op 只有 6 位，不足以表示所有的 MIPS 指令，因此在 R 型指令中，有 func 字段来辅助它的功能。</p>
+<li>
+<p>**op:**也称 opcode、操作码，用于标识指令的功能。CPU 需要通过这个字段来识别这是一条什么指令。不过，由于 op 只有 6 位，不足以表示所有的 MIPS 指令，因此在 R 型指令中，有 func 字段来辅助它的功能。</p>
 </li>
-<li><p><strong>func:</strong> 用于辅助 op 来识别指令。</p>
+<li>
+<p><strong>func:</strong> 用于辅助 op 来识别指令。</p>
 </li>
-<li><p><strong>rs</strong>、<strong>rt</strong>、**rd:**通用寄存器的代号，并不特指某一寄存器。范围是<code>$0~$31</code>，<strong>用机器码表示就是 00000~11111</strong>（将指令翻译成机器码时会用到）。</p>
+<li>
+<p><strong>rs</strong>、<strong>rt</strong>、**rd:**通用寄存器的代号，并不特指某一寄存器。范围是<code>$0~$31</code>，<strong>用机器码表示就是 00000~11111</strong>（将指令翻译成机器码时会用到）。</p>
 </li>
-<li><p>**shamt:**移位值，用于移位指令。</p>
+<li>
+<p>**shamt:**移位值，用于移位指令。</p>
 </li>
-<li><p>**offset:**地址偏移量。在跳转中，它的值就等于：从该条指令的下一条指令开始数，到目标<code>label</code>一共经过的指令条数（字数）。为了程序员的便利，MIPS只允许使用标签来跳转，不过我们仍然有手段计算offset的具体值，在此之前，我们需要先了解指令集中为什么是这样计算的。</p>
+<li>
+<p>**offset:**地址偏移量。在跳转中，它的值就等于：从该条指令的下一条指令开始数，到目标<code>label</code>一共经过的指令条数（字数）。为了程序员的便利，MIPS只允许使用标签来跳转，不过我们仍然有手段计算offset的具体值，在此之前，我们需要先了解指令集中为什么是这样计算的。</p>
 <p>仔细观察跳转指令，以beq为例，</p>
 <p><code>目标地址 = 当前指令地址 + 4 + (offset × 4)</code></p>
 <p><code>当前指令地址 + 4</code>就是下条指令指令地址</p>
@@ -320,20 +338,26 @@ nop
 <p>为什么要拓展到32位？因为MIPS使用的是32位地址空间，这意味着内存地址都是32位的数字。而offset常为16位的数字，因此需要转换。</p>
 <p>题外话，在将<code>offset × 4</code>时，使用的手段是将它左移两位，这使得地址的最后两位永远是<code>00</code>。这吻合了MIPS里的存储方式，每条指令是4字节对齐的，每条指令的地址一定是4的倍数，最低两位只能是<code>00</code>。（这会影响到跳转有效地址的范围）</p>
 </li>
-<li><p>**immediate:**立即数</p>
+<li>
+<p>**immediate:**立即数</p>
 </li>
-<li><p>**address：**跳转目标地址，用于跳转指令。</p>
+<li>
+<p>**address：**跳转目标地址，用于跳转指令。</p>
 </li>
 </ul>
-<h2 id="扩展指令和伪指令"><a href="#扩展指令和伪指令" class="headerlink" title="扩展指令和伪指令"></a>扩展指令和伪指令</h2><h3 id="扩展指令"><a href="#扩展指令" class="headerlink" title="扩展指令"></a>扩展指令</h3><p>汇编器将一些常用、但标准指令集不提供的功能<strong>封装</strong>为一条指令；或者改变现有指令的操作数的形式或个数，使其以新的形式出现。需要注意的是，它们只是<strong>形式上</strong>是一条新指令，而实际上，在汇编器将其汇编之后，还是<strong>使用标准指令来实现</strong>的。</p>
+<h2 id="扩展指令和伪指令">扩展指令和伪指令</h2>
+<h3 id="扩展指令">扩展指令</h3>
+<p>汇编器将一些常用、但标准指令集不提供的功能<strong>封装</strong>为一条指令；或者改变现有指令的操作数的形式或个数，使其以新的形式出现。需要注意的是，它们只是<strong>形式上</strong>是一条新指令，而实际上，在汇编器将其汇编之后，还是<strong>使用标准指令来实现</strong>的。</p>
 <ul>
 <li><code>li</code>指令：用来为某个寄存器赋值，如<code>li $a0, 100</code>就是将100赋给<code>$a0</code>寄存器</li>
 <li><code>la</code>指令：使用标签给寄存器赋值，标签本质上对应一个32位地址，<code>la $t0, fibs</code>就是将<code>fibs</code>这个标签的地址存入<code>$t0</code>中</li>
 </ul>
-<h3 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h3><p>伪指令是用来指导汇编器如何处理程序的语句，有点类似于其他语言中的预处理命令。伪指令不是指令，它并不会被编译为机器码，但他却能影响其他指令的汇编结果。</p>
+<h3 id="伪指令">伪指令</h3>
+<p>伪指令是用来指导汇编器如何处理程序的语句，有点类似于其他语言中的预处理命令。伪指令不是指令，它并不会被编译为机器码，但他却能影响其他指令的汇编结果。</p>
 <p>伪指令的主要用途是标识数据段和代码段的位置，并为声明的数据分配空间，以及初始化常量</p>
 <ul>
-<li><p><code>.data</code></p>
+<li>
+<p><code>.data</code></p>
 <p>格式：<code>.data[address]</code></p>
 <p>说明：</p>
 <ul>
@@ -341,7 +365,8 @@ nop
 <li>需要声明的程序变量需要紧跟着该指令</li>
 </ul>
 </li>
-<li><p><code>.text</code></p>
+<li>
+<p><code>.text</code></p>
 <p>格式：<code>.text[address]</code></p>
 <p>说明：</p>
 <ul>
@@ -350,7 +375,8 @@ nop
 <li>在 MARS 中如果前面没有使用 <code>.data</code> 伪指令，可以不使用 <code>.text</code> 直接编写程序代码，代码将放置在前面设置的代码段默认地址中，但如果前面使用了 <code>.data</code> 伪指令，务必在代码段开始前使用 <code>.text</code> 进行标注。</li>
 </ul>
 </li>
-<li><p><code>.space</code></p>
+<li>
+<p><code>.space</code></p>
 <p>格式：<code>[name]: .space [n]</code></p>
 <p>说明：</p>
 <ul>
@@ -360,7 +386,8 @@ nop
 </ul>
 <p>用法：用来声明一个可能用到的空数组</p>
 </li>
-<li><p><code>.word</code></p>
+<li>
+<p><code>.word</code></p>
 <p>格式：<code>[name]: .word [data1],[data2]...</code></p>
 <p>说明：</p>
 <ul>
@@ -369,7 +396,8 @@ nop
 </ul>
 <p>用法：用来存储一个或多个常量，以供以后使用</p>
 </li>
-<li><p><code>.asciiz</code></p>
+<li>
+<p><code>.asciiz</code></p>
 <p>格式：<code>[name]: .asciiz &quot;[content]&quot;</code></p>
 <p>说明：</p>
 <ul>
@@ -381,8 +409,10 @@ nop
 <p>用法：用来存储一个字符串，以供以后使用</p>
 </li>
 </ul>
-<h2 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h2><p>可以把宏理解为浓缩的代码段，汇编器会把所有的宏语句替换为相应的代码段</p>
-<h3 id="不带参数的宏"><a href="#不带参数的宏" class="headerlink" title="不带参数的宏"></a>不带参数的宏</h3><pre><code class="language-assembly">.macro macro_name
+<h2 id="宏">宏</h2>
+<p>可以把宏理解为浓缩的代码段，汇编器会把所有的宏语句替换为相应的代码段</p>
+<h3 id="不带参数的宏">不带参数的宏</h3>
+<pre><code class="language-assembly">.macro macro_name
 # 代码段
 .end_macro
 </code></pre>
@@ -393,7 +423,8 @@ syscall
 .end_macro
 </code></pre>
 <p>在需要程序停止运行的地方，使用 done 语句，就可以让程序在那里退出。</p>
-<h3 id="带参数的宏"><a href="#带参数的宏" class="headerlink" title="带参数的宏"></a>带参数的宏</h3><pre><code class="language-assembly">.macro macro_name(%parameter1, %parameter2, ...)
+<h3 id="带参数的宏">带参数的宏</h3>
+<pre><code class="language-assembly">.macro macro_name(%parameter1, %parameter2, ...)
 # 代码段
 .end_macro
 </code></pre>
@@ -405,10 +436,12 @@ syscall
     sll %ans, %ans, 2
 .end_macro
 </code></pre>
-<h3 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h3><p>与C语言中类似，一般用于常量的定义，是<code>.eqv</code></p>
+<h3 id="宏定义">宏定义</h3>
+<p>与C语言中类似，一般用于常量的定义，是<code>.eqv</code></p>
 <p>用法：<code>.eqv EQV_NAME string</code></p>
 <p>汇编器会把所有 EQV_NAME 的地方替换成 string，这可以用来定义一些常量。</p>
-<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><pre><code class="language-assembly">.text
+<h2 id="条件语句">条件语句</h2>
+<pre><code class="language-assembly">.text
 li $t1, 100             #t1 = 100
 li $t2, 200             #t2 = 200
 slt $t3, $t1, $t2       #if(t1 &lt; t2) t3 = 1 
@@ -424,7 +457,8 @@ if_1_end:
 li $v0, 10
 syscall
 </code></pre>
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><pre><code class="language-assembly">.text
+<h2 id="循环语句">循环语句</h2>
+<pre><code class="language-assembly">.text
 li $t1, 100 #n
 li $t2, 0 #i
 
@@ -438,34 +472,38 @@ for_end1:
 li $v0, 10
 syscall
 </code></pre>
-<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><ul>
-<li><p>小端存储和大端存储</p>
+<h2 id="一些细节">一些细节</h2>
+<ul>
+<li>
+<p>小端存储和大端存储</p>
 <p>小端存储是指<strong>最低有效字节放在内存的最低地址</strong>，最高有效字节放在内存的最高地址</p>
 <p>eg.假设某条指令的机器码为<code>0x00852020</code>，在小端存储格式中，这4个字节在内存中的存储顺序应该是：</p>
 <table>
 <thead>
 <tr>
-<th align="center">地址</th>
-<th align="center">值</th>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">值</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0x1000</td>
-<td align="center">0x20</td>
+<tbody>
+<tr>
+<td style="text-align:center">0x1000</td>
+<td style="text-align:center">0x20</td>
 </tr>
 <tr>
-<td align="center">0x1001</td>
-<td align="center">0x20</td>
+<td style="text-align:center">0x1001</td>
+<td style="text-align:center">0x20</td>
 </tr>
 <tr>
-<td align="center">0x1002</td>
-<td align="center">0x85</td>
+<td style="text-align:center">0x1002</td>
+<td style="text-align:center">0x85</td>
 </tr>
 <tr>
-<td align="center">0x1003</td>
-<td align="center">0x00</td>
+<td style="text-align:center">0x1003</td>
+<td style="text-align:center">0x00</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>值得一提的是，小端存储仅指某条指令的机器码内部存储方式，多条指令之间依旧是递增存储的，如下：</p>
 <pre><code class="language-assembly">add $s0, $a0, $a1 #机器码为0x00852020
 addi $s0, $a0, 12 #机器码为0x2080000C
@@ -473,178 +511,188 @@ addi $s0, $a0, 12 #机器码为0x2080000C
 <table>
 <thead>
 <tr>
-<th align="center">地址</th>
-<th align="center">值</th>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">值</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0x1000</td>
-<td align="center">0x20</td>
+<tbody>
+<tr>
+<td style="text-align:center">0x1000</td>
+<td style="text-align:center">0x20</td>
 </tr>
 <tr>
-<td align="center">0x1001</td>
-<td align="center">0x20</td>
+<td style="text-align:center">0x1001</td>
+<td style="text-align:center">0x20</td>
 </tr>
 <tr>
-<td align="center">0x1002</td>
-<td align="center">0x85</td>
+<td style="text-align:center">0x1002</td>
+<td style="text-align:center">0x85</td>
 </tr>
 <tr>
-<td align="center">0x1003</td>
-<td align="center">0x00</td>
+<td style="text-align:center">0x1003</td>
+<td style="text-align:center">0x00</td>
 </tr>
 <tr>
-<td align="center">0x1004</td>
-<td align="center">0x0c</td>
+<td style="text-align:center">0x1004</td>
+<td style="text-align:center">0x0c</td>
 </tr>
 <tr>
-<td align="center">0x1005</td>
-<td align="center">0x00</td>
+<td style="text-align:center">0x1005</td>
+<td style="text-align:center">0x00</td>
 </tr>
 <tr>
-<td align="center">0x1006</td>
-<td align="center">0x80</td>
+<td style="text-align:center">0x1006</td>
+<td style="text-align:center">0x80</td>
 </tr>
 <tr>
-<td align="center">0x1007</td>
-<td align="center">0x20</td>
+<td style="text-align:center">0x1007</td>
+<td style="text-align:center">0x20</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
-<li><p><code>slt</code></p>
+<li>
+<p><code>slt</code></p>
 </li>
-<li><p>调用函数时配套使用<code>jal</code>和<code>jr</code>，<code>jr</code>能带你回到原函数</p>
+<li>
+<p>调用函数时配套使用<code>jal</code>和<code>jr</code>，<code>jr</code>能带你回到原函数</p>
 </li>
-<li><p>编写程序时，十进制表示的立即数用负号区分正负，十六进制表示的立即数会被视为一个补码表示的数</p>
+<li>
+<p>编写程序时，十进制表示的立即数用负号区分正负，十六进制表示的立即数会被视为一个补码表示的数</p>
 </li>
-<li><p>一个数的补码已知，它的相反数的补码：取反加1</p>
+<li>
+<p>一个数的补码已知，它的相反数的补码：取反加1</p>
 </li>
-<li><p>在测试中，<code>ori</code>指令可以当作<code>li</code>和<code>move</code>来使用</p>
+<li>
+<p>在测试中，<code>ori</code>指令可以当作<code>li</code>和<code>move</code>来使用</p>
 </li>
-<li><p><code>lui</code>指令的全称应该是：将立即数加载到高位，且将低位置0</p>
+<li>
+<p><code>lui</code>指令的全称应该是：将立即数加载到高位，且将低位置0</p>
 </li>
 </ul>
 <table>
 <thead>
 <tr>
-<th align="center">指令</th>
-<th align="center">Opcode</th>
-<th align="center">RegWrite</th>
-<th align="center">RegDst</th>
-<th align="center">ALUSrc</th>
-<th align="center">Branch</th>
-<th align="center">MemWrite</th>
-<th align="center">MemtoReg</th>
-<th align="center">ExtOp</th>
-<th align="center">ALUControl</th>
-<th align="center">类型</th>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">Opcode</th>
+<th style="text-align:center">RegWrite</th>
+<th style="text-align:center">RegDst</th>
+<th style="text-align:center">ALUSrc</th>
+<th style="text-align:center">Branch</th>
+<th style="text-align:center">MemWrite</th>
+<th style="text-align:center">MemtoReg</th>
+<th style="text-align:center">ExtOp</th>
+<th style="text-align:center">ALUControl</th>
+<th style="text-align:center">类型</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">add</td>
-<td align="center">000000</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">010</td>
-<td align="center">R</td>
+<tbody>
+<tr>
+<td style="text-align:center">add</td>
+<td style="text-align:center">000000</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">010</td>
+<td style="text-align:center">R</td>
 </tr>
 <tr>
-<td align="center">sub</td>
-<td align="center">000000</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">110</td>
-<td align="center">R</td>
+<td style="text-align:center">sub</td>
+<td style="text-align:center">000000</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">R</td>
 </tr>
 <tr>
-<td align="center">ori</td>
-<td align="center">001101</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">001</td>
-<td align="center">I</td>
+<td style="text-align:center">ori</td>
+<td style="text-align:center">001101</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">001</td>
+<td style="text-align:center">I</td>
 </tr>
 <tr>
-<td align="center">lw</td>
-<td align="center">100011</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">010</td>
-<td align="center">I</td>
+<td style="text-align:center">lw</td>
+<td style="text-align:center">100011</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">010</td>
+<td style="text-align:center">I</td>
 </tr>
 <tr>
-<td align="center">sw</td>
-<td align="center">101011</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">X</td>
-<td align="center">1</td>
-<td align="center">010</td>
-<td align="center">I</td>
+<td style="text-align:center">sw</td>
+<td style="text-align:center">101011</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">010</td>
+<td style="text-align:center">I</td>
 </tr>
 <tr>
-<td align="center">beq</td>
-<td align="center">000100</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">X</td>
-<td align="center">X</td>
-<td align="center">I</td>
+<td style="text-align:center">beq</td>
+<td style="text-align:center">000100</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">I</td>
 </tr>
 <tr>
-<td align="center">lui</td>
-<td align="center">001111</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">X</td>
-<td align="center">011</td>
-<td align="center">I</td>
+<td style="text-align:center">lui</td>
+<td style="text-align:center">001111</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">011</td>
+<td style="text-align:center">I</td>
 </tr>
 <tr>
-<td align="center">nop</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center">nop</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>拓展元件：0是无符号拓展，1是符号拓展</p>
 
     </div>

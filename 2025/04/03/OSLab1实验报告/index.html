@@ -189,21 +189,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #ff7d73">
+                <a href="/tags/BUAA/" style="color: #00a596">
                     BUAA
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/OS/" style="color: #00bcd4">
+                <a href="/tags/OS/" style="color: #ff7d73">
                     OS
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/NOTE/" style="color: #03a9f4">
+                <a href="/tags/NOTE/" style="color: #00bcd4">
                     NOTE
                 </a>
             </span>
@@ -213,7 +213,9 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-1-1"><a href="#Thinking-1-1" class="headerlink" title="Thinking 1.1"></a>Thinking 1.1</h3><p>编写程序hello.c</p>
+        <h2 id="思考题">思考题</h2>
+<h3 id="Thinking-1-1">Thinking 1.1</h3>
+<p>编写程序hello.c</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 int main()
 &#123;
@@ -304,11 +306,12 @@ Disassembly of section .plt:
 <li><code>-S</code>：尽可能反汇编出源代码，在编译时指定了<code>-g</code>等调试参数时效果明显，该选项隐含了<code>-d</code>参数</li>
 </ul>
 <p>所以该指令的意义是尽可能反汇编出所有section的源代码</p>
-<h3 id="Thinking-1-2"><a href="#Thinking-1-2" class="headerlink" title="Thinking 1.2"></a>Thinking 1.2</h3><p>使用我们编写的readelf解析内核ELF文件：</p>
-<p><img src="/../images/image-20250325113444238.png"></p>
+<h3 id="Thinking-1-2">Thinking 1.2</h3>
+<p>使用我们编写的readelf解析内核ELF文件：</p>
+<p><img src="../images/image-20250325113444238.png" alt=""></p>
 <p>使用我们的readelf解析它本身，无任何输出结果</p>
 <p>使用系统自带的readelf工具解析我们的readelf文件：</p>
-<p><img src="/../images/image-20250325113852785.png" alt="image-20250325113852785"></p>
+<p><img src="../images/image-20250325113852785.png" alt="image-20250325113852785"></p>
 <p><code>Makefile</code>中是这样的：</p>
 <pre><code class="language-makefile">readelf: main.o readelf.o
 		  $(CC) $^ -o $@
@@ -316,35 +319,41 @@ hello: hello.c
           $(CC) $^ -o $@ -m32 -static -g
 </code></pre>
 <p>可以看到<code>hello</code>是静态链接的。静态链接会将程序运行时所依赖的所有库文件（如标准 C 库、数学库等）的代码都复制到最终生成的可执行文件中，这样生成的可执行文件不依赖系统中安装的动态库，具有更好的可移植性，但文件通常会比较大。</p>
-<h3 id="Thinking-1-3"><a href="#Thinking-1-3" class="headerlink" title="Thinking 1.3"></a>Thinking 1.3</h3><p>我们的实验采用QEMU模拟器，不需要再实现bootloader的功能</p>
+<h3 id="Thinking-1-3">Thinking 1.3</h3>
+<p>我们的实验采用QEMU模拟器，不需要再实现bootloader的功能</p>
 <p>QEMU 支持加载 ELF 格式内核，所以启动流程被简化为<strong>加载内核到内存</strong>，之后<strong>跳转到内核的入口</strong>，启动就完成了。</p>
 <ul>
-<li><p>加载内核到内存，我们的依据是链接脚本文件<code>kernel.lds</code>。我们已经在这个文件中填写好了各个<code>section</code>加载的位置，通过它，生成的程序各个<code>section</code>的位置就被调整到了我们所指定的地址上。同时我们在该文件中指定了程序的入口点<code>ENTRY(_start)</code>，即把内核入口定为 _start 这个函数。</p>
+<li>
+<p>加载内核到内存，我们的依据是链接脚本文件<code>kernel.lds</code>。我们已经在这个文件中填写好了各个<code>section</code>加载的位置，通过它，生成的程序各个<code>section</code>的位置就被调整到了我们所指定的地址上。同时我们在该文件中指定了程序的入口点<code>ENTRY(_start)</code>，即把内核入口定为 _start 这个函数。</p>
 <pre><code>ENTRY(_start)
 SECTIONS &#123;
-    . = 0x80020000;
-    .text : &#123; *(.text) &#125;
-    .data : &#123; *(.data) &#125;
-    .bss : &#123; *(.bss) &#125;
-    bss_end = .;
-    . = 0x80400000;
-    end = . ;
+	. = 0x80020000;
+	.text : &#123; *(.text) &#125;
+	.data : &#123; *(.data) &#125;
+	.bss : &#123; *(.bss) &#125;
+	bss_end = .;
+	. = 0x80400000;
+	end = . ;
 &#125;
 </code></pre>
 </li>
-<li><p>跳转到内核的入口，我们通过对<code>/init/start.S</code>中<code>_start</code>函数的设置，就可以正确的跳转至<code>mips_init</code>函数</p>
+<li>
+<p>跳转到内核的入口，我们通过对<code>/init/start.S</code>中<code>_start</code>函数的设置，就可以正确的跳转至<code>mips_init</code>函数</p>
 <pre><code class="language-assembly">EXPORT(_start)
 .set at
 .set reorder
-    mtc0    zero, CP0_STATUS
-    la    sp, 0x80400000
-    j    mips_init
+	mtc0    zero, CP0_STATUS
+	la	sp, 0x80400000
+	j	mips_init
 </code></pre>
 </li>
 </ul>
-<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><h3 id="Makefile语法"><a href="#Makefile语法" class="headerlink" title="Makefile语法"></a>Makefile语法</h3><ul>
-<li><p>变量</p>
-<pre><code class="language-makefile">变量名    :=    内容
+<h2 id="难点分析">难点分析</h2>
+<h3 id="Makefile语法">Makefile语法</h3>
+<ul>
+<li>
+<p>变量</p>
+<pre><code class="language-makefile">变量名	:=	内容
 </code></pre>
 <p>内容一般是文件，可以有一个也可以有多个</p>
 <p>引用变量使用<code>$</code></p>
@@ -357,31 +366,36 @@ modules := lib init kern # 需要生成的子模块
 objects := $(addsuffix /*.o, $(modules)) # 遍历需要生成的目标文件
 </code></pre>
 </li>
-<li><p>PHONY</p>
+<li>
+<p>PHONY</p>
 <p>在 Makefile 里，<code>PHONY</code> 是一个特殊的目标（target），其作用是告诉 <code>make</code> 工具，某个目标并非代表一个实际的文件，而是一种伪目标。经过<code>PHONY</code>声称的目标，在<code>make</code>时会直接执行，而不会去检查是否存在名为 <code>clean</code> 的文件，也不管依赖文件是否被修改</p>
-<pre><code class="language-makefile">.PHONY:    目标名
+<pre><code class="language-makefile">.PHONY:	目标名
 </code></pre>
 </li>
-<li><p>目标</p>
+<li>
+<p>目标</p>
 <p>目标名可以是变量，依存文件也可以是变量，因为变量本身就可以是文件</p>
 <pre><code class="language-makefile">all: $(mos_elf) # 我们的“最终目标”
 $(mos_elf): $(modules) # 调用链接器 $(LD) 链接所有目标文件
-    $(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)
+	$(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)
 $(modules): # 进入各个子目录进行 make
-    $(MAKE) --directory=$@
+	$(MAKE) --directory=$@
 </code></pre>
 </li>
-<li><p>MAKE变量</p>
+<li>
+<p>MAKE变量</p>
 <p><code>MAKE</code>是Makefile里的一个特殊变量，其值为当前正在使用的 <code>make</code> 程序，一般就是 <code>make</code> 命令本身。使用 <code>$(MAKE)</code> 而非直接写 <code>make</code>，能保证在不同系统或者环境下都能正确调用 <code>make</code> 程序。</p>
 <p><code>--directory=$@</code>是<code>make</code>命令的一个选项，<code>--directory</code>可以简写为<code>-C</code>，其作用是改变当前工作目录到指定目录。<code>$@</code>是<code>Makefile</code>中一个自动变量，代表当前目标的名称。</p>
 <pre><code class="language-makefile">$(modules): # 进入各个子目录进行 make
-    $(MAKE) --directory=$@
+	$(MAKE) --directory=$@
 </code></pre>
 </li>
-<li><p>all</p>
+<li>
+<p>all</p>
 <p>一般在写 Makefile 时，习惯将第一个规则命名为<code>all</code>，也就是构建整个项目的意思。如果调用 make 时没有指定目标，make 会自动执行第一个目标，所以把<code>all</code>放在 第一个目标的位置上，可以使得<code>make</code>命令默认构建整个项目，较为方便。</p>
 </li>
-<li><p>$</p>
+<li>
+<p>$</p>
 <p>$在Makefile中有两种用法</p>
 <p>变量引用：使用单个 “$”符号加上用括号或花括号括起来的变量名来引用在Makefile中定义的变量。</p>
 <pre><code class="language-makefile">VAR = value
@@ -390,16 +404,18 @@ echo $&#123;VAR&#125;
 <p>函数调用：<code>$(函数名 参数)</code></p>
 </li>
 </ul>
-<h3 id="ELF"><a href="#ELF" class="headerlink" title="ELF"></a>ELF</h3><p>ELF文件是一种文件格式，有三种形式：</p>
+<h3 id="ELF">ELF</h3>
+<p>ELF文件是一种文件格式，有三种形式：</p>
 <ul>
 <li>可重定位文件.o</li>
 <li>可执行文件</li>
-<li>共享目标文件.so</li>
+<li><a target="_blank" rel="noopener" href="http://xn--0lqyg56ey07ao1c8x4a.so">共享目标文件.so</a></li>
 </ul>
 <p>ELF文件结构如下：</p>
-<p><img src="/../images/image-20250322221013203.png" alt="image-20250322221013203"></p>
+<p><img src="../images/image-20250322221013203.png" alt="image-20250322221013203"></p>
 <ul>
-<li><p>ELF文件头：包括程序的基本信息，比如体系结构和操作系统，同时也包含了节头表和段头表 相对文件的偏移量（offset）。</p>
+<li>
+<p>ELF文件头：包括程序的基本信息，比如体系结构和操作系统，同时也包含了节头表和段头表 相对文件的偏移量（offset）。</p>
 <pre><code class="language-c">typedef struct &#123;
     unsigned char e_ident[EI_NIDENT]; // 存放魔数以及其他信息
     Elf32_Half e_type; // 文件类型
@@ -418,7 +434,8 @@ echo $&#123;VAR&#125;
 &#125; Elf32_Ehdr; // ELF头类型
 </code></pre>
 </li>
-<li><p>段头表（或程序头表，program header table）：主要<strong>包含程序中各个段（segment）的信息</strong>， 段的信息需要在运行时刻使用。</p>
+<li>
+<p>段头表（或程序头表，program header table）：主要<strong>包含程序中各个段（segment）的信息</strong>， 段的信息需要在运行时刻使用。</p>
 <p><strong>段头表项</strong>和段一一对应</p>
 <pre><code class="language-c">typedef struct &#123;
     Elf32_Word p_type; // 段的类型
@@ -432,7 +449,8 @@ echo $&#123;VAR&#125;
 &#125; Elf32_Phdr; // 段头表项类型
 </code></pre>
 </li>
-<li><p>节头表（section header table）：主要<strong>包含程序中各个节（section）的信息</strong>，节的信息需要在程序编译和链接的时候使用。</p>
+<li>
+<p>节头表（section header table）：主要<strong>包含程序中各个节（section）的信息</strong>，节的信息需要在程序编译和链接的时候使用。</p>
 <p><strong>节头表项</strong>和节一一对应</p>
 <pre><code class="language-c">typedef struct &#123;
     Elf32_Word sh_name; // 节的名称
@@ -449,13 +467,17 @@ echo $&#123;VAR&#125;
 </code></pre>
 </li>
 </ul>
-<h3 id="C语言拾遗"><a href="#C语言拾遗" class="headerlink" title="C语言拾遗"></a>C语言拾遗</h3><ul>
-<li><p><code>void *</code>：泛型指针，可以指向任意类型的数据，不过 <code>void *</code> 类型的指针本身不包含所指向数据的类型信息，因此不能对它做解引用操作。</p>
+<h3 id="C语言拾遗">C语言拾遗</h3>
+<ul>
+<li>
+<p><code>void *</code>：泛型指针，可以指向任意类型的数据，不过 <code>void *</code> 类型的指针本身不包含所指向数据的类型信息，因此不能对它做解引用操作。</p>
 <p>泛型指针可以被转化成任何指针类型</p>
 </li>
-<li><p><code>const void *</code>： <code>void *</code> 的常量版本。<code>const</code> 关键字表示该指针<strong>所指向的内容是只读的</strong>，不能通过这个指针来修改所指向的数据。</p>
+<li>
+<p><code>const void *</code>： <code>void *</code> 的常量版本。<code>const</code> 关键字表示该指针<strong>所指向的内容是只读的</strong>，不能通过这个指针来修改所指向的数据。</p>
 </li>
-<li><p>指针运算：泛型指针不包含指向数据的类型信息，在加上偏移值时按照<strong>1字节</strong>处理。其它指针按照本类型的大小处理。如</p>
+<li>
+<p>指针运算：泛型指针不包含指向数据的类型信息，在加上偏移值时按照<strong>1字节</strong>处理。其它指针按照本类型的大小处理。如</p>
 <pre><code class="language-c">int a = 1;
 int *p = &amp;a; // p是int*类型的指针
 p = p + 3; // p向后移动3个int大小（3*4字节）
@@ -464,12 +486,14 @@ void *q = &amp;b;
 q = q + 3; // q向后移动3个字节
 </code></pre>
 </li>
-<li><p>指向常量的指针&amp;常量指针：</p>
+<li>
+<p>指向常量的指针&amp;常量指针：</p>
 <p><code>const &lt;类型&gt; *&lt;指针名&gt;</code>是指向常量的指针，指针指向的对象无法改变，但是指针可以移动</p>
 <p><code>&lt;类型&gt; * const &lt;指针名&gt;</code>是常量指针，指针不可移动，但是指向的对象可以变</p>
 </li>
 </ul>
-<h3 id="变长参数函数"><a href="#变长参数函数" class="headerlink" title="变长参数函数"></a>变长参数函数</h3><p>有些函数参数列表末尾有省略号，说明该函数使用了变长参数</p>
+<h3 id="变长参数函数">变长参数函数</h3>
+<p>有些函数参数列表末尾有省略号，说明该函数使用了变长参数</p>
 <ul>
 <li><code>va_list</code>：这是一种类型，用来声明一个变量，该变量会依次访问参数列表里的参数。</li>
 <li><code>va_start</code>：对<code>va_list</code>类型的变量进行初始化，使其指向参数列表的首个可变参数。</li>
@@ -511,14 +535,17 @@ int main() &#123;
 &#125;
 </code></pre>
 <p>我们熟知的<code>printf()</code>函数就使用了变长参数列表，它的函数标签是这样<code>void printk(const char *fmt, ...)</code></p>
-<h3 id="获得文件类型"><a href="#获得文件类型" class="headerlink" title="获得文件类型"></a>获得文件类型</h3><pre><code class="language-bash">file 要查看的文件名
+<h3 id="获得文件类型">获得文件类型</h3>
+<pre><code class="language-bash">file 要查看的文件名
 </code></pre>
-<h3 id="readelf基本用法"><a href="#readelf基本用法" class="headerlink" title="readelf基本用法"></a>readelf基本用法</h3><pre><code class="language-bash">readelf [option(s)] &lt;elf-file(s)&gt;
+<h3 id="readelf基本用法">readelf基本用法</h3>
+<pre><code class="language-bash">readelf [option(s)] &lt;elf-file(s)&gt;
 readelf -h &lt;elf_file&gt; //查看ELF文件头
 readelf -S &lt;elf_file&gt; //查看各节
 readelf -l &lt;elf_file&gt; //查看各段
 </code></pre>
-<h3 id="使用-Linker-Script"><a href="#使用-Linker-Script" class="headerlink" title="使用 Linker Script"></a>使用 Linker Script</h3><p>要使用Linker Script来调整各节的位置，将脚本写入链接脚本文件<code>.lds</code>中</p>
+<h3 id="使用-Linker-Script">使用 Linker Script</h3>
+<p>要使用Linker Script来调整各节的位置，将脚本写入链接脚本文件<code>.lds</code>中</p>
 <pre><code>SECTIONS
 &#123;
 	. = 0x10000; // 定位计数器,可设置接下来的节的起始地址
@@ -528,7 +555,8 @@ readelf -l &lt;elf_file&gt; //查看各段
 	.bss : &#123; *(.bss) &#125;
 &#125;
 </code></pre>
-<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>回调函数指将A函数作为参数传递给B函数，在B函数内调用A函数</p>
+<h3 id="回调函数">回调函数</h3>
+<p>回调函数指将A函数作为参数传递给B函数，在B函数内调用A函数</p>
 <pre><code class="language-c">void printk(const char *fmt, ...) &#123;
 	va_list ap;
 	va_start(ap, fmt);
@@ -561,14 +589,20 @@ readelf -l &lt;elf_file&gt; //查看各段
 <li>函数的调用关系更加灵活，B函数可以通过传入的参数不同来调用不同的函数，而不是在编程时已经写死的某个函数</li>
 <li>降低不同函数之间的耦合度，如果在B函数内直接调用A函数，B函数的执行依赖A函数，耦合度太高。如果使用回调函数，则B函数的执行不完全依赖A函数，模块的独立性增强。</li>
 </ul>
-<h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h2><h3 id="Exercise-1-1"><a href="#Exercise-1-1" class="headerlink" title="Exercise 1.1"></a>Exercise 1.1</h3><ul>
-<li><p>我们想要遍历节头表，输出所有节的地址信息，那么我们必须了解3个量：<strong>节头表与文件头的偏移</strong>、<strong>节头表项数</strong>、<strong>节头表每一项有多大</strong>。这3个量都包含在ELF文件头的结构体中</p>
+<h2 id="实验体会">实验体会</h2>
+<h3 id="Exercise-1-1">Exercise 1.1</h3>
+<ul>
+<li>
+<p>我们想要遍历节头表，输出所有节的地址信息，那么我们必须了解3个量：<strong>节头表与文件头的偏移</strong>、<strong>节头表项数</strong>、<strong>节头表每一项有多大</strong>。这3个量都包含在ELF文件头的结构体中</p>
 </li>
-<li><p>ELF文件头、节头表表项、段头表表项都是结构体，其中包含了相应的ELF文件、节、段的信息</p>
+<li>
+<p>ELF文件头、节头表表项、段头表表项都是结构体，其中包含了相应的ELF文件、节、段的信息</p>
 </li>
-<li><p>节头表由若干节头表项组成，段头表由若干段头表项组成。节头表项与节一一对应，段头表项与段一一对应。</p>
+<li>
+<p>节头表由若干节头表项组成，段头表由若干段头表项组成。节头表项与节一一对应，段头表项与段一一对应。</p>
 </li>
-<li><p><code>e_shoff</code>以字节为单位表示偏移量，所以使用指针加它的时候一定要使用<strong>泛型指针</strong></p>
+<li>
+<p><code>e_shoff</code>以字节为单位表示偏移量，所以使用指针加它的时候一定要使用<strong>泛型指针</strong></p>
 </li>
 </ul>
 <p>我的答案：</p>
@@ -605,7 +639,8 @@ readelf -l &lt;elf_file&gt; //查看各段
     return 0;
 &#125;
 </code></pre>
-<h3 id="Exercise-1-2"><a href="#Exercise-1-2" class="headerlink" title="Exercise 1.2"></a>Exercise 1.2</h3><p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定各节的位置，发现<code>Kernel Text</code>从<code>0x8002 0000</code>开始</p>
+<h3 id="Exercise-1-2">Exercise 1.2</h3>
+<p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定各节的位置，发现<code>Kernel Text</code>从<code>0x8002 0000</code>开始</p>
 <pre><code class="language-c">/*
  o     4G -----------&gt;  +----------------------------+------------0x100000000
  o                      |       ...                  |  kseg2
@@ -677,7 +712,8 @@ readelf -l &lt;elf_file&gt; //查看各段
     end =. ;
 &#125;
 </code></pre>
-<h3 id="Exercise-1-3"><a href="#Exercise-1-3" class="headerlink" title="Exercise 1.3"></a>Exercise 1.3</h3><p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定栈指针的初始位置<code>0x80400000</code></p>
+<h3 id="Exercise-1-3">Exercise 1.3</h3>
+<p>通过查看<code>include/mmu.h</code>中的内核内存布局图来确定栈指针的初始位置<code>0x80400000</code></p>
 <p>注意：栈是<strong>从高到低</strong>增长的</p>
 <p>我的答案：</p>
 <pre><code class="language-assembly">clear_bss_done:
@@ -692,13 +728,14 @@ readelf -l &lt;elf_file&gt; //查看各段
     /* Exercise 1.3: Your code here. (2/4) */
     j       mips_init # 不用返回，用j指令即可
 </code></pre>
-<h3 id="Exercise-1-4"><a href="#Exercise-1-4" class="headerlink" title="Exercise 1.4"></a>Exercise 1.4</h3><p>按照给定的格式<code>%[flags][width][length]&lt;specifier&gt;</code>，考虑每部分的情况，逐个解析即可</p>
-<p>8&#x2F;8的部分是输出十进制数，注意<code>neg_flag</code>要根据数值的正负来变化，<code>print_num()</code>的<code>base</code>参数改为10</p>
+<h3 id="Exercise-1-4">Exercise 1.4</h3>
+<p>按照给定的格式<code>%[flags][width][length]&lt;specifier&gt;</code>，考虑每部分的情况，逐个解析即可</p>
+<p>8/8的部分是输出十进制数，注意<code>neg_flag</code>要根据数值的正负来变化，<code>print_num()</code>的<code>base</code>参数改为10</p>
 <p>我的答案：</p>
-<pre><code class="language-c">		/* scan for the next &#39;%&#39; */
+<pre><code class="language-c">		/* scan for the next '%' */
 		/* Exercise 1.4: Your code here. (1/8) */
 		const char * p = fmt;
-		while (*p != &#39;%&#39; &amp;&amp; *p != &#39;\0&#39;) &#123;
+		while (*p != '%' &amp;&amp; *p != '\0') &#123;
 			p++;
 		&#125;
 
@@ -709,47 +746,47 @@ readelf -l &lt;elf_file&gt; //查看各段
 
 		/* check &quot;are we hitting the end?&quot; */
 		/* Exercise 1.4: Your code here. (3/8) */
-		if (*fmt == &#39;\0&#39;) &#123;
+		if (*fmt == '\0') &#123;
 			break;
 		&#125;
 
-		/* we found a &#39;%&#39; */
+		/* we found a '%' */
 		/* Exercise 1.4: Your code here. (4/8) */
 		fmt++;
 
 		/* check format flag */
 		/* Exercise 1.4: Your code here. (5/8) */
 		ladjust = 0;
-		padc = &#39; &#39;;
-		if (*fmt == &#39;-&#39;) &#123;
+		padc = ' ';
+		if (*fmt == '-') &#123;
 			ladjust = 1;
 			fmt++;
-		&#125; else if (*fmt == &#39;0&#39;) &#123;
-			padc = &#39;0&#39;;
+		&#125; else if (*fmt == '0') &#123;
+			padc = '0';
 			fmt++;
 		&#125;
 
 		/* get width */
 		/* Exercise 1.4: Your code here. (6/8) */
 		width = 0;
-		while (&#39;0&#39; &lt;= *fmt &amp;&amp; *fmt &lt;= &#39;9&#39; &amp;&amp; *fmt != &#39;\0&#39;) &#123;
+		while ('0' &lt;= *fmt &amp;&amp; *fmt &lt;= '9' &amp;&amp; *fmt != '\0') &#123;
 			width *= 10;
-			width += *fmt - &#39;0&#39;;
+			width += *fmt - '0';
 			fmt++;
 		&#125;
 
 		/* check for long */
 		/* Exercise 1.4: Your code here. (7/8) */
 		long_flag = 0;
-		if (*fmt == &#39;l&#39;) &#123;
+		if (*fmt == 'l') &#123;
 			long_flag = 1;
 			fmt++;
 		&#125;
 
         /*
-         * Refer to other parts (case &#39;b&#39;, case &#39;o&#39;, etc.) and func &#39;print_num&#39; to
-         * complete this part. Think the differences between case &#39;d&#39; and the
-         * others. (hint: &#39;neg_flag&#39;).
+         * Refer to other parts (case 'b', case 'o', etc.) and func 'print_num' to
+         * complete this part. Think the differences between case 'd' and the
+         * others. (hint: 'neg_flag').
          */
         /* Exercise 1.4: Your code here. (8/8) */
         if (num &lt; 0) &#123;
@@ -759,7 +796,8 @@ readelf -l &lt;elf_file&gt; //查看各段
         print_num(out, data, num, 10, neg_flag, width, ladjust, padc, 0);
         break;
 </code></pre>
-<h2 id="体会与感想"><a href="#体会与感想" class="headerlink" title="体会与感想"></a>体会与感想</h2><p>相较于边学习边写代码，我更喜欢系统性地全部学习了解了以后再写代码，所以lab1学习的流程就是不停地看指导书，然后遇到不懂的内容立刻去查资料，遇到不会的代码使用工具辅助理解最后着手写代码。</p>
+<h2 id="体会与感想">体会与感想</h2>
+<p>相较于边学习边写代码，我更喜欢系统性地全部学习了解了以后再写代码，所以lab1学习的流程就是不停地看指导书，然后遇到不懂的内容立刻去查资料，遇到不会的代码使用工具辅助理解最后着手写代码。</p>
 <p>lab1只有最后一个练习的代码量比较大，而且新知识很多，如变长参数列表、回调函数等等。所以我感觉大部分的时间都花在了读代码和理解代码逻辑上。尤其是<code>printk</code>的实现还分了三个文件，层层嵌套，目前我对于多个<code>.c</code>文件之间的关系理解的还比较浅薄，所以很多时间花在了明析各个文件的功能和协同工作上，它们是怎么一起实现一个函数功能的。</p>
 
     </div>
