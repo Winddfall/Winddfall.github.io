@@ -189,7 +189,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #ff7d73">
+                <a href="/tags/BUAA/" style="color: #03a9f4">
                     BUAA
                 </a>
             </span>
@@ -214,13 +214,13 @@
 <p><code>LexerAndParser</code>：管理词法分析器<code>Lexer</code>类、语法分析器<code>Parser</code>类，是递归下降分析表达式层次的主要工具</p>
 <p><code>PolyandUnit</code>：管理和运算生成的多项式，其中<code>Poly</code>类包含多项式相加、相乘和<code>toString</code>方法。值得一提的是，第一次作业我没有构建<code>Unit</code>类，而是在<code>Poly</code>类中直接用一个<code>Hashmap&lt;指数，系数&gt;</code>存所有的因子，由于第一次作业只有变量因子可以这么做，迭代后显然不行了。</p>
 <p><code>Tool</code>：管理工具类，目前负责化简输入的表达式使其能够被解析</p>
-<p><img src="../images/image-20250321223457064.png" alt="image-20250321223457064"></p>
+<p><img src="/images/image-20250321223457064.png" alt="image-20250321223457064"></p>
 <h4 id="复杂度分析">复杂度分析</h4>
 <p>可以看到<code>Parser</code>、<code>Lexer</code>和<code>Poly</code>类的复杂度远高于其它类，我认为主要原因是<code>Parser</code>和<code>Lexer</code>两类高度耦合，在<code>Parser</code>类中大量调用<code>Lexer</code>类的方法，并且两个类本身就具有比较高的复杂度。而<code>Poly</code>类中有较多对于多项式运算的方法（包括一个优化方法）以及<code>toString</code>方法，因此复杂度高也是正常的。</p>
-<p><img src="../images/image-20250321223724276.png" alt="image-20250321223724276"></p>
+<p><img src="/images/image-20250321223724276.png" alt="image-20250321223724276"></p>
 <p>由于我比较注重封装的意识，因此写了不少方法。除了<code>Poly</code>类的<code>toString</code>和<code>seekPositiveNum</code>方法以外，都比较简单。关于这两个方法为什么如此复杂，实际上是我在第一次作业中走的一些弯路。比如<code>toString</code>方法中大量嵌套了分支结构，事实上只需要考虑单项式各个部分在什么情况下需要输出，<code>seekPositiveNum</code>方法可以被给单项式降序排序的方法替代。</p>
-<p><img src="../images/image-20250321224930445.png" alt="image-20250321224930445"></p>
-<p><img src="../images/image-20250321225022232.png" alt="image-20250321225022232"></p>
+<p><img src="/images/image-20250321224930445.png" alt="image-20250321224930445"></p>
+<p><img src="/images/image-20250321225022232.png" alt="image-20250321225022232"></p>
 <h3 id="第二次作业">第二次作业</h3>
 <h4 id="架构解说-2">架构解说</h4>
 <p>正如前面所说，在加入了三角函数因子后，我不得不构造了<code>Unit</code>类用来代表一个单项式，并且修改了相关逻辑。由于现在的单项式比较复杂，可能含有三角函数，因此我的<code>Unit</code>类包含4个属性，能够唯一确定一个单项式：</p>
@@ -243,21 +243,21 @@ private int exp; // 三角函数的指数
 </ul>
 <p>前一次作业<code>Poly</code>类的<code>toString</code>方法写的笨拙且臃肿，加入三角函数以后我不可能再在原来的代码块上添加，否则就会超出60行的限制，在借助了AI工具后我很好地将它变得逻辑清晰，大大减少了分支数量和代码量。其原因在于我一开始是将一个<code>Unit</code>看成一个整体，而前面已经提到<code>Unit</code>有4个属性，这就导致要不停地考虑每个属性对应的多种情况，其分支多达十几种。化简后的代码独立考虑四个属性分别怎么输出，逻辑上简便了不少。</p>
 <p>在这次作业中令我印象深刻的是封装了两个判断单项式和多项式是否为0的方法。在判断单项式是否为0时不得不判断三角函数中是否有0，而三角函数中又有多项式，需要挨个判断里面的单项式是否为0。这里再次用到了递归的思想，方法写成后非常成功。</p>
-<p><img src="../images/image-20250322011400914.png" alt="image-20250322011400914"></p>
+<p><img src="/images/image-20250322011400914.png" alt="image-20250322011400914"></p>
 <h4 id="复杂度分析-2">复杂度分析</h4>
 <p>可以看到，由于<code>toString</code>方法在逻辑上的大大简化，在加入了三角函数方法后，<code>Poly</code>类的复杂度甚至比之前还要低！而剩下两个类的复杂度和之前相比只有略微提升，这是正常的。</p>
-<p><img src="../images/image-20250322011500134.png" alt="image-20250322011500134"></p>
+<p><img src="/images/image-20250322011500134.png" alt="image-20250322011500134"></p>
 <p>可以清楚地看到，这次的<code>toString</code>方法复杂度由35降到了26，说明分支机构的嵌套确实会大大增加复杂度。</p>
 <p><code>unitIsZero</code>这个方法就是用来判断单项式是否为0的，因为有递归的存在导致复杂度较高。</p>
 <p><code>appTriFunc</code>方法封装了三角函数的<code>toString</code>，其逻辑本身就比较复杂，有几层分支嵌套，我还考虑了优化cos(-x)，我认为这块代码已经无法再简化，因此第三次作业也一直沿用</p>
-<p><img src="../images/image-20250322011646668.png" alt="image-20250322011646668"></p>
+<p><img src="/images/image-20250322011646668.png" alt="image-20250322011646668"></p>
 <h3 id="第三次作业">第三次作业</h3>
 <h4 id="架构解说-3">架构解说</h4>
 <p>第三次作业和第二次作业相比，架构几乎没有变化，只是增加了一些类和对应的方法。</p>
 <p>我为求导因子增加了<code>Dx</code>类，，为自定义普通函数增加了<code>NomFuncModel</code>和<code>NomFuncModel</code>类，功能和递推函数类似</p>
 <p>对于求导的解析，我受到课上作业的启发，只需要对各种各样的因子都分别写好求导方法即可。</p>
 <p>值得一提的是，我沿用了课上作业的求导方法，即：除了<code>Term</code>类求导返回<code>Expr</code>类型，其它类求导均返回<code>Term</code>类型，这样做的原因是：我的<code>Term</code>类是自带正负号的，三角函数因子求导后符号可能会改变，这样才能将符号的改变正确地传递出来。</p>
-<p><img src="../images/image-20250322110854178.png" alt="image-20250322110854178"></p>
+<p><img src="/images/image-20250322110854178.png" alt="image-20250322110854178"></p>
 <h4 id="复杂度分析-3">复杂度分析</h4>
 <p>下表均为对最终程序架构的度量</p>
 <table>

@@ -189,14 +189,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/BUAA/" style="color: #ff7d73">
+                <a href="/tags/BUAA/" style="color: #00a596">
                     BUAA
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/CO/" style="color: #00a596">
+                <a href="/tags/CO/" style="color: #03a9f4">
                     CO
                 </a>
             </span>
@@ -209,7 +209,7 @@
         <h2 id="寄存器">寄存器</h2>
 <h3 id="32个通用寄存器-GPR">32个通用寄存器(GPR)</h3>
 <p>编号从00000到11111</p>
-<p><img src="../images/image-20240924103709031.png" alt="image-20240924103709031"></p>
+<p><img src="/images/image-20240924103709031.png" alt="image-20240924103709031"></p>
 <p><code>$zero</code>的值永远是0，无法改变</p>
 <p><code>$1</code>保留给汇编器，一般不使用此寄存器</p>
 <h3 id="三个特殊寄存器">三个特殊寄存器</h3>
@@ -301,17 +301,17 @@ nop
 <li>
 <p><strong>R型指令</strong></p>
 <p>操作数最多，一般用于运算指令。例如<code>add</code>、<code>sub</code>、<code>sll</code>等。其格式如下：</p>
-<p><img src="../images/image-20240924114844056.png" alt="image-20240924114844056"></p>
+<p><img src="/images/image-20240924114844056.png" alt="image-20240924114844056"></p>
 </li>
 <li>
 <p><strong>I型指令</strong></p>
 <p>I 型指令的特点是有 <strong>16 位的立即数</strong>。一般用于<code>addi</code>、<code>subi</code>、<code>ori</code>等与立即数相运算的指令。（<strong>这里需要注意：在写汇编语言的时候，需要使用负号来标记负数，而不要和机器码一样认为首位的 1 就代表负数</strong>），或 <code>beq</code>、<code>bgtz</code> 等比较跳转指令，因为它们要让两个寄存器的值相比并让 PC 偏移 offset 这么多，刚好利用了全部的字段。还有存取指令，例如 <code>sw</code>、<code>lw</code>，它们在使用时需要对地址指定一个偏移值，也会用到立即数字段。</p>
-<p><img src="../images/image-20240924115256457.png" alt="image-20240924115256457"></p>
+<p><img src="/images/image-20240924115256457.png" alt="image-20240924115256457"></p>
 </li>
 <li>
 <p><strong>J型指令</strong></p>
 <p>很少，常见的为 <code>j</code> 和 <code>jal</code>。他们需要直接跳转至某个地址，而非利用当前的 PC 值加上偏移量计算出新的地址，因此需要的位数较多。</p>
-<p><img src="../images/image-20240924115351775.png" alt="image-20240924115351775"></p>
+<p><img src="/images/image-20240924115351775.png" alt="image-20240924115351775"></p>
 </li>
 </ul>
 <p>严格来说，并非所有的指令都严格遵守上面三种格式，有的如 <code>eret</code>、<code>syscall</code> 指令一样没有操作数；有的如 <code>jalr</code> 指令一样某些字段被固定为某个值。不过，就大部分指令而言，都可按上面三种格式进行解释，某些字段被固定也可以按照格式来识别为 R、I、J 中的一种，因此这三种格式要着重理解。</p>

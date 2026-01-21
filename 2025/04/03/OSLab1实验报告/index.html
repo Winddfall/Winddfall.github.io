@@ -196,14 +196,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/OS/" style="color: #ff7d73">
+                <a href="/tags/OS/" style="color: #03a9f4">
                     OS
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/NOTE/" style="color: #00bcd4">
+                <a href="/tags/NOTE/" style="color: #ffa2c4">
                     NOTE
                 </a>
             </span>
@@ -308,10 +308,10 @@ Disassembly of section .plt:
 <p>所以该指令的意义是尽可能反汇编出所有section的源代码</p>
 <h3 id="Thinking-1-2">Thinking 1.2</h3>
 <p>使用我们编写的readelf解析内核ELF文件：</p>
-<p><img src="../images/image-20250325113444238.png" alt=""></p>
+<p><img src="/images/image-20250325113444238.png" alt=""></p>
 <p>使用我们的readelf解析它本身，无任何输出结果</p>
 <p>使用系统自带的readelf工具解析我们的readelf文件：</p>
-<p><img src="../images/image-20250325113852785.png" alt="image-20250325113852785"></p>
+<p><img src="/images/image-20250325113852785.png" alt="image-20250325113852785"></p>
 <p><code>Makefile</code>中是这样的：</p>
 <pre><code class="language-makefile">readelf: main.o readelf.o
 		  $(CC) $^ -o $@
@@ -412,7 +412,7 @@ echo $&#123;VAR&#125;
 <li><a target="_blank" rel="noopener" href="http://xn--0lqyg56ey07ao1c8x4a.so">共享目标文件.so</a></li>
 </ul>
 <p>ELF文件结构如下：</p>
-<p><img src="../images/image-20250322221013203.png" alt="image-20250322221013203"></p>
+<p><img src="/images/image-20250322221013203.png" alt="image-20250322221013203"></p>
 <ul>
 <li>
 <p>ELF文件头：包括程序的基本信息，比如体系结构和操作系统，同时也包含了节头表和段头表 相对文件的偏移量（offset）。</p>
